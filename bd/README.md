@@ -1,10 +1,10 @@
 # Modelo para la Base de Datos
-## Diagrama E-R
+## Diagrama Entidad Relación
 Diseño del diagrama para el modelo entidad relación.
 
 ![](/bd/diagrama_e-r.svg)
 
-## Traducción M-R 
+## Diagrama Modelo Relacional
 Diseño del diagrama para la traducción del modelo entidad relación a modelo relacional.
 
 ![](/bd/diagrama_m-r.svg)
