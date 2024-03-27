@@ -14,6 +14,7 @@ En el caso de que de tiempo se desarrollará una versión web de la aplicación.
 ## Tecnologías
 - Kotlin
 - Java
+- Spring Boot
 - MySQL
 - HTML
 - CSS
