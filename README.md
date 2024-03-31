@@ -19,7 +19,7 @@ En el caso de que de tiempo se desarrollará una versión web de la aplicación.
 - HTML
 - CSS
 
-## [Imágenes](/img/)
+## [Imágenes](/images/)
 Imágenes a usar en un futuro a la hora de desarrollar la aplicación.
 ## [Base de Datos](/bd/)
 Diseño y documentación de como está estructurada la base de datos del proyecto.
