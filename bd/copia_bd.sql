@@ -1,6 +1,38 @@
 CREATE DATABASE IF NOT EXISTS `karmasell` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci */;
 USE `karmasell`;
 
+-- Volcando estructura para tabla karmasell.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(5) AUTO_INCREMENT PRIMARY KEY,
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `nomb_usu` varchar(50) NOT NULL,
+  `contras` varchar(255) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `foto` varchar(50),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- Volcando estructura para tabla karmasell.categoria
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `descripcion` varchar(50) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- Volcando estructura para tabla karmasell.direccion_envio
+CREATE TABLE IF NOT EXISTS `direccion_envio` (
+  `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
+  `id_usuario` INT(5) NOT NULL,
+  `direccion` VARCHAR(50) NOT NULL,
+  `cp` INT(11) NOT NULL,
+  `poblacion` VARCHAR(50) NOT NULL,
+  `provincia` VARCHAR(50) NOT NULL,
+  `pais` VARCHAR(50) NOT NULL,
+  KEY `FK_direccion_envio_usuario` (`id_usuario`),
+  CONSTRAINT `FK_direccion_envio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
 -- Volcando estructura para tabla karmasell.anuncio
 CREATE TABLE IF NOT EXISTS `anuncio` (
   `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
@@ -19,31 +51,6 @@ CREATE TABLE IF NOT EXISTS `anuncio` (
   CONSTRAINT `FK_anuncio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
--- La exportación de datos fue deseleccionada.
-
--- Volcando estructura para tabla karmasell.categoria
-CREATE TABLE IF NOT EXISTS `categoria` (
-  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
-  `descripcion` varchar(50) NOT NULL,
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
--- La exportación de datos fue deseleccionada.
-
--- Volcando estructura para tabla karmasell.direccion_envio
-CREATE TABLE IF NOT EXISTS `direccion_envio` (
-  `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
-  `id_usuario` INT(5) NOT NULL,
-  `direccion` VARCHAR(50) NOT NULL,
-  `cp` INT(11) NOT NULL,
-  `poblacion` VARCHAR(50) NOT NULL,
-  `provincia` VARCHAR(50) NOT NULL,
-  `pais` VARCHAR(50) NOT NULL,
-  KEY `FK_direccion_envio_usuario` (`id_usuario`),
-  CONSTRAINT `FK_direccion_envio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
--- La exportación de datos fue deseleccionada.
-
 -- Volcando estructura para tabla karmasell.mensaje
 CREATE TABLE IF NOT EXISTS `mensaje` (
   `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
@@ -57,8 +64,6 @@ CREATE TABLE IF NOT EXISTS `mensaje` (
   CONSTRAINT `FK_mensaje_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
--- La exportación de datos fue deseleccionada.
-
 -- Volcando estructura para tabla karmasell.pedido
 CREATE TABLE IF NOT EXISTS `pedido` (
   `id` int(5) AUTO_INCREMENT PRIMARY KEY,
@@ -71,17 +76,5 @@ CREATE TABLE IF NOT EXISTS `pedido` (
   CONSTRAINT `FK_pedido_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
--- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla karmasell.usuario
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id` int(5) AUTO_INCREMENT PRIMARY KEY,
-  `nombre` varchar(50) NOT NULL,
-  `apellidos` varchar(50) NOT NULL,
-  `nomb_usu` varchar(50) NOT NULL,
-  `contras` varchar(255) NOT NULL,
-  `fecha_nacimiento` date NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `foto` varchar(50),
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
