@@ -1,70 +1,87 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-04-2024 a las 14:51:50
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+CREATE DATABASE IF NOT EXISTS `karmasell` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci */;
+USE `karmasell`;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `karmasell`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE `usuario` (
-  `id` int(5) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
-  `apellidos` varchar(50) NOT NULL,
-  `fecha_nacimiento` date NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `telefono` varchar(16) NOT NULL,
-  `foto` varchar(50) DEFAULT NULL
+-- Volcando estructura para tabla karmasell.anuncio
+CREATE TABLE IF NOT EXISTS `anuncio` (
+  `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
+  `id_usuario` INT(5) NOT NULL,
+  `id_categoria` INT(5) NOT NULL,
+  `titulo` VARCHAR(50) NOT NULL,
+  `descripcion` VARCHAR(50) NOT NULL,
+  `estado` VARCHAR(50) NOT NULL,
+  `ubicacion` VARCHAR(50) NOT NULL,
+  `precio` FLOAT NOT NULL,
+  `divisa` VARCHAR(50) NOT NULL,
+  `fech_public` DATE DEFAULT CURRENT_TIMESTAMP,
+  KEY `FK_anuncio_categoria` (`id_categoria`),
+  KEY `FK_anuncio_usuario` (`id_usuario`),
+  CONSTRAINT `FK_anuncio_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_anuncio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Volcado de datos para la tabla `usuario`
---
+-- La exportación de datos fue deseleccionada.
 
-INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `foto`) VALUES
-(1, 'Francisco', 'Lopez Montes', '2004-04-14', 'franlopz@gemail.com', '+34 678 54 32 12', NULL);
+-- Volcando estructura para tabla karmasell.categoria
+CREATE TABLE IF NOT EXISTS `categoria` (
+  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
+  `descripcion` varchar(50) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- Índices para tablas volcadas
---
+-- La exportación de datos fue deseleccionada.
 
---
--- Indices de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+-- Volcando estructura para tabla karmasell.direccion_envio
+CREATE TABLE IF NOT EXISTS `direccion_envio` (
+  `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
+  `id_usuario` INT(5) NOT NULL,
+  `direccion` VARCHAR(50) NOT NULL,
+  `cp` INT(11) NOT NULL,
+  `poblacion` VARCHAR(50) NOT NULL,
+  `provincia` VARCHAR(50) NOT NULL,
+  `pais` VARCHAR(50) NOT NULL,
+  KEY `FK_direccion_envio_usuario` (`id_usuario`),
+  CONSTRAINT `FK_direccion_envio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
+-- La exportación de datos fue deseleccionada.
 
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
+-- Volcando estructura para tabla karmasell.mensaje
+CREATE TABLE IF NOT EXISTS `mensaje` (
+  `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
+  `id_anuncio` INT(5) NOT NULL,
+  `id_comprador` INT(5) NOT NULL,
+  `mensaje` VARCHAR(50) NOT NULL,
+  `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  KEY `FK_mensaje_usuario` (`id_comprador`),
+  KEY `FK_mensaje_anuncio` (`id_anuncio`),
+  CONSTRAINT `FK_mensaje_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_mensaje_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla karmasell.pedido
+CREATE TABLE IF NOT EXISTS `pedido` (
+  `id` int(5) AUTO_INCREMENT PRIMARY KEY,
+  `id_comprador` int(5) NOT NULL,
+  `id_anuncio` int(5) NOT NULL,
+  `fech_pedido` DATE DEFAULT CURRENT_TIMESTAMP,
+  KEY `FK_pedido_usuario` (`id_comprador`),
+  KEY `FK_pedido_anuncio` (`id_anuncio`),
+  CONSTRAINT `FK_pedido_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_pedido_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla karmasell.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int(5) AUTO_INCREMENT PRIMARY KEY,
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `nomb_usu` varchar(50) NOT NULL,
+  `contras` varchar(255) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `foto` varchar(50),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
