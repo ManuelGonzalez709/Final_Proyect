@@ -1,5 +1,5 @@
-# Proyecto Fin Grado (Karma Sell) 
-Karma Sell es una aplicación móvil desarrollada para dispositivos Android con el propósito de realizar la venta de objetos de segunda mano.
+# Proyecto Fin Grado (ReTrove) 
+Karma Sell es una aplicación móvil desarrollada para dispositivos Android con el propósito de realizar la venta de productos de segunda mano.
 La aplicación incorporará funcionalidades como:
 - Buscar productos.
 - Subir un producto.
@@ -14,11 +14,12 @@ En el caso de que de tiempo se desarrollará una versión web de la aplicación.
 ## Tecnologías
 - Kotlin
 - Java
+- Spring Boot
 - MySQL
 - HTML
 - CSS
 
-## [Imágenes](/img/)
+## [Imágenes](/images/)
 Imágenes a usar en un futuro a la hora de desarrollar la aplicación.
 ## [Base de Datos](/bd/)
 Diseño y documentación de como está estructurada la base de datos del proyecto.
