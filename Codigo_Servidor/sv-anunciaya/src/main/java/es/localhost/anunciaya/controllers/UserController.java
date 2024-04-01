@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.localhost.anunciaya.models.UserModel;
+import es.localhost.anunciaya.services.UserService;
+
 
 @RestController
 @RequestMapping("/user")
@@ -47,10 +50,10 @@ public class UserController {
 			boolean ok = this.usuarioService.deleteUser(id);
 			
 			if(ok) {
-				return "User with id "+id+" deleted";
+				return "Usuario con "+ id +" ha sido borrado";
 			}
 			else {
-				return "Error, it's not possible to deleted user with id "+id;
+				return "Error, no es posible borrar el usuario con id "+id;
 			}
 		}
 }

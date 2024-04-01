@@ -1,5 +1,5 @@
 package es.localhost.anunciaya.services;
 
-public class UsuarioService {
+public class UserService {
 
 }
