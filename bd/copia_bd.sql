@@ -11,13 +11,13 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `fecha_nacimiento` date NOT NULL,
   `email` varchar(50) NOT NULL,
   `telefono` int(11) NOT NULL,
-  `foto` varchar(50),
+  `foto` varchar(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- Volcando estructura para tabla karmasell.categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
   `id` int(11) AUTO_INCREMENT PRIMARY KEY,
-  `descripcion` varchar(50) NOT NULL,
+  `descripcion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- Volcando estructura para tabla karmasell.direccion_envio
