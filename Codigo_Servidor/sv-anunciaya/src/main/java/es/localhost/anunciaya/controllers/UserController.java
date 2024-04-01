@@ -32,7 +32,7 @@ public class UserController {
 		//Create a new user
 		@PostMapping
 		public UserModel saveUser(@RequestBody UserModel user) {
-			return this.usuarioService.saveUser(user);
+			return this.usuarioService.saveUsers(user);
 		} 
 		
 		@GetMapping(path="/{id}")
