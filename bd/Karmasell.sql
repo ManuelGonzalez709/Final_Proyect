@@ -16,96 +16,102 @@
 
 
 -- Volcando estructura de base de datos para karmasell
-CREATE DATABASE IF NOT EXISTS `karmasell` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `karmasell`;
+CREATE DATABASE IF NOT EXISTS `karmasell2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci */;
+USE `karmasell2`;
 
 -- Volcando estructura para tabla karmasell.anuncio
 CREATE TABLE IF NOT EXISTS `anuncio` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `id_categoria` int(11) DEFAULT NULL,
-  `titulo` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(50) DEFAULT NULL,
-  `estado` varchar(50) DEFAULT NULL,
-  `ubicacion` varchar(50) DEFAULT NULL,
-  `precio` float DEFAULT NULL,
-  `divisa` varchar(50) DEFAULT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(5) NOT NULL,
+  `id_categoria` int(5) NOT NULL,
+  `titulo` varchar(50) NOT NULL,
+  `descripcion` varchar(50) NOT NULL,
+  `estado` varchar(50) NOT NULL,
+  `ubicacion` varchar(50) NOT NULL,
+  `precio` float NOT NULL,
+  `divisa` varchar(50) NOT NULL,
+  `fech_public` date DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `FK_anuncio_categoria` (`id_categoria`),
   KEY `FK_anuncio_usuario` (`id_usuario`),
   CONSTRAINT `FK_anuncio_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_anuncio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_anuncio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla karmasell.categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
-  `id` int(11) NOT NULL,
-  `Categoria` varchar(50) DEFAULT NULL,
-  `Descripcion` varchar(50) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla karmasell.direccion_envio
 CREATE TABLE IF NOT EXISTS `direccion_envio` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
-  `direccion` varchar(50) DEFAULT NULL,
-  `cp` int(11) DEFAULT NULL,
-  `poblacion` varchar(50) DEFAULT NULL,
-  `provincia` varchar(50) DEFAULT NULL,
-  `pais` varchar(50) DEFAULT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(5) NOT NULL,
+  `direccion` varchar(50) NOT NULL,
+  `cp` int(11) NOT NULL,
+  `poblacion` varchar(50) NOT NULL,
+  `provincia` varchar(50) NOT NULL,
+  `pais` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_direccion_envio_usuario` (`id_usuario`),
-  CONSTRAINT `FK_direccion_envio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_direccion_envio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla karmasell.mensaje
 CREATE TABLE IF NOT EXISTS `mensaje` (
-  `id` int(11) NOT NULL,
-  `id_anuncio` int(11) DEFAULT NULL,
-  `id_escritor` int(11) DEFAULT NULL,
-  `mensaje` varchar(50) NOT NULL DEFAULT '',
-  `fecha` datetime NOT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_anuncio` int(5) NOT NULL,
+  `id_vendedor` int(11) NOT NULL,
+  `id_comprador` int(5) NOT NULL,
+  `mensaje` varchar(50) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `FK_mensaje_usuario` (`id_escritor`),
+  KEY `FK_mensaje_usuario` (`id_comprador`),
   KEY `FK_mensaje_anuncio` (`id_anuncio`),
+  KEY `FK_mensaje_usuario_2` (`id_vendedor`),
   CONSTRAINT `FK_mensaje_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_mensaje_usuario` FOREIGN KEY (`id_escritor`) REFERENCES `usuario` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_mensaje_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_mensaje_usuario_2` FOREIGN KEY (`id_vendedor`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla karmasell.pedido
 CREATE TABLE IF NOT EXISTS `pedido` (
-  `id` int(11) NOT NULL,
-  `Id_comprador` int(11) DEFAULT NULL,
-  `id_anuncio` int(11) DEFAULT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_comprador` int(5) NOT NULL,
+  `id_anuncio` int(5) NOT NULL,
+  `fech_pedido` date DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
-  KEY `FK_pedido_usuario` (`Id_comprador`),
+  KEY `FK_pedido_usuario` (`id_comprador`),
   KEY `FK_pedido_anuncio` (`id_anuncio`),
   CONSTRAINT `FK_pedido_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_pedido_usuario` FOREIGN KEY (`Id_comprador`) REFERENCES `usuario` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `FK_pedido_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla karmasell.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
-  `Id` int(11) NOT NULL DEFAULT 0,
-  `Nombre` varchar(50) DEFAULT NULL,
-  `Apellidos` varchar(50) DEFAULT NULL,
-  `Fecha_nacimiento` datetime DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `telefono` int(11) DEFAULT NULL,
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `nomb_usu` varchar(50) NOT NULL,
+  `contras` varchar(255) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `telefono` varchar(50) NOT NULL,
   `foto` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- La exportación de datos fue deseleccionada.
 
