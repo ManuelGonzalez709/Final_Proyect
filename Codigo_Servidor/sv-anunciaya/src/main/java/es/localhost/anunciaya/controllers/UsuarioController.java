@@ -1,5 +1,5 @@
 package es.localhost.anunciaya.controllers;
 
-public class NuevaClase {
+public class UsuarioController {
 
 }

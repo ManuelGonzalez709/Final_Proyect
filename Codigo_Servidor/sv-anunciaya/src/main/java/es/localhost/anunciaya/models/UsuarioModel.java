@@ -1,5 +1,5 @@
 package es.localhost.anunciaya.models;
 
-public class Ejemplo2 {
+public class UsuarioModel {
 
 }
