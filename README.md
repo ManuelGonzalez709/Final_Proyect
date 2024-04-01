@@ -1,5 +1,5 @@
-# Proyecto Fin Grado (ReTrove) 
-Karma Sell es una aplicación móvil desarrollada para dispositivos Android con el propósito de realizar la venta de productos de segunda mano.
+# Proyecto Fin Grado (AnunciaYa) 
+AnunciaYa es una aplicación móvil desarrollada para dispositivos Android con el propósito de realizar la venta de productos de segunda mano.
 La aplicación incorporará funcionalidades como:
 - Buscar productos.
 - Subir un producto.
