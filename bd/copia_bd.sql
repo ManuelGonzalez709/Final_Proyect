@@ -3,21 +3,21 @@ USE `karmasell`;
 
 -- Volcando estructura para tabla karmasell.usuario
 CREATE TABLE IF NOT EXISTS `usuario` (
-  `id` int(5) AUTO_INCREMENT PRIMARY KEY,
-  `nombre` varchar(50) NOT NULL,
-  `apellidos` varchar(50) NOT NULL,
-  `nomb_usu` varchar(50) NOT NULL,
-  `contras` varchar(255) NOT NULL,
-  `fecha_nacimiento` date NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `telefono` int(11) NOT NULL,
-  `foto` varchar(50)
+  `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
+  `nombre` VARCHAR(50) NOT NULL,
+  `apellidos` VARCHAR(50) NOT NULL,
+  `nomb_usu` VARCHAR(50) NOT NULL,
+  `contras` VARCHAR(255) NOT NULL,
+  `fecha_nacimiento` DATE NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `telefono` VARCHAR(11) NOT NULL,
+  `foto` VARCHAR(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- Volcando estructura para tabla karmasell.categoria
 CREATE TABLE IF NOT EXISTS `categoria` (
-  `id` int(11) AUTO_INCREMENT PRIMARY KEY,
-  `descripcion` varchar(50) NOT NULL
+  `id` INT(11) AUTO_INCREMENT PRIMARY KEY,
+  `descripcion` VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- Volcando estructura para tabla karmasell.direccion_envio
@@ -56,19 +56,21 @@ CREATE TABLE IF NOT EXISTS `mensaje` (
   `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
   `id_anuncio` INT(5) NOT NULL,
   `id_comprador` INT(5) NOT NULL,
+  `id_vendedor` INT(5) NOT NULL,
   `mensaje` VARCHAR(50) NOT NULL,
   `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   KEY `FK_mensaje_usuario` (`id_comprador`),
   KEY `FK_mensaje_anuncio` (`id_anuncio`),
   CONSTRAINT `FK_mensaje_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_mensaje_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_mensaje_comprador` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_mensaje_vendedor` FOREIGN KEY (`id_vendedor`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 -- Volcando estructura para tabla karmasell.pedido
 CREATE TABLE IF NOT EXISTS `pedido` (
-  `id` int(5) AUTO_INCREMENT PRIMARY KEY,
-  `id_comprador` int(5) NOT NULL,
-  `id_anuncio` int(5) NOT NULL,
+  `id` INT(5) AUTO_INCREMENT PRIMARY KEY,
+  `id_comprador` INT(5) NOT NULL,
+  `id_anuncio` INT(5) NOT NULL,
   `fech_pedido` DATE DEFAULT CURRENT_TIMESTAMP,
   KEY `FK_pedido_usuario` (`id_comprador`),
   KEY `FK_pedido_anuncio` (`id_anuncio`),
