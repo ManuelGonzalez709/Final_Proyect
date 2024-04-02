@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.4</version>
+		<version>3.2.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>es.localhost</groupId>
-	<artifactId>anunciaya</artifactId>
+	<groupId>com.localhost</groupId>
+	<artifactId>cruduser</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sv-anunciaya</name>
-	<description>Demo project for Spring Boot</description>
+	<name>cruduser</name>
+	<description>Api Rest with Java</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

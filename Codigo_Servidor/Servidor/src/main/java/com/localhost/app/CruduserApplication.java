@@ -1,13 +1,13 @@
-package es.localhost.anunciaya.app;
+package com.localhost.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Main {
+public class CruduserApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Main.class, args);
+		SpringApplication.run(CruduserApplication.class, args);
 	}
 
 }

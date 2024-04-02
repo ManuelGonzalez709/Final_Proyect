@@ -1,4 +1,4 @@
-package es.localhost.anunciaya.models;
+package com.localhost.app.models;
 
 import java.util.Date;
 
@@ -111,34 +111,4 @@ public class UserModel {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	} 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
