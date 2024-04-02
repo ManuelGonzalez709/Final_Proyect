@@ -1,6 +1,21 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-04-2024 a las 14:00:56
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `anunciaya`
@@ -22,6 +37,7 @@ CREATE TABLE `anuncio` (
   `ubicacion` varchar(50) NOT NULL,
   `precio` float NOT NULL,
   `divisa` varchar(20) NOT NULL,
+  `fotos` text NOT NULL,
   `fech_public` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -29,8 +45,8 @@ CREATE TABLE `anuncio` (
 -- Volcado de datos para la tabla `anuncio`
 --
 
-INSERT INTO `anuncio` (`id`, `id_usuario`, `id_categoria`, `titulo`, `descripcion`, `estado`, `ubicacion`, `precio`, `divisa`, `fech_public`) VALUES
-(1, 1, 3, 'Iphone 12 PRO MAX', 'Se vende Iphone 12 PRO MAX, nuevo sin apenas uso.\r\nSe ha cuidado perfectamente, incluye todos los accesorios.', 'Muy bueno', 'Coordenadas ', 950, 'Euro', '2024-04-02');
+INSERT INTO `anuncio` (`id`, `id_usuario`, `id_categoria`, `titulo`, `descripcion`, `estado`, `ubicacion`, `precio`, `divisa`, `fotos`, `fech_public`) VALUES
+(1, 1, 3, 'Iphone 12 PRO MAX', 'Se vende Iphone 12 PRO MAX, nuevo sin apenas uso.\r\nSe ha cuidado perfectamente, incluye todos los accesorios.', 'Muy bueno', 'Coordenadas ', 950, 'Euro', '/1/img1.png', '2024-04-02');
 
 -- --------------------------------------------------------
 
@@ -266,3 +282,7 @@ ALTER TABLE `mensaje`
 ALTER TABLE `pedido`
   ADD CONSTRAINT `FK_pedido_usuario` FOREIGN KEY (`id_comprador`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
