@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `contras` VARCHAR(255) NOT NULL,
   `fecha_nacimiento` DATE NOT NULL,
   `email` VARCHAR(50) NOT NULL,
-  `telefono` VARCHAR(11) NOT NULL,
+  `telefono` VARCHAR(25) NOT NULL,
   `foto` VARCHAR(50)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
