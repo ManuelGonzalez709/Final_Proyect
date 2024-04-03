@@ -8,6 +8,7 @@ public class SvAnunciaYaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SvAnunciaYaApplication.class, args);
+		System.out.println("Servidor Spring Boot funcionando!");
 	}
 
 }
