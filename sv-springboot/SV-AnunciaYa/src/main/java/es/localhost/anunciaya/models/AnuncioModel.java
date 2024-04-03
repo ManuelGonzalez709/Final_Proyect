@@ -16,11 +16,11 @@ import jakarta.persistence.Table;
 @Table(name="anuncio")
 public class AnuncioModel {
 
-	@OneToMany 
+	@ManyToOne 
     @JoinColumn(name = "id_usuario")
     private UserModel propietario; 
 	
-	@OneToMany 
+	@ManyToOne 
     @JoinColumn(name = "id_categoria")
     private CategoryModel categoria; 
 	
@@ -44,12 +44,12 @@ public class AnuncioModel {
 	private Float precio;
 	
 	@Column(name="divisa",nullable = false)
-	private Date divisa;
+	private String divisa;
 	
-	@Column(name="fecha_publicacion",nullable = false)
+	@Column(name="fech_public")
 	private Date fecha_publicacion;
 	
-	@Column(name="foto",nullable = false)
+	@Column(name="foto")
 	private String foto;
 
 	public UserModel getPropietario() {
@@ -116,11 +116,11 @@ public class AnuncioModel {
 		this.precio = precio;
 	}
 
-	public Date getDivisa() {
+	public String getDivisa() {
 		return divisa;
 	}
 
-	public void setDivisa(Date divisa) {
+	public void setDivisa(String divisa) {
 		this.divisa = divisa;
 	}
 

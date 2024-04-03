@@ -22,22 +22,22 @@ public class UserModel {
 	@Column(name = "apellidos",nullable = false)
 	private String apellidos;
 	
-	@Column(name = "nombre_usuario",nullable = false)
+	@Column(name = "nomb_usu")
 	private String nomb_usu;
 	
-	@Column(name = "contrasena",nullable = false)
+	@Column(name = "contras")
 	private String contras;
 	
-	@Column(name = "email",nullable = false)
+	@Column(name = "email")
 	private String email;
 	
-	@Column(name="fecha_nacimiento",nullable = false)
-	private Date fechaNacimiento;
+	@Column(name="fecha_nacimiento")
+	private String fechaNacimiento;
 	
-	@Column(name="telefono",nullable = false)
+	@Column(name="telefono")
 	private String telefono;
 	
-	@Column(name="foto",nullable = false)
+	@Column(name="foto")
 	private String foto;
 
 	public Long getId() {
@@ -88,11 +88,11 @@ public class UserModel {
 		this.email = email;
 	}
 
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

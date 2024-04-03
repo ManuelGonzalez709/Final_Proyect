@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="usuario")
+@Table(name="categoria")
 
 public class CategoryModel {
 	@Id

@@ -15,7 +15,7 @@ import es.localhost.anunciaya.models.UserModel;
 import es.localhost.anunciaya.services.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/usuario")
 public class UserController {
 	
 	@Autowired

@@ -37,8 +37,7 @@ public class AnuncioService {
 		anuncio.setDivisa(request.getDivisa());
 		anuncio.setPrecio(request.getPrecio());
 		anuncio.setFecha_publicacion(request.getFecha_publicacion());
-		if(request.getFoto().compareTo("")==0)anuncio.setFoto("default_anuncio");
-		else anuncio.setFoto(request.getFoto());
+		anuncio.setFoto(request.getFoto());
 		anuncio.setCategoria(request.getCategoria());
 		anuncio.setPropietario(request.getPropietario());
 		anuncioservice.save(anuncio);

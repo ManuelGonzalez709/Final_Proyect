@@ -17,7 +17,7 @@ import es.localhost.anunciaya.services.CategoryService;
 import es.localhost.anunciaya.services.UserService;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categoria")
 public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
