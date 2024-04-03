@@ -17,7 +17,7 @@ public class CategoryModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private Long id;
-	@Column
+	@Column(name = "descripcion",nullable = false)
 	private String descripcion;
 	
 	public Long getId() {return id;}

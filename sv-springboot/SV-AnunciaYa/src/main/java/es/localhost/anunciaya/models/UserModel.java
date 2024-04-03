@@ -16,28 +16,28 @@ public class UserModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column(name = "nombre",nullable = false)
 	private String nombre;
 	
-	@Column
+	@Column(name = "apellidos",nullable = false)
 	private String apellidos;
 	
-	@Column
+	@Column(name = "nombre_usuario",nullable = false)
 	private String nomb_usu;
 	
-	@Column
+	@Column(name = "contrasena",nullable = false)
 	private String contras;
 	
-	@Column
+	@Column(name = "email",nullable = false)
 	private String email;
 	
-	@Column(name="fecha_nacimiento")
+	@Column(name="fecha_nacimiento",nullable = false)
 	private Date fechaNacimiento;
 	
-	@Column
+	@Column(name="telefono",nullable = false)
 	private String telefono;
 	
-	@Column
+	@Column(name="foto",nullable = false)
 	private String foto;
 
 	public Long getId() {

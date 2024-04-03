@@ -37,7 +37,8 @@ public class UserService {
 		user.setEmail(request.getEmail());
 		user.setFechaNacimiento(request.getFechaNacimiento());
 		user.setTelefono(request.getTelefono());
-		user.setFoto(request.getFoto());
+		if(request.getFoto().compareTo("")==0) user.setFoto("default");
+		else user.setFoto(request.getFoto());
 		userRepository.save(user);
 		return user;
 	}
