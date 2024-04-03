@@ -14,10 +14,10 @@ import es.localhost.anunciaya.repositories.IUserRepository;
 public class UserService {
 	
 	@Autowired
-	IUserRepository userRepository; // Dependecias inyectadas
+	IUserRepository userRepository; 
 	
 	public ArrayList<UserModel> getUsers(){
-		return (ArrayList<UserModel>) userRepository.findAll(); // Método de devuelve todos los usuarios
+		return (ArrayList<UserModel>) userRepository.findAll(); 
 	}
 	
 	public UserModel saveUsers(UserModel user) {
