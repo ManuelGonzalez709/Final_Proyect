@@ -30,6 +30,8 @@ public class AnuncioService {
 	
 	public AnuncioModel updateById(AnuncioModel request, Long id) {
 		AnuncioModel anuncio = anuncioservice.findById(id).get();
+		anuncio.setUsuarioAnuncio(request.getUsuarioAnuncio());
+		anuncio.setCategoriaAnuncio(request.getCategoriaAnuncio());
 		anuncio.setTitulo(request.getTitulo());
 		anuncio.setDescripcion(request.getDescripcion());
 		anuncio.setEstado(request.getEstado());
@@ -38,8 +40,6 @@ public class AnuncioService {
 		anuncio.setPrecio(request.getPrecio());
 		anuncio.setFecha_publicacion(request.getFecha_publicacion());
 		anuncio.setFoto(request.getFoto());
-		anuncio.setCategoria(request.getCategoria());
-		anuncio.setPropietario(request.getPropietario());
 		anuncioservice.save(anuncio);
 		return anuncio;
 	}

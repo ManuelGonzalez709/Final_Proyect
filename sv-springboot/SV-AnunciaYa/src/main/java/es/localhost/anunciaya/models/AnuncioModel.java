@@ -17,12 +17,12 @@ import jakarta.persistence.Table;
 public class AnuncioModel {
 
 	@ManyToOne 
-    @JoinColumn(name = "id_usuario")
-    private UserModel propietario; 
+    @JoinColumn(name = "id_usuario",nullable = false)
+    private UserModel usuarioAnuncio; 
 	
 	@ManyToOne 
-    @JoinColumn(name = "id_categoria")
-    private CategoryModel categoria; 
+    @JoinColumn(name = "id_categoria",nullable = false)
+    private CategoryModel categoriaAnuncio; 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,26 +46,27 @@ public class AnuncioModel {
 	@Column(name="divisa",nullable = false)
 	private String divisa;
 	
-	@Column(name="fech_public")
-	private Date fecha_publicacion;
+	@Column(name="fech_public",nullable = false)
+	private String fecha_publicacion;
 	
-	@Column(name="foto")
+	@Column(name="foto",nullable = false)
 	private String foto;
 
-	public UserModel getPropietario() {
-		return propietario;
+	
+	public UserModel getUsuarioAnuncio() {
+		return usuarioAnuncio;
 	}
 
-	public void setPropietario(UserModel user) {
-		this.propietario = user;
+	public void setUsuarioAnuncio(UserModel id_usuario) {
+		this.usuarioAnuncio = id_usuario;
 	}
 
-	public CategoryModel getCategoria() {
-		return categoria;
+	public CategoryModel getCategoriaAnuncio() {
+		return categoriaAnuncio;
 	}
 
-	public void setCategoria(CategoryModel category) {
-		this.categoria = category;
+	public void setCategoriaAnuncio(CategoryModel categoriaAnuncio) {
+		this.categoriaAnuncio = categoriaAnuncio;
 	}
 
 	public Long getId() {
@@ -124,11 +125,11 @@ public class AnuncioModel {
 		this.divisa = divisa;
 	}
 
-	public Date getFecha_publicacion() {
+	public String getFecha_publicacion() {
 		return fecha_publicacion;
 	}
 
-	public void setFecha_publicacion(Date fecha_publicacion) {
+	public void setFecha_publicacion(String fecha_publicacion) {
 		this.fecha_publicacion = fecha_publicacion;
 	}
 

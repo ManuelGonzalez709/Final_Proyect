@@ -22,24 +22,39 @@ public class UserModel {
 	@Column(name = "apellidos",nullable = false)
 	private String apellidos;
 	
-	@Column(name = "nomb_usu")
+	@Column(name = "nomb_usu",nullable = false)
 	private String nomb_usu;
 	
-	@Column(name = "contras")
+	@Column(name = "contras",nullable = false)
 	private String contras;
 	
-	@Column(name = "email")
+	@Column(name = "email",nullable = false)
 	private String email;
 	
-	@Column(name="fecha_nacimiento")
+	@Column(name="fecha_nacimiento",nullable = false)
 	private String fechaNacimiento;
 	
-	@Column(name="telefono")
+	@Column(name="telefono",nullable = false)
 	private String telefono;
 	
-	@Column(name="foto")
+	@Column(name="foto",nullable = false)
 	private String foto;
+	
+	public UserModel() {
+    }
 
+    public UserModel(Long id, String nombre, String apellidos, String nomb_usu, String contras, String email, String fechaNacimiento, String telefono, String foto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.nomb_usu = nomb_usu;
+        this.contras = contras;
+        this.email = email;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.foto = foto;
+    }
+	
 	public Long getId() {
 		return id;
 	}
