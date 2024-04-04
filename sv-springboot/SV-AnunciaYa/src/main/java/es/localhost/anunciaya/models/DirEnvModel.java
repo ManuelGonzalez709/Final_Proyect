@@ -67,11 +67,11 @@ public class DirEnvModel {
 		this.poblacion = poblacion;
 	}
 
-	public String getProvicia() {
+	public String getProvincia() {
 		return provincia;
 	}
 
-	public void setProvicia(String provicia) {
+	public void setProvincia(String provicia) {
 		this.provincia = provicia;
 	}
 

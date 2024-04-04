@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import es.localhost.anunciaya.models.AnuncioModel;
 import es.localhost.anunciaya.models.CategoryModel;
-import es.localhost.anunciaya.repositories.IAnuncioService;
+import es.localhost.anunciaya.repositories.IAnuncioRepository;
 import es.localhost.anunciaya.repositories.ICategoryRepository;
 
 @Service
 public class AnuncioService {
 	@Autowired
-	IAnuncioService anuncioservice; 
+	IAnuncioRepository anuncioservice; 
 	
 	public ArrayList<AnuncioModel> getAnuncios(){
 		return (ArrayList<AnuncioModel>) anuncioservice.findAll(); 

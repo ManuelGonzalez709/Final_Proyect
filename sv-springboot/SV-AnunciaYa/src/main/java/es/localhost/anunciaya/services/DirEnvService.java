@@ -35,8 +35,9 @@ public class DirEnvService {
             dirEnv.setDireccion(request.getDireccion());
             dirEnv.setCp(request.getCp());
             dirEnv.setPoblacion(request.getPoblacion());
-            dirEnv.setProvicia(request.getProvicia());
+            dirEnv.setProvincia(request.getProvincia());
             dirEnv.setPais(request.getPais());
+            dirEnv.setUser(request.getUser());
             return dirEnvRepository.save(dirEnv);
         } else {
             return null; // Manejo de caso en que la direccion envio no exista

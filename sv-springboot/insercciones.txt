@@ -32,3 +32,13 @@
     "foto": "sin fotos"
   
 }
+
+---------Inserccion de direccion_envio------------
+{
+    "direccion":"Caridad 48",
+    "cp":"14270",
+    "poblacion":"12313",
+    "provincia":"Cordoba",
+    "pais":"España",
+    "user":{"id":1}
+}
