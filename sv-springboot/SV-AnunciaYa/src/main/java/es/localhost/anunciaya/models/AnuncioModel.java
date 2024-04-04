@@ -49,8 +49,8 @@ public class AnuncioModel {
 	@Column(name="fech_public",nullable = false)
 	private String fecha_publicacion;
 	
-	@Column(name="foto",nullable = false)
-	private String foto;
+	@Column(name="fotos",nullable = false)
+	private String fotos;
 
 	
 	public UserModel getUsuarioAnuncio() {
@@ -133,12 +133,12 @@ public class AnuncioModel {
 		this.fecha_publicacion = fecha_publicacion;
 	}
 
-	public String getFoto() {
-		return foto;
+	public String getFotos() {
+		return fotos;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public void setFotos(String foto) {
+		this.fotos = foto;
 	}
 	
 	

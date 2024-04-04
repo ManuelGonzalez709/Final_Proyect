@@ -39,7 +39,7 @@ public class AnuncioService {
 		anuncio.setDivisa(request.getDivisa());
 		anuncio.setPrecio(request.getPrecio());
 		anuncio.setFecha_publicacion(request.getFecha_publicacion());
-		anuncio.setFoto(request.getFoto());
+		anuncio.setFotos(request.getFotos());
 		anuncioservice.save(anuncio);
 		return anuncio;
 	}

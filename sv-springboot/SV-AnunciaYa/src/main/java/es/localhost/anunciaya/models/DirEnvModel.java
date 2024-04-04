@@ -16,23 +16,23 @@ public class DirEnvModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	
-	@Column
+	@Column(name = "direccion",nullable = false)
 	private String direccion;
 	
-	@Column
+	@Column(name = "cp",nullable = false)
 	private String cp;
 	
-	@Column
+	@Column(name = "poblacion",nullable = false)
 	private String poblacion;
 	
-	@Column
+	@Column(name = "provincia",nullable = false)
 	private String provincia;
 	
-	@Column 
+	@Column(name = "pais",nullable = false)
 	private String pais;
 	
 	@ManyToOne // entidad pertenece a una usuario
-    @JoinColumn(name = "id_usuario") // almacena la clave foránea en la tabla person
+    @JoinColumn(name = "id_usuario",nullable = false) // almacena la clave foránea en la tabla person
 	private UserModel user;
 
 	public Long getId() {
