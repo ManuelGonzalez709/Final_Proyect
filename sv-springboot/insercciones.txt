@@ -42,3 +42,10 @@
     "pais":"España",
     "user":{"id":1}
 }
+
+-------Inserccion para Pedido------------
+{
+    "usuarioComprador":{"id":1},
+    "anuncioCompra":{"id":1},
+    "fech_pedido":"2024-01-01"
+}
