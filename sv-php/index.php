@@ -1,9 +1,13 @@
 <?php
 require_once 'conexion.php';
-require_once 'models/direccion_envio.php';
-require_once 'controllers/db_manager.php';
 require_once 'models/usuario.php';
-
+require_once 'util/auth.php';
+require_once 'models/mensaje.php';
+require_once 'models/usuario.php';
+require_once 'models/direccion_envio.php';
+require_once 'models/categoria.php';
+require_once 'models/anuncio.php';
+require_once 'models/pedido.php';
 /* EJEMPLO OBTENER DIRECCIONES ENVIO POR ID
 $controlador = new DBManager();
 
@@ -55,7 +59,83 @@ if ($usuario) {
 
 // EJEMPLO AUTENTICACION USUARIO Y CONTRASEÑA
 
-require_once 'util/auth.php';
+
+// Devuelve todos los mensajes del anuncio 1 con id emisor 1 o 3 y id receptor 1 o 3
+$mensajes = new Mensaje();
+$mensj = $mensajes->obtenerMensajesChat(1,3,1);
+
+foreach ($mensj as $mensaje) {
+    echo $mensaje . "<br>";
+}
+echo "<br>";
+
+// Devuelve todos los datos del usuario 1
+$usuario = new Usuario();
+$usuarios = $usuario->getUsuarioId(1);
+
+foreach ($usuarios as $user) {
+    echo $user . "<br>";
+}
+
+// Devuelve todas las direcciones de envio con el id usuario
+$dir_env = new DireccionEnvio();
+$dirs = $dir_env->getDirEnvioIdUsuario(1);
+
+foreach($dirs as $d){
+    echo "ID: " . $d->getId() . ", Dirección: " . $d->getDireccion() . ", CP: " . $d->getCp() . ", Provincia: " . $d->getProvincia() . ", Población: " . $d->getPoblacion() . ", País: " . $d->getPais() . ", ID Usuario: " . $d->getIdUsuario() . "<br>";
+}
+
+// Devuelve la categoria por id introducido
+$cat = new Categoria();
+$categoria = $cat->getCategoriaId(3);
+echo "ID: " . $categoria->getId() . ", Descripcion: " . $categoria->getDescripcion() . "<br>";
+
+// Devuelve los anuncios por id_anuncio introducido
+$anun = new Anuncio();
+$anuncio = $anun->getAnuncioId(1);
+echo "<br>Todos los datos de un anuncio mediante el id_anuncio<br>";
+echo "<hr>";
+echo "ID: " . $anuncio->getId() . ", Titulo: " . $anuncio->getTitulo() . ", Descripcion: " . $anuncio->getDescripcion() . "<br>";
+
+// Devuelve los anuncios por id_usuario introducido
+$anun1 = new Anuncio();
+$anuncio1 = $anun1->getAnuncioIdUsuario(1);
+echo "<br>Todos los anuncios que tiene el usuario con id_usuario 1<br>";
+echo "<hr>";
+foreach($anuncio1 as $a){
+    echo "ID: " . $a->getId() . ", Titulo: " . $a->getTitulo() . ", Descripcion: " . $a->getDescripcion() . "<br>";
+}
+echo "<br>";
+
+// Devuelve los pedidos por id_pedido
+$ped = new Pedido();
+$pedido = $ped->getPedidoId(1);
+
+echo "Pedido por id_pedido";
+echo "<hr>";
+echo "ID: " . $pedido->getId() . ", ID_Comprador: " . $pedido->getIdComprador() . ", ID_Anuncio: " . $pedido->getIdAnuncio() . ", Fecha: " . $pedido->getFecha() . "<br>";
+echo "<br>";
+
+
+// Devuelve todos los pedidos de un usuario comprador por id
+// ----------------------------------------------------------
+/* REVISAR METODO NO DEVUELVE
+$ped1 = new Pedido();
+$pedidosUsuario1 = $ped1->getPedidoIdUsuario(3);
+
+echo "Todos los pedidos que tiene el usuario con id_usuario 1<br>";
+echo "<hr>";
+
+if (!empty($pedidosUsuario1)) {
+    foreach ($pedidosUsuario1 as $pedido) {
+        echo "ID: " . $pedido->getId() . ", ID_Comprador: " . $pedido->getIdComprador() . ", ID_Articulo: " . $pedido->getIdAnuncio() . ", Fecha: " . $pedido->getFecha() . "<br>";
+    } // DA FALLO
+} else {
+    echo "El usuario no tiene pedidos.";
+}
+echo "<br>";*/
+
+
 
 // Verifica si se ha enviado un formulario de inicio de sesión
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -65,6 +145,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Crea un objeto Auth
     $auth = new Auth();
+    $pass = $auth->hashContras("usuario");
+    echo $pass;
+    echo "<br>";
 
     // Verifica la autenticación
     if ($auth->verificarAutenticacion($username, $password)) {

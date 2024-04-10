@@ -9,15 +9,17 @@ class Usuario {
     private $nomb_usu;
     private $contras;
 
-    public function __construct($id, $nombre, $apellidos, $telefono, $email, $fecha_nac, $nomb_usu, $contras) {
-        $this->id = $id;
-        $this->nombre = $nombre;
-        $this->apellidos = $apellidos;
-        $this->telefono = $telefono;
-        $this->email = $email;
-        $this->fecha_nac = $fecha_nac;
-        $this->nomb_usu = $nomb_usu;
-        $this->contras = $contras;
+    public function __construct($id = null, $nombre = null, $apellidos = null, $telefono = null, $email = null, $fecha_nac = null, $nomb_usu = null, $contras = null) {
+        if ($id !== null && $nombre !== null && $apellidos !== null && $telefono !== null && $email !== null && $fecha_nac !== null && $nomb_usu !== null && $contras !== null) {
+            $this->id = $id;
+            $this->nombre = $nombre;
+            $this->apellidos = $apellidos;
+            $this->telefono = $telefono;
+            $this->email = $email;
+            $this->fecha_nac = $fecha_nac;
+            $this->nomb_usu = $nomb_usu;
+            $this->contras = $contras;
+        }
     }
 
     public function getId() { return $this->id; }
@@ -36,6 +38,34 @@ class Usuario {
     public function setFechaNac($fecha_nac) { $this->fecha_nac = $fecha_nac; }
     public function setNombUsu($nomb_usu) { $this->nomb_usu = $nomb_usu; }
     public function setContras($contras) { $this->contras = $contras; }
+    
+    public function getUsuarioId($id_usuario) {
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        
+        // Obtener la conexión a la base de datos
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        // Preparar la sentencia
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bind_param("i", $id_usuario);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
+        
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        
+        // Obtener el primer usuario encontrado (debería ser único)
+        $usuario = $result->fetch_assoc();
+        
+        // Cerrar la conexión y devuelve el usuario
+        $stmt->close();
+        $conexion->cerrarConexion();
+        return $usuario;
+    }
     
 }
 

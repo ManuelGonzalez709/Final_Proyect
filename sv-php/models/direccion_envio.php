@@ -8,14 +8,17 @@ class DireccionEnvio {
     private $pais;
     private $id_usuario;
     
-    public function __construct($id, $direccion, $cp, $provincia, $poblacion, $pais, $id_usuario) {
-        $this->id = $id;
-        $this->direccion = $direccion;
-        $this->cp = $cp;
-        $this->provincia = $provincia;
-        $this->poblacion = $poblacion;
-        $this->pais = $pais;
-        $this->id_usuario = $id_usuario;
+    public function __construct($id = null, $direccion = null, $cp = null, $provincia = null, $poblacion = null, $pais = null, $id_usuario = null) {
+        // Si se proporcionan argumentos, asigna las propiedades
+        if ($id !== null && $direccion !== null && $cp !== null && $provincia !== null && $poblacion !== null && $pais !== null && $id_usuario !== null) {
+            $this->id = $id;
+            $this->direccion = $direccion;
+            $this->cp = $cp;
+            $this->provincia = $provincia;
+            $this->poblacion = $poblacion;
+            $this->pais = $pais;
+            $this->id_usuario = $id_usuario;
+        }
     }
     
     public function getId() { return $this->id; }
@@ -24,18 +27,23 @@ class DireccionEnvio {
     public function getProvincia() { return $this->provincia; }
     public function getPoblacion() { return $this->poblacion; }
     public function getPais() { return $this->pais; }
+    public function getIdUsuario() { return $this->id_usuario; }
 
     public function setDireccion($direccion) { $this->direccion = $direccion; }
     public function setCp($cp) { $this->cp = $cp; }
     public function setProvincia($provincia) { $this->provincia = $provincia; }
     public function setPoblacion($poblacion) { return $this->poblacion = $poblacion; }
     public function setPais($pais) { $this->pais = $pais; }
+    public function setIdUsuario($id_usuario) { $this->id_usuario = $id_usuario; }
 
-    public static function obtenerDireccionesEnvio($conexion, $id_usuario) {
+    public static function getDirEnvioIdUsuario($id_usuario) {
         $sql = "SELECT * FROM direccion_envio WHERE id_usuario = ?";
         
         // Preparar la consulta
-        $stmt = $conexion->prepare($sql);
+        $conexion = new Conexion();
+        $conexion->conectar();
+
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
         
         // Vincular parámetros
         $stmt->bind_param("i", $id_usuario);
