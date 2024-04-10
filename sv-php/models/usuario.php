@@ -1,4 +1,6 @@
 <?php
+require_once 'util/auth.php';
+
 class Usuario {
     private $id;
     private $nombre;
@@ -66,6 +68,58 @@ class Usuario {
         $conexion->cerrarConexion();
         return $usuario;
     }
+
+    public function updateUsuario($id_usuario, $nombre, $apellidos, $telefono, $email, $fecha_nac, $nomb_usu){
+        $sql = "UPDATE usuario SET nombre = ?, apellidos = ?, telefono = ?, email = ?, fecha_nacimiento = ?, nomb_usu = ? WHERE id = ?";
+        
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        $stmt->bind_param("ssssssi", $nombre, $apellidos, $telefono, $email, $fecha_nac, $nomb_usu, $id_usuario);
+        
+        $stmt->execute();
+        
+        // Verifica si la actualización fue exitosa
+        $filas_afectadas = $stmt->affected_rows;
+        
+        $stmt->close();
+        $conexion->cerrarConexion();
+        
+        // Retorna true si se actualizó al menos una fila, de lo contrario, retorna false
+        return $filas_afectadas > 0;
+    }
+
+    public function updateContras($id_usuario, $nueva_contrasena) {
+        // Hashear la nueva contraseña antes de actualizarla en la base de datos
+        $contrasena_hasheada = Auth::hashContras($nueva_contrasena);
+    
+        $sql = "UPDATE usuario SET contras = ? WHERE id = ?";
+        
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        // Enlaza los parámetros con los valores proporcionados
+        $stmt->bind_param("si", $contrasena_hasheada, $id_usuario);
+        
+        // Ejecuta la consulta
+        $stmt->execute();
+        
+        // Verifica si la actualización fue exitosa
+        $filas_afectadas = $stmt->affected_rows;
+        
+        // Cierra la conexión y el statement
+        $stmt->close();
+        $conexion->cerrarConexion();
+        
+        // Retorna true si se actualizó al menos una fila, de lo contrario, retorna false
+        return $filas_afectadas > 0;
+    }
+    
+    
     
 }
 

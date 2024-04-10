@@ -1,13 +1,13 @@
 <?php
-require_once 'conexion.php';
-require_once 'models/usuario.php';
-require_once 'util/auth.php';
-require_once 'models/mensaje.php';
-require_once 'models/usuario.php';
-require_once 'models/direccion_envio.php';
-require_once 'models/categoria.php';
-require_once 'models/anuncio.php';
-require_once 'models/pedido.php';
+require_once ('conexion.php');
+require_once ('models/usuario.php');
+require_once ('util/auth.php');
+require_once ('models/mensaje.php');
+require_once ('models/usuario.php');
+require_once ('models/direccion_envio.php');
+require_once ('models/categoria.php');
+require_once ('models/anuncio.php');
+require_once ('models/pedido.php');
 /* EJEMPLO OBTENER DIRECCIONES ENVIO POR ID
 $controlador = new DBManager();
 
@@ -57,17 +57,6 @@ if ($usuario) {
     echo "No se encontró ningún usuario con el ID proporcionado.";
 }*/
 
-// EJEMPLO AUTENTICACION USUARIO Y CONTRASEÑA
-
-
-// Devuelve todos los mensajes del anuncio 1 con id emisor 1 o 3 y id receptor 1 o 3
-$mensajes = new Mensaje();
-$mensj = $mensajes->obtenerMensajesChat(1,3,1);
-
-foreach ($mensj as $mensaje) {
-    echo $mensaje . "<br>";
-}
-echo "<br>";
 
 // Devuelve todos los datos del usuario 1
 $usuario = new Usuario();
@@ -118,12 +107,10 @@ echo "<br>";
 
 
 // Devuelve todos los pedidos de un usuario comprador por id
-// ----------------------------------------------------------
-/* REVISAR METODO NO DEVUELVE
 $ped1 = new Pedido();
 $pedidosUsuario1 = $ped1->getPedidoIdUsuario(3);
 
-echo "Todos los pedidos que tiene el usuario con id_usuario 1<br>";
+echo "Todos los pedidos que tiene el usuario con id_usuario 3<br>";
 echo "<hr>";
 
 if (!empty($pedidosUsuario1)) {
@@ -133,8 +120,59 @@ if (!empty($pedidosUsuario1)) {
 } else {
     echo "El usuario no tiene pedidos.";
 }
-echo "<br>";*/
+echo "<br>";
 
+
+// Devuelve todos los mensajes por id anuncio, id_emisor e id_receptor
+echo "Todos los mensajes por id anuncio, id_emisor e id_receptor <br>";
+echo "<hr>";
+$mensj = new Mensaje();
+$mensajes = $mensj->getMensajesId(1,3,1);
+
+foreach($mensajes as $m){
+    echo "Mensaje: " . $m->getMensaje() . ", Fecha/Hora: " . $m->getFecha() . "<br>";
+}
+
+// Método que actualiza un usuario existente
+// --------------------------------------------
+/*
+$id = 3;
+$nombre = "Nombre actualizado";
+$apellidos = "Apellidos actualizados";
+$telefono = "989000031";
+$email = "nuevo@correo.com";
+$fecha_nac = "1990-01-01";
+$nomb_usu = "nuevousuario";
+
+$usuario = new Usuario();
+$actualizacion_exitosa = $usuario->updateUsuario($id, $nombre, $apellidos, $telefono, $email, $fecha_nac, $nomb_usu);
+echo "<br>";
+if ($actualizacion_exitosa) {
+    echo "Usuario actualizado correctamente.";
+} else {
+    echo "Hubo un error al actualizar el usuario.";
+}*/
+
+// Método que actualiza a la nueva contraseña de un usuario
+//----------------------------------------------------------
+/*$usuario = new Usuario();
+$actualizacion_ok = $usuario->updateContras(1, '1234');
+if($actualizacion_ok){
+    echo "Contraseña actualizada!<br>";
+} else{
+    echo "Hubo un error al actualizar la contraseña...<br>";
+}*/
+
+
+// Método que añade una nueva direccion de envio
+echo "<br>";
+$dir = new DireccionEnvio();
+$nueva_dir = $dir->insertDirEnc("Calle de ejemplo 12", "12092", "Málaga", "La Malagueta", "España", 1);
+if($nueva_dir){
+    echo "Direccion de envio añadida!<br>";
+} else{
+    echo "Hubo un error al añadir una direccion de envio..<br>";
+}
 
 
 // Verifica si se ha enviado un formulario de inicio de sesión

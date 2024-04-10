@@ -51,7 +51,6 @@ class Anuncio {
     public function getAnuncioId($id_anuncio){
         $sql = "SELECT * FROM anuncio WHERE id = ?";
         
-        // Obtiene la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
@@ -59,13 +58,10 @@ class Anuncio {
         
         $stmt->bind_param("i", $id_anuncio);
         
-        // Ejecuta la consulta
         $stmt->execute();
         
-        // Obtiene el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Obtiene el anuncio encontrado como objeto
         $anuncio = null;
         if ($row = $result->fetch_assoc()) {
             $anuncio = new Anuncio(
@@ -90,7 +86,6 @@ class Anuncio {
     public function getAnuncioIdUsuario($id_usuario) {
         $sql = "SELECT * FROM anuncio WHERE id_usuario = ?";
         
-        // Obtiene la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
@@ -98,13 +93,10 @@ class Anuncio {
         
         $stmt->bind_param("i", $id_usuario);
         
-        // Ejecuta la consulta
         $stmt->execute();
         
-        // Obtiene el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Inicializa un array para almacenar los anuncios
         $anuncios = array();
         
         // Itera sobre los resultados y crea objetos Anuncio para cada uno
@@ -121,7 +113,6 @@ class Anuncio {
                 $row['id_categoria'],
                 $row['id_usuario']
             );
-            // Agrega el anuncio al array de anuncios
             $anuncios[] = $anuncio;
         }
     

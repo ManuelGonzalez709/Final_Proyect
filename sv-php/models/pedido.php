@@ -58,7 +58,7 @@ class Pedido {
         return $pedido;
     }
 
-    public function getPedidoIdUsuario($id_usuario){ // DA FALLO
+    public function getPedidoIdUsuario($id_usuario){
         $sql = "SELECT * FROM pedido WHERE id_comprador = ?";
         
         // Obtiene la conexión a la base de datos
@@ -80,7 +80,7 @@ class Pedido {
         
         // Itera sobre los resultados y crea objetos Pedido para cada uno
         while ($row = $result->fetch_assoc()) {
-            $pedido = new Anuncio(
+            $pedido = new Pedido(
                 $row['id'],
                 $row['id_anuncio'],
                 $row['id_comprador'],
