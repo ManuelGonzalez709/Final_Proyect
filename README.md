@@ -12,11 +12,11 @@ La aplicación incorporará funcionalidades como:
 En el caso de que de tiempo se desarrollará una versión web de la aplicación.
 
 ## Tecnologías
-- Java
-- Spring Boot
-- MySQL
-- HTML
-- CSS
+- ``Java``
+- ``PHP``
+- ``MySQL``
+- ``HTML`` ?
+- ``CSS`` ?
 
 ## [Imágenes](/images/)
 Imágenes a usar en un futuro a la hora de desarrollar la aplicación.
