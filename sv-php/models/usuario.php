@@ -1,4 +1,5 @@
 <?php
+require_once 'conexion.php';
 require_once 'util/auth.php';
 
 class Usuario {
@@ -72,7 +73,7 @@ class Usuario {
         // Cerrar la conexión y devuelve el usuario
         $stmt->close();
         $conexion->cerrarConexion();
-        return $usuario;
+        return json_encode($usuario);
     }
 
     /**

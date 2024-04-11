@@ -1,4 +1,5 @@
 <?php
+require_once 'conexion.php';
 class Anuncio {
     private $id;
     private $titulo;

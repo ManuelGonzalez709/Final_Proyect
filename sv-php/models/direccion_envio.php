@@ -1,4 +1,5 @@
 <?php
+require_once 'conexion.php';
 class DireccionEnvio {
     private $id;
     private $direccion;
