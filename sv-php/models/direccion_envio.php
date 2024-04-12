@@ -43,44 +43,39 @@ class DireccionEnvio {
      * 
      * return direcciones_envio
      */
-    public static function getDirEnvioIdUsuario($id_usuario) {
+    public function getDirEnvioIdUsuario($id_usuario) {
         $sql = "SELECT * FROM direccion_envio WHERE id_usuario = ?";
         
-        // Preparar la consulta
+        // Obtener la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
-
+        
+        // Preparar la sentencia
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
-        // Vincular parámetros
+        // Vincular los parámetros
         $stmt->bind_param("i", $id_usuario);
         
+        // Ejecutar la consulta
         $stmt->execute();
         
-        // Obtiene los resultados
+        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Array para almacenar las direcciones de envío
+        // Crear un array para almacenar las direcciones de envío
         $direcciones = array();
         
+        // Obtener todas las direcciones de envío encontradas
         while ($row = $result->fetch_assoc()) {
-            $direccion = new DireccionEnvio(
-                $row['id'],
-                $row['direccion'],
-                $row['cp'],
-                $row['provincia'],
-                $row['poblacion'],
-                $row['pais'],
-                $row['id_usuario']
-            );
-            $direcciones[] = $direccion;
+            $direcciones[] = $row;
         }
         
+        // Cerrar la conexión y devolver las direcciones de envío como JSON
         $stmt->close();
-        
-        return $direcciones;
+        $conexion->cerrarConexion();
+        return json_encode($direcciones);
     }
-
+    
     /**
      * Función que inserta nuevas direcciones de envío de un usuario en específico
      * en la base de datos a partir de los parámetros $direccion, $cp, $provincia, 
@@ -112,7 +107,7 @@ class DireccionEnvio {
         $conexion->cerrarConexion();
 
         // Retorna true si se insertó correctamente, de lo contrario, retorna false
-        return $insercion_exitosa;
+        return json_encode($insercion_exitosa);
     }
 }
 

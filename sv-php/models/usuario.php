@@ -77,6 +77,36 @@ class Usuario {
     }
 
     /**
+     * Función que crea un nuevo usuario mediante los datos proporcionados
+     * como parámetro.
+     * 
+     * return true / false
+     */
+    public function insertUsuario($nombre, $apellidos, $nomb_usu, $contras, $fecha_nacimiento, $email, $telefono){
+        $contrasena_cifrada = Auth::hashContras($contras);
+
+        $sql = "INSERT INTO usuario (nombre, apellidos, nomb_usu, contras, fecha_nacimiento, email, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        $stmt->bind_param("sssssss", $nombre, $apellidos, $nomb_usu, $contrasena_cifrada, $fecha_nacimiento, $email, $telefono);
+        
+        $stmt->execute();
+        
+        // Verifica si la inserción fue exitosa
+        $insercion_exitosa = $stmt->affected_rows > 0;
+        
+        $stmt->close();
+        $conexion->cerrarConexion();
+
+        // Retorna true si se insertó correctamente, de lo contrario, retorna false
+        return json_encode($insercion_exitosa);
+    }
+
+    /**
      * Función que actualiza los datos de un usuario existente en la base de datos
      * a partir de los parámetros $id_usuario, $nombre, $apellidos, $telefono, $email,
      *  $fecha_nac, $nomb_usu
@@ -102,7 +132,7 @@ class Usuario {
         $conexion->cerrarConexion();
         
         // Retorna true si se actualizó al menos una fila, de lo contrario, retorna false
-        return $filas_afectadas > 0;
+        return json_encode($filas_afectadas > 0);
     }
 
     /**
@@ -137,8 +167,8 @@ class Usuario {
         $conexion->cerrarConexion();
         
         // Retorna true si se actualizó al menos una fila, de lo contrario, retorna false
-        return $filas_afectadas > 0;
-    }    
+        return json_encode($filas_afectadas > 0);
+    }
 }
 
 ?>

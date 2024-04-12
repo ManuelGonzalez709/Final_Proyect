@@ -34,34 +34,29 @@ class Pedido {
     public function getPedidoId($id_pedido){
         $sql = "SELECT * FROM pedido WHERE id = ?";
         
-        // Obtiene la conexión a la base de datos
+        // Obtener la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
+        // Preparar la sentencia
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
+        // Vincular los parámetros
         $stmt->bind_param("i", $id_pedido);
         
-        // Ejecuta la consulta
+        // Ejecutar la consulta
         $stmt->execute();
         
-        // Obtiene el resultado de la consulta
+        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Obtiene el pedido encontrado como objeto
-        $pedido = null;
-        if ($row = $result->fetch_assoc()) {
-            $pedido = new Pedido(
-                $row['id'],
-                $row['id_anuncio'],
-                $row['id_comprador'],
-                $row['fech_pedido']
-            );
-        }
-    
+        // Obtiene el primer pedido encontrada (debería ser único)
+        $pedido = $result->fetch_assoc();
+        
+        // Cerrar la conexión y devuelve el pedido
         $stmt->close();
         $conexion->cerrarConexion();
-        return $pedido;
+        return json_encode($pedido);
     }
 
     /**
@@ -72,38 +67,38 @@ class Pedido {
     public function getPedidosIdUsuario($id_usuario){
         $sql = "SELECT * FROM pedido WHERE id_comprador = ?";
         
-        // Obtiene la conexión a la base de datos
+        // Obtener la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
         $stmt->bind_param("i", $id_usuario);
-        
-        // Ejecuta la consulta
+    
+        // Ejecutar la consulta
         $stmt->execute();
         
-        // Obtiene el resultado de la consulta
+        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Inicializa un array para almacenar los pedidos
+        // Crear un array para almacenar los pedidos
         $pedidos = array();
         
-        // Itera sobre los resultados y crea objetos Pedido para cada uno
+        // Obtener todas los pedidos encontrados
         while ($row = $result->fetch_assoc()) {
-            $pedido = new Pedido(
-                $row['id'],
-                $row['id_anuncio'],
-                $row['id_comprador'],
-                $row['fech_pedido']
-            );
-            // Agrega el pedido al array de pedidos
-            $pedidos[] = $pedido;
+            $pedidos[] = $row;
         }
-    
+        
+        // Cerrar la conexión y devolver los pedidos como JSON
         $stmt->close();
         $conexion->cerrarConexion();
-        return $pedidos;
+        
+        // Verificar si se encontraron mensajes
+        if (empty($pedidos)) {
+            return json_encode(array('error' => 'No se encontraron pedidos para los parametros proporcionados.'));
+        } else {
+            return json_encode($pedidos);
+        }
     }
 
     /**
@@ -114,14 +109,14 @@ class Pedido {
      */
     public function insertPedido($id_comprador, $id_anuncio){
         // Comprobar si ya existe el pedido en la bd
-        $sql_check = "SELECT COUNT(*) AS total FROM pedido WHERE id_comprador = ? AND id_anuncio = ?";
+        $sql_check = "SELECT COUNT(*) AS total FROM pedido WHERE id_anuncio = ?";
         
         $conexion = new Conexion();
         $conexion->conectar();
         
         $stmt_check = $conexion->obtenerConexion()->prepare($sql_check);
         
-        $stmt_check->bind_param("ii", $id_comprador, $id_anuncio);
+        $stmt_check->bind_param("i", $id_anuncio);
         
         // Ejecutar la consulta
         $stmt_check->execute();
@@ -137,7 +132,7 @@ class Pedido {
             // Cerrar la conexión
             $conexion->cerrarConexion();
             // Retornar false indicando que no se insertó el pedido porque ya existe
-            return false;
+            return json_encode(false);
         }
         
         // Si no existe, proceder con la inserción del nuevo pedido
@@ -156,7 +151,7 @@ class Pedido {
         
         $conexion->cerrarConexion();
         
-        return $insercion_exitosa;
+        return json_encode($insercion_exitosa);
     }
 }
 

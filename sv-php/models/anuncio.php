@@ -1,5 +1,6 @@
 <?php
 require_once 'conexion.php';
+
 class Anuncio {
     private $id;
     private $titulo;
@@ -58,36 +59,29 @@ class Anuncio {
     public function getAnuncioId($id_anuncio){
         $sql = "SELECT * FROM anuncio WHERE id = ?";
         
+        // Obtener la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
+        // Preparar la sentencia
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
+        // Vincular los parámetros
         $stmt->bind_param("i", $id_anuncio);
         
+        // Ejecutar la consulta
         $stmt->execute();
         
+        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
-        $anuncio = null;
-        if ($row = $result->fetch_assoc()) {
-            $anuncio = new Anuncio(
-                $row['id'],
-                $row['titulo'],
-                $row['descripcion'],
-                $row['estado'],
-                $row['ubicacion'],
-                $row['precio'],
-                $row['divisa'],
-                $row['fotos'],
-                $row['id_categoria'],
-                $row['id_usuario'],
-            );
-        }
-    
+        // Obtener el primer anuncio encontrado (debería ser único)
+        $anuncio = $result->fetch_assoc();
+        
+        // Cerrar la conexión y devuelve el anuncio
         $stmt->close();
         $conexion->cerrarConexion();
-        return $anuncio;
+        return json_encode($anuncio);
     }
 
     /**
@@ -99,39 +93,68 @@ class Anuncio {
     public function getAnunciosIdUsuario($id_usuario) {
         $sql = "SELECT * FROM anuncio WHERE id_usuario = ?";
         
+        // Obtener la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
+        // Preparar la sentencia
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
+        // Vincular los parámetros
         $stmt->bind_param("i", $id_usuario);
         
+        // Ejecutar la consulta
         $stmt->execute();
         
+        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
+        // Crear un array para almacenar los anuncios
         $anuncios = array();
         
-        // Itera sobre los resultados y crea objetos Anuncio para cada uno
+        // Obtener todos los anuncios encontrados
         while ($row = $result->fetch_assoc()) {
-            $anuncio = new Anuncio(
-                $row['id'],
-                $row['titulo'],
-                $row['descripcion'],
-                $row['estado'],
-                $row['ubicacion'],
-                $row['precio'],
-                $row['divisa'],
-                $row['fotos'],
-                $row['id_categoria'],
-                $row['id_usuario']
-            );
-            $anuncios[] = $anuncio;
+            $anuncios[] = $row;
         }
-    
+        
+        // Cerrar la conexión y devolver los anuncios como JSON
         $stmt->close();
         $conexion->cerrarConexion();
-        return $anuncios;
+        return json_encode($anuncios);
+    }
+
+     /**
+     * Función que inserta nuevos anuncios de un usuario en específico
+     * en la base de datos a partir de los parámetros  $direccion, $cp, 
+     * $provincia, $poblacion, $pais, $id_usuario
+     * 
+     * return -> true / false
+     */
+    public function insertAnuncio($id_usuario, $id_categoria, $titulo, $descripcion, $estado, $ubicacion, $precio, $divisa, $fotos) {
+        // Query SQL para insertar una nuevo anuncio en la base de datos
+        $sql = "INSERT INTO anuncio (id_usuario, id_categoria, titulo, descripcion, estado, ubicacion, precio, divisa, fotos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        // Obtiene la conexión a la base de datos
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        // Prepara la sentencia SQL
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        // Enlaza los parámetros con los valores proporcionados
+        $stmt->bind_param("iissssdss", $id_usuario, $id_categoria, $titulo, $descripcion, $estado, $ubicacion, $precio, $divisa, $fotos);
+        
+        // Ejecuta la consulta
+        $stmt->execute();
+        
+        // Verifica si la inserción fue exitosa
+        $insercion_exitosa = $stmt->affected_rows > 0;
+        
+        $stmt->close();
+        $conexion->cerrarConexion();
+
+        // Retorna true si se insertó correctamente, de lo contrario, retorna false
+        return json_encode($insercion_exitosa);
     }
 
     /**
@@ -169,7 +192,8 @@ class Anuncio {
      * return true / false
      */
     public function deleteAnuncio($id_anuncio) {
-        $sql = "DELETE FROM anuncio WHERE id = ?";
+        try{
+            $sql = "DELETE FROM anuncio WHERE id = ?";
         
         $conexion = new Conexion();
         $conexion->conectar();
@@ -185,7 +209,14 @@ class Anuncio {
         $stmt->close();
         $conexion->cerrarConexion();
 
-        return $filas_afectadas > 0;
+        return json_encode($filas_afectadas > 0);
+
+        /* Controlamos la excepción por si salta debido a que no se pueden 
+           eliminar productos que se han pedido  por el constraint de la bd
+         */
+        } catch(mysqli_sql_exception $exception){
+            return json_encode(false); // Retorne false
+        } 
     }
 }
 

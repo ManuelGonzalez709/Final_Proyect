@@ -42,42 +42,40 @@ class Mensaje {
     public function getMensajesId($id_anuncio, $id_emisor, $id_receptor) {
         $sql = "SELECT * FROM mensaje WHERE id_anuncio = ? AND ((id_emisor = ? AND id_receptor = ?) OR (id_emisor = ? AND id_receptor = ?)) ORDER BY id";
         
-        // Obtiene la conexión a la base de datos
+        // Obtener la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
         $stmt->bind_param("iiiii", $id_anuncio, $id_emisor, $id_receptor, $id_receptor, $id_emisor);
-        
-        // Ejecuta la consulta
+    
+        // Ejecutar la consulta
         $stmt->execute();
         
-        // Obtiene el resultado de la consulta
+        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Inicializa un array para almacenar los mensajes
+        // Crear un array para almacenar los mensajes
         $mensajes = array();
-    
-        // Itera sobre los resultados y crea objetos Mensaje para cada uno
+        
+        // Obtener todas los mensajes encontrados
         while ($row = $result->fetch_assoc()) {
-            $mensaje = new Mensaje(
-                $row['id'],
-                $row['id_emisor'],
-                $row['id_receptor'],
-                $row['mensaje'],
-                $row['fecha'],
-                $row['id_anuncio']
-            );
-            // Agrega el mensaje al array de mensajes
-            $mensajes[] = $mensaje;
+            $mensajes[] = $row;
         }
-    
+        
+        // Cerrar la conexión y devolver los mensajes como JSON
         $stmt->close();
         $conexion->cerrarConexion();
-        return $mensajes;
+        
+        // Verificar si se encontraron mensajes
+        if (empty($mensajes)) {
+            return json_encode(array('error' => 'No se encontraron mensajes para los parámetros proporcionados.'));
+        } else {
+            return json_encode($mensajes);
+        }
     }
-
+    
     /**
      * Función que inserta nuevos mensajes en la base de datos a partir
      * del $id_emisor, $id_receptor, $mensaje, $id_anuncio.
@@ -103,7 +101,7 @@ class Mensaje {
         $conexion->cerrarConexion();
 
         // Retorna true si se insertó correctamente, de lo contrario, retorna false
-        return $insercion_exitosa;
+        return json_encode($insercion_exitosa);
     }
 }
 

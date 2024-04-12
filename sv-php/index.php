@@ -4,14 +4,16 @@ include 'models/categoria.php';
 include 'models/pedido.php';
 include 'models/anuncio.php';
 include 'models/usuario.php';
+include 'models/direccion_envio.php';
+include 'models/mensaje.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 if (isset($data['class']) && isset($data['method']) && isset($data['params'])) { 
-    // Obtener la clase y el método solicitado
+    // Obtiene la clase y el método solicitado
     $class = $data['class'];
     $method = $data['method'];
 
-    // Verificar qué clase se solicita
+    // Verifica que clase se solicita
     switch ($class) {
         case 'Categoria':
             $obj = new Categoria();
@@ -25,14 +27,20 @@ if (isset($data['class']) && isset($data['method']) && isset($data['params'])) {
         case 'Usuario':
             $obj = new Usuario();
             break;
+        case 'DireccionEnvio':
+            $obj = new DireccionEnvio();
+            break;
+        case 'Mensaje':
+            $obj = new Mensaje();
+            break;
         default:
             echo json_encode(['success' => false, 'error' => 'Clase no encontrada']);
             exit(); // Salir del script si la clase no es válida
     }
 
-    // Verificar si el método solicitado existe en la clase
+    // Verifica si el metodo solicitado existe en la clase
     if (method_exists($obj, $method)) {
-        // Llamar al método correspondiente de la clase
+        // Llamar al metodo correspondiente de la clase
         $result = call_user_func_array([$obj, $method], $data['params']);
         echo json_encode(['success' => true, 'data' => $result]);
     } else {

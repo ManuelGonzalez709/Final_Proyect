@@ -26,32 +26,29 @@ class Categoria {
     public function getCategoriaId($id_categoria){
         $sql = "SELECT * FROM categoria WHERE id = ?";
         
-        // Obtiene la conexión a la base de datos
+        // Obtener la conexión a la base de datos
         $conexion = new Conexion();
         $conexion->conectar();
         
+        // Preparar la sentencia
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
+        // Vincular los parámetros
         $stmt->bind_param("i", $id_categoria);
         
-        // Ejecuta la consulta
+        // Ejecutar la consulta
         $stmt->execute();
         
-        // Obtiene el resultado de la consulta
+        // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Obtiene la categoría encontrada como objeto
-        $categoria = null;
-        if ($row = $result->fetch_assoc()) {
-            $categoria = new Categoria(
-                $row['id'],
-                $row['descripcion']
-            );
-        }
-    
+        // Obtener la primera categoria encontrada (debería ser único)
+        $categoria = $result->fetch_assoc();
+        
+        // Cerrar la conexión y devuelve la categoria
         $stmt->close();
         $conexion->cerrarConexion();
-        return $categoria;
+        return json_encode($categoria);
     }
 }
 
