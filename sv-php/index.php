@@ -5,7 +5,6 @@ include 'models/pedido.php';
 include 'models/anuncio.php';
 include 'models/usuario.php';
 include 'models/direccion_envio.php';
-include 'models/mensaje.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 if (isset($data['class']) && isset($data['method']) && isset($data['params'])) { 
@@ -29,9 +28,6 @@ if (isset($data['class']) && isset($data['method']) && isset($data['params'])) {
             break;
         case 'DireccionEnvio':
             $obj = new DireccionEnvio();
-            break;
-        case 'Mensaje':
-            $obj = new Mensaje();
             break;
         default:
             echo json_encode(['success' => false, 'error' => 'Clase no encontrada']);

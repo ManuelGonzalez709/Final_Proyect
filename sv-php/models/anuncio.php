@@ -189,7 +189,7 @@ class Anuncio {
      * Función que elimina un anuncio existente de un
      * usuario a partir del $id_anuncio
      * 
-     * return true / false
+     * return true / false / "err_constr"
      */
     public function deleteAnuncio($id_anuncio) {
         try{
@@ -214,10 +214,17 @@ class Anuncio {
         /* Controlamos la excepción por si salta debido a que no se pueden 
            eliminar productos que se han pedido  por el constraint de la bd
          */
-        } catch(mysqli_sql_exception $exception){
-            return json_encode(false); // Retorne false
-        } 
-    }
+    } catch(mysqli_sql_exception $exception) {
+        $constraint = "Cannot delete or update a parent row: a foreign key constraint fails";
+        
+        // Si no se puede eliminar por el constraint retorna un mensaje personalizado
+        if(strpos($exception->getMessage(), $constraint) !== false) {
+            return json_encode("err_constr"); // Error constraint
+        }
+    
+        return json_encode(false); // Retorne false
+        }
+    }    
 }
 
 ?>
