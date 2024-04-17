@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2024 a las 10:54:02
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 17-04-2024 a las 18:11:54
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,10 +46,9 @@ CREATE TABLE `anuncio` (
 --
 
 INSERT INTO `anuncio` (`id`, `id_usuario`, `id_categoria`, `titulo`, `descripcion`, `estado`, `ubicacion`, `precio`, `divisa`, `fotos`, `fech_public`) VALUES
-(1, 1, 4, 'Muebles casa', 'Sofá de cuero en excelente estado', 'activo', 'Madrid', 300, 'EUR', 'sofa1.jpg', '2024-04-11'),
-(2, 2, 3, 'iPhone 13 PRO MAX', 'iPhone 13 Pro Max nuevo en caja sellada', 'activo', 'Barcelona', 1200, 'EUR', 'iphone13.jpg', '2024-04-10'),
-(3, 3, 2, 'Camisa básica', 'Camisa de vestir para hombre talla M', 'inactivo', 'Valencia', 25, 'EUR', 'camisa.jpg', '2024-04-09'),
-(4, 2, 1, 'Toyota Corolla', 'Toyota Corolla 2019, único dueño', 'activo', 'Sevilla', 15000, 'EUR', 'corolla.jpg', '2024-04-08');
+(1, 1, 3, 'Iphone 12 PRO MAX', 'Se vende Iphone 12 PRO MAX, nuevo sin apenas uso.\r\nSe ha cuidado perfectamente, incluye todos los accesorios.', 'Muy bueno', 'Coordenadas ', 950, 'Euro', '/1/img1.png', '2024-04-02'),
+(2, 1, 1, 'Seat León 2009', 'Se vende SEAT LEON 2009. Tiene 120.000km, ITV al dia y todos los mantenimientos echos en la SEAT.', 'Usado', 'Coordenadas', 8000, 'Euro', 'ruta_imagenes', '2024-04-10'),
+(3, 1, 2, 'Yamaha TMAX', 'Se vende Yamaha TMAX 550 del 2020.\r\nSe compro como capricho, tiene todos los extras y mantenimientos hechos al día.\r\nMejor ver y probar.', 'Nuevo', 'Coordenadas', 10000, 'Euro', 'ruta_imagenes', '2024-04-10');
 
 -- --------------------------------------------------------
 
@@ -68,9 +67,9 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`id`, `descripcion`) VALUES
 (1, 'Coche'),
-(2, 'Ropa'),
+(2, 'Moto'),
 (3, 'Electrónica'),
-(4, 'Mueble');
+(4, 'Ocio');
 
 -- --------------------------------------------------------
 
@@ -93,27 +92,11 @@ CREATE TABLE `direccion_envio` (
 --
 
 INSERT INTO `direccion_envio` (`id`, `id_usuario`, `direccion`, `cp`, `poblacion`, `provincia`, `pais`) VALUES
-(3, 1, 'Calle Principal 123', '28001', 'Madrid', 'Madrid', 'España'),
-(4, 1, 'Avenida Central 456', '41001', 'Sevilla', 'Sevilla', 'España'),
-(5, 2, 'Plaza Mayor 789', '08001', 'Barcelona', 'Barcelona', 'España'),
-(6, 2, 'Calle Gran Vía 1011', '46001', 'Valencia', 'Valencia', 'España'),
-(7, 3, 'Paseo del Prado 1314', '28014', 'Madrid', 'Madrid', 'España'),
-(8, 3, 'Calle Serrano 1516', '28006', 'Madrid', 'Madrid', 'España');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mensaje`
---
-
-CREATE TABLE `mensaje` (
-  `id` int(5) NOT NULL,
-  `id_anuncio` int(5) NOT NULL,
-  `id_emisor` int(5) NOT NULL,
-  `id_receptor` int(5) NOT NULL,
-  `mensaje` varchar(255) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+(1, 1, 'Avenida del Parque 12', '12345', 'Pozoblanco', 'Córdoba', 'España'),
+(2, 3, 'Calle Ramon y Cajal 34', '23456', 'Belalcázar', 'Córdoba', 'España'),
+(3, 1, 'Calle de ejemplo 12', '12092', 'La Malagueta', 'Málaga', 'España'),
+(4, 1, 'Calle de ejemplo 12', '12092', 'La Malagueta', 'Málaga', 'España'),
+(5, 1, 'Calle de ejemplo 12', '12092', 'La Malagueta', 'Málaga', 'España');
 
 -- --------------------------------------------------------
 
@@ -133,7 +116,8 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id`, `id_comprador`, `id_anuncio`, `fech_pedido`) VALUES
-(2, 2, 4, '2024-04-11');
+(1, 3, 1, '2024-04-02'),
+(2, 3, 2, '2024-04-10');
 
 -- --------------------------------------------------------
 
@@ -150,6 +134,7 @@ CREATE TABLE `usuario` (
   `fecha_nacimiento` date NOT NULL,
   `email` varchar(50) NOT NULL,
   `telefono` varchar(25) NOT NULL,
+  `tipo` varchar(3) NOT NULL DEFAULT 'STD',
   `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -157,11 +142,10 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nomb_usu`, `contras`, `fecha_nacimiento`, `email`, `telefono`, `foto`) VALUES
-(1, 'Juan', 'Lopez Sanchez', 'juanlpz', '1234', '2006-04-04', 'juanlpz@gemail.com', '+34 678 54 32 12', NULL),
-(2, 'Juan', 'Lopez Sanchez', 'juanlpz', '1234', '2006-04-04', 'juanlpz@gemail.com', '+34 678 54 32 12', NULL),
-(3, 'Maria', 'Gonzalez Perez', 'mariagp', '5678', '1999-10-15', 'mariagp@gemail.com', '+34 654 78 91 23', NULL),
-(4, 'Pedro', 'Martinez Rodriguez', 'pedromr', 'abcd', '1985-07-23', 'pedromr@gemail.com', '+34 612 34 56 78', NULL);
+INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nomb_usu`, `contras`, `fecha_nacimiento`, `email`, `telefono`, `tipo`, `foto`) VALUES
+(1, 'Francisco', 'Lopez Montes', 'franlm', '$2y$10$QHHyvaoIguuO7Ve.UUlN6.NejY67wPYUg2yTTqLKML9KNuBcgU.4a', '1995-06-08', 'franlopz@gemail.com', '+34 678 54 32 60', 'STD', NULL),
+(2, 'María', 'Cantueso Murillo', 'mariacm', 'JASDKDHASJDHASKDHSAJKDHAD', '2004-04-01', 'mariacanmu@jotmail.com', '+34 789 90 00 76', 'STD', NULL),
+(3, 'Nombre actualizado', 'Apellidos actualizados', 'nuevousuario', 'JASDKDHASJDHASKDHSAJKDHAD', '1990-01-01', 'nuevo@correo.com', '989000031', 'STD', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -189,15 +173,6 @@ ALTER TABLE `direccion_envio`
   ADD KEY `FK_direccion_envio_usuario` (`id_usuario`);
 
 --
--- Indices de la tabla `mensaje`
---
-ALTER TABLE `mensaje`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_mensaje_usuario` (`id_emisor`),
-  ADD KEY `FK_mensaje_anuncio` (`id_anuncio`),
-  ADD KEY `FK_mensaje_vendedor` (`id_receptor`);
-
---
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
@@ -219,25 +194,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `anuncio`
 --
 ALTER TABLE `anuncio`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `direccion_envio`
 --
 ALTER TABLE `direccion_envio`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `mensaje`
---
-ALTER TABLE `mensaje`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -249,7 +218,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -267,14 +236,6 @@ ALTER TABLE `anuncio`
 --
 ALTER TABLE `direccion_envio`
   ADD CONSTRAINT `FK_direccion_envio_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `mensaje`
---
-ALTER TABLE `mensaje`
-  ADD CONSTRAINT `FK_mensaje_anuncio` FOREIGN KEY (`id_anuncio`) REFERENCES `anuncio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_mensaje_comprador` FOREIGN KEY (`id_emisor`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_mensaje_vendedor` FOREIGN KEY (`id_receptor`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `pedido`
