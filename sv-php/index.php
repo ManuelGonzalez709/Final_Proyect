@@ -29,6 +29,9 @@ if (isset($data['class']) && isset($data['method']) && isset($data['params'])) {
         case 'DireccionEnvio':
             $obj = new DireccionEnvio();
             break;
+        case 'Auth':
+            $obj = new Auth();
+            break;
         default:
             echo json_encode(['success' => false, 'error' => 'Clase no encontrada']);
             exit(); // Salir del script si la clase no es válida

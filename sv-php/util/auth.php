@@ -17,7 +17,7 @@ class Auth {
      * return true / false
      */
     public function verificarAutenticacion($nomb_usuario, $contrasena) {
-        $sql = "SELECT contras FROM usuario WHERE nomb_usu = ?";
+        $sql = "SELECT contras FROM usuario WHERE nomb_usu = ? AND tipo = 'ADM'";
 
         // Prepara la consulta
         $stmt = $this->conexion->obtenerConexion()->prepare($sql);
