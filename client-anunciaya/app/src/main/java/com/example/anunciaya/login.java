@@ -1,7 +1,6 @@
 package com.example.anunciaya;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -15,12 +14,13 @@ import android.widget.Toast;
 
 import com.example.anunciaya.tools.BundleRecoverry;
 import com.example.anunciaya.tools.ServerAsyncTask;
+import com.example.anunciaya.tools.ServerComunication;
 
 import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
-public class login extends AppCompatActivity {
+public class login extends AppCompatActivity{
     private TextView registerButton;
     private BundleRecoverry dataRecovery;
     private Button IniciarSesion;
@@ -42,23 +42,32 @@ public class login extends AppCompatActivity {
 
         registerButton.setOnClickListener(new View.OnClickListener() // Te lleva a la ventana de Inicio de Sesion
         {public void onClick(View v) {abrirRegister();}});
-        IniciarSesion.setOnClickListener(new View.OnClickListener()// Te lleva a la ventana de Inicio de Sesion
-        {public void onClick(View v) {
+        // Te lleva a la ventana de Inicio de Sesion
+        IniciarSesion.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
             String[] p1 = {loginNombreUsuario.getText().toString(), loginContraseña.getText().toString()};
-            LanzarPeticion("Auth","verificarAuthClient",p1);
-            if(parsearLoggin()){
-                String[]p2 = {loginNombreUsuario.getText().toString()};
-                LanzarPeticion("Usuario","getIdUser",p2);
-                dataRecovery.guardarInt("logginId",obtenerId());
+            if(LanzarPeticion("Auth","verificarAuthClient",p1)){
+                Log.i("ResultadoServer",resultadoServer);
             }
+
         }});
 
     }
-    private void LanzarPeticion(String clase , String metodo , String[]parametros){
-        ServerAsyncTask asyncTask = new ServerAsyncTask(urlServer, clase, metodo, parametros, new ServerAsyncTask.ServerCommunicationListener() {
+
+    private Boolean LanzarPeticion(String clase , String metodo , String[]parametros){
+        Thread thread = new Thread(new Runnable() {
             @Override
-            public void onServerResponse(String response) {resultadoServer = response;}});
-            asyncTask.execute();
+            public void run() {
+                resultadoServer = ServerComunication.comunicacion(urlServer,clase,metodo,parametros);
+            }
+        });
+        try{
+            thread.start();
+            thread.join();
+            return true;}
+        catch (Exception e){
+            return false;
+        }
     }
     private void abrirRegister(){
         Intent intent = new Intent(this, register.class);
