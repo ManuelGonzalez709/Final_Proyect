@@ -59,7 +59,7 @@ class Usuario {
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
         // Vincular los parámetros
-        $stmt->bind_param("i", $nombre_usuario);
+        $stmt->bind_param("s", $nombre_usuario);
         
         // Ejecutar la consulta
         $stmt->execute();
