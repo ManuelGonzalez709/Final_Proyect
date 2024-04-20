@@ -9,21 +9,21 @@ class Auth {
     }
     
     /**
-     * Función que verifica la autenticación de un usuario standar a partir
+     * Función que verifica la autenticación de un usuario a partir
      * del nombre de usuario y contraseña proporcionada por parámetro.
      * La contraseña proporcioanda se hashea y se comprueba si es la
      * misma que la de la bd hasheada.
      * 
      * return true / false
      */
-    public function verificarAuthClient($nomb_usu, $contrasena) {
-        $sql = "SELECT contras FROM usuario WHERE nomb_usu = ? AND tipo = 'STD'";
+    public function verificarAuthClient($nomb_usuario, $contrasena) {
+        $sql = "SELECT contras FROM usuario WHERE nomb_usu = ? AND tipo = 'STD' ";
 
         // Prepara la consulta
         $stmt = $this->conexion->obtenerConexion()->prepare($sql);
 
         // Vincula el parámetro
-        $stmt->bind_param("s", $nomb_usu);
+        $stmt->bind_param("s", $nomb_usuario);
 
         $stmt->execute();
 
@@ -55,22 +55,14 @@ class Auth {
         }
     }
 
-    /**
-     * Función que verifica la autenticación de un usuario administrador
-     *  a partir del email y contraseña proporcionada por parámetro.
-     * La contraseña proporcioanda se hashea y se comprueba si es la
-     * misma que la de la bd hasheada.
-     * 
-     * return true / false
-     */
-    public function verificarAuthAdmin($email, $contrasena) {
-        $sql = "SELECT contras FROM usuario WHERE email = ? AND tipo = 'ADM'";
+    public function verificarAuthAdmin($nomb_usuario, $contrasena) {
+        $sql = "SELECT contras FROM usuario WHERE nomb_usu = ? AND tipo = 'ADM' ";
 
         // Prepara la consulta
         $stmt = $this->conexion->obtenerConexion()->prepare($sql);
 
         // Vincula el parámetro
-        $stmt->bind_param("s", $email);
+        $stmt->bind_param("s", $nomb_usuario);
 
         $stmt->execute();
 
@@ -101,6 +93,7 @@ class Auth {
             return false;
         }
     }
+
 
      /**
       * Función que hashea una contraseña introducida como parámetro en

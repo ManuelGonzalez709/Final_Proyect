@@ -1,7 +1,22 @@
 <?php
 require_once 'conexion.php';
-
 class Categoria {
+    private $id;
+    private $descripcion;
+
+    public function __construct($id = null, $descripcion = null){
+        if($id != null && $descripcion != null){
+            $this->id = $id;
+            $this->descripcion = $descripcion;
+        }
+    } 
+
+    public function getId() { return $this->id; }
+    public function getDescripcion() { return $this->descripcion; }
+
+    public function setId($id) { $this->id = $id; }
+    public function setDescripcion($descripcion) { $this->descripcion = $descripcion; }
+
     /**
      * Función que obtiene todos los datos de una categoria
      * a partir del $id_categoria
