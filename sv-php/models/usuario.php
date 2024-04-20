@@ -3,45 +3,6 @@ require_once 'conexion.php';
 require_once 'util/auth.php';
 
 class Usuario {
-    private $id;
-    private $nombre;
-    private $apellidos;
-    private $telefono;
-    private $email;
-    private $fecha_nac;
-    private $nomb_usu;
-    private $contras;
-
-    public function __construct($id = null, $nombre = null, $apellidos = null, $telefono = null, $email = null, $fecha_nac = null, $nomb_usu = null, $contras = null) {
-        if ($id !== null && $nombre !== null && $apellidos !== null && $telefono !== null && $email !== null && $fecha_nac !== null && $nomb_usu !== null && $contras !== null) {
-            $this->id = $id;
-            $this->nombre = $nombre;
-            $this->apellidos = $apellidos;
-            $this->telefono = $telefono;
-            $this->email = $email;
-            $this->fecha_nac = $fecha_nac;
-            $this->nomb_usu = $nomb_usu;
-            $this->contras = $contras;
-        }
-    }
-
-    public function getId() { return $this->id; }
-    public function getNombre() { return $this->nombre; }
-    public function getApellidos() { return $this->apellidos; }
-    public function getTelefono() { return $this->telefono; }
-    public function getEmail() { return $this->email; }
-    public function getFechaNac() { return $this->fecha_nac; }
-    public function getNombUsu() { return $this->nomb_usu; }
-    public function getContras() { return $this->contras; }
-
-    public function setNombre($nombre) { $this->nombre = $nombre; }
-    public function setApellidos($apellidos) { $this->apellidos = $apellidos; }
-    public function setTelefono($telefono) { $this->telefono = $telefono; }
-    public function setEmail($email) { $this->email = $email; }
-    public function setFechaNac($fecha_nac) { $this->fecha_nac = $fecha_nac; }
-    public function setNombUsu($nomb_usu) { $this->nomb_usu = $nomb_usu; }
-    public function setContras($contras) { $this->contras = $contras; }
-    
     /**
      * Función que obtiene todos los datos de un usuario insertado
      * en una base de datos a partir del $id_usuario
@@ -114,7 +75,8 @@ class Usuario {
      * return true / false
      */
     public function updateUsuario($id_usuario, $nombre, $apellidos, $telefono, $email, $fecha_nac, $nomb_usu){
-        $sql = "UPDATE usuario SET nombre = ?, apellidos = ?, telefono = ?, email = ?, fecha_nacimiento = ?, nomb_usu = ? WHERE id = ?";
+        try{
+            $sql = "UPDATE usuario SET nombre = ?, apellidos = ?, telefono = ?, email = ?, fecha_nacimiento = ?, nomb_usu = ? WHERE id = ?";
         
         $conexion = new Conexion();
         $conexion->conectar();
@@ -133,6 +95,28 @@ class Usuario {
         
         // Retorna true si se actualizó al menos una fila, de lo contrario, retorna false
         return json_encode($filas_afectadas > 0);
+        } catch(mysqli_sql_exception $exception){
+            echo $exception;
+        
+            // Definir las cadenas que identifican las violaciones de restricciones únicas
+            $unique_nomb_usu = "Duplicate entry 'usuario777' for key 'UNIKE_nomb_usu'";
+            $unique_email = "Duplicate entry 'nuevo@correo.com' for key 'UNIKE_email'";
+            
+            // Arreglo para almacenar los mensajes de error
+            $error_message = "excepcion";
+        
+            // Si la excepción indica una violación de la restricción de nombre de usuario único, añadir al arreglo de mensajes de error
+            if(strpos($exception->getMessage(), $unique_nomb_usu) !== false) {
+                $error_message[0] = "unique_nomb_usu"; // Error constraint
+            } 
+        
+            // Si la excepción indica una violación de la restricción de correo electrónico único, añadir al arreglo de mensajes de error
+            if(strpos($exception->getMessage(), $unique_email) !== false) {
+                $error_message[1] = "unique_email"; // Error constraint
+            }
+        
+            return json_encode(["error" => $error_message]);
+        }  
     }
 
     /**

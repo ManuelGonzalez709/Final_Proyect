@@ -1,31 +1,7 @@
 <?php
 require_once 'conexion.php';
+
 class Pedido {
-    private $id;
-    private $id_anuncio;
-    private $id_comprador;
-    private $fecha;
-
-    public function __construct($id = null, $id_anuncio = null, $id_usuario = null, $fecha = null) {
-        if($id != null && $id_anuncio != null && $id_usuario != null && $fecha != null){
-            $this->id = $id;
-            $this->id_anuncio = $id_anuncio;
-            $this->id_comprador = $id_usuario;
-            $this->fecha = $fecha;
-        }
-        
-    }
-
-    public function getId() { return $this->id; }
-    public function getIdAnuncio() { return $this->id_anuncio; }
-    public function getIdComprador() { return $this->id_comprador; }
-    public function getFecha() { return $this->fecha; }
-
-    public function setId($id) { $this->id = $id; }
-    public function setIdAnuncio($id_anuncio) { $this->id_anuncio = $id_anuncio; }
-    public function setIdComprador($id_usuario) { $this->id_comprador = $id_usuario; }
-    public function setFecha($fecha) { $this->fecha = $fecha; }
-
     /**
      * Función que obtiene el pedido completo a partir del $id_pedido
      * 
