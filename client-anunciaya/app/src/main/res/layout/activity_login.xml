@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:text="Nombre Usuario*"
-            android:textSize="20dp"/>
+            android:textSize="16dp"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/containerEmailPadre"
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:gravity="start"
             android:text="Contraseña*"
-            android:textSize="20dp"/>
+            android:textSize="16dp"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/containerPassPadre"

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.anunciaya.tools.BundleRecoverry;
 import com.example.anunciaya.tools.ServerComunication;
@@ -30,9 +31,7 @@ public class login extends AppCompatActivity{
         setContentView(R.layout.activity_login);
         SharedPreferences sharedPreferences = getSharedPreferences("MisDatos", MODE_PRIVATE);
         dataRecovery = new BundleRecoverry(sharedPreferences);
-        //if(dataRecovery.recuperarInt("logginId")!= -1)LanzarMain();
-        // esto de arriba si lo descomentas , al estar la sesion iniciada te lanza al main
-        // pero como todabia no tenemos boton de desloguearse lo quito porque sino no me manda al main
+        if(dataRecovery.recuperarInt("logginId")!= -1)LanzarMain();
 
         registerButton = findViewById(R.id.btLoginRegistrate);
         loginContraseña = findViewById(R.id.loginContraseña);
@@ -54,16 +53,24 @@ public class login extends AppCompatActivity{
                         LanzarMain();
                     }
                 }
-            }
+            }else Toast.makeText(login.this, "Usuario o Contraseña Invalidos", Toast.LENGTH_SHORT).show();
 
         }});
 
     }
+    /*Metodo que lanza la actividad de Main y Finaliza la Actividad de Loggin*/
     private void LanzarMain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
+    /*Metodo que se encarga de abrir la ventana de Registro*/
+    private void abrirRegister(){
+        Intent intent = new Intent(this, register.class);
+        startActivity(intent);
+    }
+
+    /*Metodo que se encarga de lanzar peticion al server*/
     private Boolean LanzarPeticion(String clase , String metodo , String[]parametros){
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -77,10 +84,7 @@ public class login extends AppCompatActivity{
             return false;
         }
     }
-    private void abrirRegister(){
-        Intent intent = new Intent(this, register.class);
-        startActivity(intent);
-    }
+    /*Metodo que parsea la salida para obtener el nombre de usuario*/
     private int obtenerId(String datos){
         try{
             ObjectMapper objectMapper = new ObjectMapper();
@@ -90,6 +94,7 @@ public class login extends AppCompatActivity{
             return dataNode.get("id").asInt();
         }catch (Exception e){return -1;}
     }
+    /*Metodo que se encarga de parsear la salida para obtener si es valida la password*/
     private boolean parsearLoggin(String datos){
         try{
             JSONObject jsonObject = new JSONObject(datos);
