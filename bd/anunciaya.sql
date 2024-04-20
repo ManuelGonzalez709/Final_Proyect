@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-04-2024 a las 14:03:39
+-- Tiempo de generación: 20-04-2024 a las 14:06:04
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -186,8 +186,9 @@ ALTER TABLE `pedido`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `UNIKE_nomb_usu` (`nomb_usu`),
-  ADD UNIQUE KEY `UNIKE_email` (`email`);
+  ADD UNIQUE KEY `UNIQUE_tlf` (`telefono`),
+  ADD UNIQUE KEY `UNIQUE_nomb_usu` (`nomb_usu`) USING BTREE,
+  ADD UNIQUE KEY `UNIQUE_email` (`email`) USING BTREE;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
