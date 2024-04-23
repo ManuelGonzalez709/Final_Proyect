@@ -9,9 +9,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ServerComunication {
+    private String urlServer = "http://192.168.18.5/sv-php/index.php";
+    private String resultadoServer = "";
+    public ServerComunication(String server){urlServer = server;}
     public ServerComunication(){}
+    public String getResultadoServer() {return resultadoServer;}
 
-    public static String comunicacion(String UrlServer , String clase, String metodo , String[]params){
+    private String comunicacion(String UrlServer , String clase, String metodo , String[]params){
         try {
             // URL del servidor PHP
             URL url = new URL(UrlServer);
@@ -55,5 +59,17 @@ public class ServerComunication {
         }
         return retornador;
     }
-
+    public Boolean LanzarPeticion(String clase , String metodo ,String[]parametros){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                resultadoServer = comunicacion(urlServer,clase,metodo,parametros);
+            }
+        });
+        try{
+            thread.start();thread.join();return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

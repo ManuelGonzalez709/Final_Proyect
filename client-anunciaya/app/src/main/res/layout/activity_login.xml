@@ -70,7 +70,7 @@
                     android:background="@null"
                     android:textColor="@color/white"
                     android:hint="Nombre Usuario"
-                    android:maxLines="1" />
+                    android:singleLine="true" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                     android:textColor="@color/white"
                     android:hint="Contraseña"
                     android:gravity="end|center"
-                    android:maxLines="1"
+                    android:singleLine="true"
                     android:layout_marginRight="10dp"/>
 
                 <androidx.cardview.widget.CardView
