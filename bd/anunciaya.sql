@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2024 a las 18:11:54
+-- Tiempo de generación: 20-04-2024 a las 14:06:04
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -143,9 +143,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `nombre`, `apellidos`, `nomb_usu`, `contras`, `fecha_nacimiento`, `email`, `telefono`, `tipo`, `foto`) VALUES
-(1, 'Francisco', 'Lopez Montes', 'franlm', '$2y$10$QHHyvaoIguuO7Ve.UUlN6.NejY67wPYUg2yTTqLKML9KNuBcgU.4a', '1995-06-08', 'franlopz@gemail.com', '+34 678 54 32 60', 'STD', NULL),
-(2, 'María', 'Cantueso Murillo', 'mariacm', 'JASDKDHASJDHASKDHSAJKDHAD', '2004-04-01', 'mariacanmu@jotmail.com', '+34 789 90 00 76', 'STD', NULL),
-(3, 'Nombre actualizado', 'Apellidos actualizados', 'nuevousuario', 'JASDKDHASJDHASKDHSAJKDHAD', '1990-01-01', 'nuevo@correo.com', '989000031', 'STD', NULL);
+(1, 'Modificado', 'Apellidos modificados', 'usuario', '$2y$10$QHHyvaoIguuO7Ve.UUlN6.NejY67wPYUg2yTTqLKML9KNuBcgU.4a', '2024-04-17', 'nuevo@correo.com3', '+34 789 90 00 763', 'STD', NULL),
+(2, 'Modificado', 'Apellidos modificados', 'usuario777', '$2a$12$zwdimD4AMfP2nzT9uDRoOOpxfB93Ynirl6dHd1ifOhlBqo70kmsv2\n', '2024-04-17', 'nuevo@correo.com777', '+34 789 90 00 76', 'STD', NULL),
+(3, 'Modificado', 'Apellidos modificados', 'usuario1111', '$2a$12$FiftGO0JHzzeCH5djMlW8uXWdvhLTU2ZBrX11fCpEKNLt7EldQbMa', '2024-04-17', 'nuevo@correo.com', '20848209483', 'STD', NULL),
+(4, 'Administrador', 'Administrador', 'admin', '$2a$12$XgYSJ6Kq8ADtfIPfoo.62.Oh7JYHJB9vqqDRNYZ72tPZH60Iw3qCO', '2024-04-17', 'admin@example.com', '000000000', 'ADM', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -184,7 +185,10 @@ ALTER TABLE `pedido`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQUE_tlf` (`telefono`),
+  ADD UNIQUE KEY `UNIQUE_nomb_usu` (`nomb_usu`) USING BTREE,
+  ADD UNIQUE KEY `UNIQUE_email` (`email`) USING BTREE;
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -218,7 +222,7 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
