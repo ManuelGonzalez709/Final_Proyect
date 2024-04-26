@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ServerComunication {
-    private String urlServer = "http://192.168.18.5/sv-php/index.php";
+    private String urlServer = "http://172.20.10.5/sv-php/index.php";
     private String resultadoServer = "";
     public ServerComunication(String server){urlServer = server;}
     public ServerComunication(){}
@@ -66,10 +66,8 @@ public class ServerComunication {
                 resultadoServer = comunicacion(urlServer,clase,metodo,parametros);
             }
         });
-        try{
-            thread.start();thread.join();return true;
-        }catch (Exception e){
-            return false;
-        }
+        // lanzamos el hilo y esperamos a que termine
+        try{thread.start();thread.join();return true;}
+        catch (Exception e){return false;}
     }
 }

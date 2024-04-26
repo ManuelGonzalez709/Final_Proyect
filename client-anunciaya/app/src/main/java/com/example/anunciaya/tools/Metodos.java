@@ -8,6 +8,7 @@ import org.json.JSONObject;
 public class Metodos {
     private ServerComunication comunication;
     public Metodos() {comunication = new ServerComunication();}
+
     public int insertUsuario(String[]args){
         try{
             if(comunication.LanzarPeticion("Usuario","insertUsuario",args)){

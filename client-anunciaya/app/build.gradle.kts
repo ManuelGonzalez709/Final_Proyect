@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation ("androidx.navigation:navigation-fragment:2.5.3")
+    implementation ("androidx.navigation:navigation-ui:2.5.3")
     implementation ("com.fasterxml.jackson.core:jackson-databind:2.13.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")

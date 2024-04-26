@@ -72,7 +72,7 @@ public class register extends AppCompatActivity {
                             if(contras.getText().toString().compareTo("")!= 0){
                                 if(dateButton.getText().toString().compareTo("")!=0){
                                     String [] p1 = {nombre.getText().toString(),apellidos.getText().toString(),nomb_usu.getText().toString(),contras.getText().toString(),dateButton.getText().toString(),email.getText().toString(),telf.getText().toString()};
-                                    int idUser =  metodos.insertUsuario(p1);
+                                    int idUser = metodos.insertUsuario(p1);
                                     if(idUser!= -1){
                                         dataRecovery.guardarInt("logginId",idUser);
                                         LanzarMain();

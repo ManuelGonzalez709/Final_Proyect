@@ -34,7 +34,6 @@ public class login extends AppCompatActivity{
         SharedPreferences sharedPreferences = getSharedPreferences("MisDatos", MODE_PRIVATE);
         metodos = new Metodos();
         dataRecovery = new BundleRecoverry(sharedPreferences);
-
         if(dataRecovery.recuperarInt("logginId")!= -1)LanzarMain();
 
         registerButton = findViewById(R.id.btLoginRegistrate);
@@ -69,5 +68,4 @@ public class login extends AppCompatActivity{
         startActivity(intent);
         finish();
     }
-
 }
