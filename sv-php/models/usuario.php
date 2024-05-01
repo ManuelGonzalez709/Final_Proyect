@@ -3,6 +3,10 @@ require_once 'conexion.php';
 require_once 'util/auth.php';
 
 class Usuario {
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 4da6a5a8611f7ae8fcb35f6896c420c5b5ca3fa3
     /**
      * Función que obtiene todos los datos de un usuario insertado
      * en una base de datos a partir del $id_usuario
