@@ -9,10 +9,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ServerComunication {
-    private String urlServer = "http://172.20.10.5/sv-php/index.php";
+    private String urlServer = "http://192.168.0.102/sv-php/index.php";
     private String resultadoServer = "";
+
+
     public ServerComunication(String server){urlServer = server;}
+
     public ServerComunication(){}
+
     public String getResultadoServer() {return resultadoServer;}
 
     private String comunicacion(String UrlServer , String clase, String metodo , String[]params){

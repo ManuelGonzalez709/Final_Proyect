@@ -1,4 +1,4 @@
-package com.example.anunciaya.Fragments;
+package com.example.anunciaya.fragments;
 
 import android.os.Bundle;
 

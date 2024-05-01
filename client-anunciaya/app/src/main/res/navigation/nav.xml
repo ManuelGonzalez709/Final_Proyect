@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/page_inicio"
-        android:name="com.example.anunciaya.Fragments.InicioFragment"
+        android:name="com.example.anunciaya.fragments.InicioFragment"
         tools:layout="@layout/fragment_inicio" />
 
     <fragment
         android:id="@+id/page_Add"
-        android:name="com.example.anunciaya.Fragments.AddFragment"
+        android:name="com.example.anunciaya.fragments.AddFragment"
         tools:layout="@layout/fragment_add" />
 
     <fragment
         android:id="@+id/page_perfil"
-        android:name="com.example.anunciaya.Fragments.UserFragment"
+        android:name="com.example.anunciaya.fragments.UserFragment"
         tools:layout="@layout/fragment_user" />
 
 </navigation>

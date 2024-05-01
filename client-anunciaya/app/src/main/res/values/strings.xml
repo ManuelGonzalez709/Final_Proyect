@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">AnunciaYa</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contentDescription">Foto anuncio</string>
+    <string name="titBuscar">Buscar productos…</string>
+    <string name="descripUbicacion">Selecciona una ubicación</string>
+    <string name="promptCategorias">Categorías</string>
 </resources>

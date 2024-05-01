@@ -16,15 +16,10 @@ import android.widget.Toast;
 
 import com.example.anunciaya.tools.BundleRecoverry;
 import com.example.anunciaya.tools.Metodos;
-import com.example.anunciaya.tools.ServerComunication;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
-public class register extends AppCompatActivity {
+public class Register extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     private Button registerButton;
@@ -86,7 +81,7 @@ public class register extends AppCompatActivity {
         }else Toast.makeText(getApplicationContext(), "El nombre no puede estar vacio", Toast.LENGTH_SHORT).show();
     }
     private void LanzarLoggin(){
-        Intent intent = new Intent(this, login.class);
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
         this.finish();
     }
