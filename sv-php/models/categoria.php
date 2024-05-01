@@ -1,22 +1,7 @@
 <?php
 require_once 'conexion.php';
+
 class Categoria {
-    private $id;
-    private $descripcion;
-
-    public function __construct($id = null, $descripcion = null){
-        if($id != null && $descripcion != null){
-            $this->id = $id;
-            $this->descripcion = $descripcion;
-        }
-    } 
-
-    public function getId() { return $this->id; }
-    public function getDescripcion() { return $this->descripcion; }
-
-    public function setId($id) { $this->id = $id; }
-    public function setDescripcion($descripcion) { $this->descripcion = $descripcion; }
-
     /**
      * Función que obtiene todos los datos de una categoria
      * a partir del $id_categoria
@@ -50,6 +35,43 @@ class Categoria {
         $conexion->cerrarConexion();
         return json_encode($categoria);
     }
+
+    /**
+     * Función que obtiene todas las categorias
+     * 
+     * 
+     * return categoria
+     */
+    public function getCategorias(){
+        $sql = "SELECT * FROM categoria";
+        
+        // Obtener la conexión a la base de datos
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        // Preparar la sentencia
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
+        
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        
+        // Crear un array para almacenar las categorias
+        $categorias = array();
+        
+        // Obtener todas las categorias encontradas
+        while ($row = $result->fetch_assoc()) {
+            $categorias[] = $row;
+        }
+        
+        // Cerrar la conexión y devolver las categorias como JSON
+        $stmt->close();
+        $conexion->cerrarConexion();
+        return json_encode($categorias);
+    }
+    
 }
 
 ?>

@@ -1,42 +1,6 @@
 <?php
 require_once 'conexion.php';
 class DireccionEnvio {
-    private $id;
-    private $direccion;
-    private $cp;
-    private $provincia;
-    private $poblacion;
-    private $pais;
-    private $id_usuario;
-    
-    public function __construct($id = null, $direccion = null, $cp = null, $provincia = null, $poblacion = null, $pais = null, $id_usuario = null) {
-        // Si se proporcionan argumentos, asigna las propiedades
-        if ($id !== null && $direccion !== null && $cp !== null && $provincia !== null && $poblacion !== null && $pais !== null && $id_usuario !== null) {
-            $this->id = $id;
-            $this->direccion = $direccion;
-            $this->cp = $cp;
-            $this->provincia = $provincia;
-            $this->poblacion = $poblacion;
-            $this->pais = $pais;
-            $this->id_usuario = $id_usuario;
-        }
-    }
-    
-    public function getId() { return $this->id; }
-    public function getDireccion() { return $this->direccion; }
-    public function getCp() { return $this->cp; }
-    public function getProvincia() { return $this->provincia; }
-    public function getPoblacion() { return $this->poblacion; }
-    public function getPais() { return $this->pais; }
-    public function getIdUsuario() { return $this->id_usuario; }
-
-    public function setDireccion($direccion) { $this->direccion = $direccion; }
-    public function setCp($cp) { $this->cp = $cp; }
-    public function setProvincia($provincia) { $this->provincia = $provincia; }
-    public function setPoblacion($poblacion) { return $this->poblacion = $poblacion; }
-    public function setPais($pais) { $this->pais = $pais; }
-    public function setIdUsuario($id_usuario) { $this->id_usuario = $id_usuario; }
-
     /**
      * Función que obtiene todas las direcciones de envío de un usuario
      * pasado como parámetro $id_usuario

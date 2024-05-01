@@ -9,7 +9,7 @@ class Auth {
     }
     
     /**
-     * Función que verifica la autenticación de un usuario a partir
+     * Función que verifica la autenticación de un usuario standar a partir
      * del nombre de usuario y contraseña proporcionada por parámetro.
      * La contraseña proporcioanda se hashea y se comprueba si es la
      * misma que la de la bd hasheada.
@@ -55,6 +55,14 @@ class Auth {
         }
     }
 
+    /**
+     * Función que verifica la autenticación de un usuario administrador
+     *  a partir del email y contraseña proporcionada por parámetro.
+     * La contraseña proporcioanda se hashea y se comprueba si es la
+     * misma que la de la bd hasheada.
+     * 
+     * return true / false
+     */
     public function verificarAuthAdmin($nomb_usuario, $contrasena) {
         $sql = "SELECT contras FROM usuario WHERE nomb_usu = ? AND tipo = 'ADM' ";
 
@@ -93,7 +101,6 @@ class Auth {
             return false;
         }
     }
-
 
      /**
       * Función que hashea una contraseña introducida como parámetro en
