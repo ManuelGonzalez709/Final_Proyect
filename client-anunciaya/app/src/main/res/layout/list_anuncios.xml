@@ -6,12 +6,15 @@
     app:cardCornerRadius="20dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:backgroundTint="@color/Rojo1"
-    android:layout_marginBottom="50dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    app:cardUseCompatPadding="true"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="10dp"
         android:padding="10dp">
 
         <ImageView
@@ -34,11 +37,11 @@
             android:layout_height="wrap_content"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="23sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="190dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="190dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintHorizontal_bias="0.079"
             app:layout_constraintStart_toEndOf="@+id/ivAnuncio"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,7 +52,7 @@
             android:id="@+id/tvPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -83,10 +86,10 @@
             android:id="@+id/tvUbicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="190dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginLeft="190dp"
+            android:layout_marginRight="10dp"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

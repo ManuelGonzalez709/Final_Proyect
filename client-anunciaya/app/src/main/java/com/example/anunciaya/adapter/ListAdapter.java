@@ -92,9 +92,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             tvDivisa.setText(String.valueOf(item.getDivisa()));
             tvUbicacion.setText(item.getUbicacion());
 
+            String[]fotos = item.getFoto().split(";");
+
             // Cargar la imagen desde la URL usando Glide
             Glide.with(context)
-                    .load(item.getFoto())
+                    .load(fotos[0])
                     .into(iconImagen);
         }
 

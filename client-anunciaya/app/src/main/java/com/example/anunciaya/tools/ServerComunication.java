@@ -1,28 +1,134 @@
 package com.example.anunciaya.tools;
 
+import android.text.BoringLayout;
 import android.util.Log;
+import javax.xml.xpath.*;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 
 public class ServerComunication {
-    private String urlServer = "http://192.168.0.102/sv-php/index.php";
+    private String urlServer = "https://sv-anunciaya.000webhostapp.com/sv-php/";
     private String resultadoServer = "";
 
+    public String getUrlServer() {
+        return urlServer;
+    }
 
     public ServerComunication(String server){urlServer = server;}
 
     public ServerComunication(){}
 
     public String getResultadoServer() {return resultadoServer;}
+    private String obtenerMunicipios(String urlServer){
+        try {
+            String respuesta = "";
+            // Crear una URL y establecer la conexión HTTP
+            URL url = new URL("https://analisi.transparenciacatalunya.cat/api/views/x5xm-w9x7/rows.xml?accessType=DOWNLOAD");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
 
+            // Leer la respuesta de la solicitud HTTP
+            InputStream inputStream = conn.getInputStream();
+
+            // Parsear el XML
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(inputStream);
+
+            // Crear un objeto XPath
+            XPath xpath = XPathFactory.newInstance().newXPath();
+
+            // Compilar la expresión XPath
+            XPathExpression expr = xpath.compile("//nom");
+
+            // Evaluar la expresión XPath para obtener el resultado
+            NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+
+            // Recorrer los nodos y obtener el texto de cada nodo
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Element element = (Element) nodeList.item(i);
+                respuesta+=element.getTextContent()+";";
+            }
+            return respuesta;
+
+        } catch (Exception e) {
+            e.printStackTrace(); return null;
+        }
+    }
+    public String subirFotoServer(String rutaFoto){
+        String server = "files.000webhost.com";
+        int port = 21;
+        String user = "sv-anunciaya";
+        String password = "0O&67mG{oE";
+        String remoteDirectory = "/public_html/sv-php/img";
+
+        FTPClient ftpClient = new FTPClient();
+        try {
+            ftpClient.connect(server, port);
+            ftpClient.login(user, password);
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            File file = new File(rutaFoto);
+            String fileName = file.getName();
+            FileInputStream inputStream = new FileInputStream(file);
+
+            boolean uploaded = ftpClient.storeFile(remoteDirectory + "/" + fileName, inputStream);
+            inputStream.close();
+            if (uploaded) {
+                return urlServer+"img/"+fileName;
+            } else {
+                return null;
+            }
+
+        } catch (IOException ex) {
+            Log.i("ErrorFtp",ex.toString());
+            return null;
+        }finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
     private String comunicacion(String UrlServer , String clase, String metodo , String[]params){
         try {
             // URL del servidor PHP
-            URL url = new URL(UrlServer);
+            URL url = new URL(UrlServer+"/index.php");
 
             // Abrir conexión
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -63,6 +169,15 @@ public class ServerComunication {
         }
         return retornador;
     }
+    public String subirFoto(String url){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {resultadoServer = subirFotoServer(url);}
+        });
+        // lanzamos el hilo y esperamos a que termine
+        try{thread.start();thread.join(); return resultadoServer;}
+        catch (Exception e){return null;}
+    }
     public Boolean LanzarPeticion(String clase , String metodo ,String[]parametros){
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -73,5 +188,16 @@ public class ServerComunication {
         // lanzamos el hilo y esperamos a que termine
         try{thread.start();thread.join();return true;}
         catch (Exception e){return false;}
+    }
+    public String getMunicipios(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                resultadoServer = obtenerMunicipios(urlServer);
+            }
+        });
+        // lanzamos el hilo y esperamos a que termine
+        try{thread.start();thread.join();return resultadoServer;}
+        catch (Exception e){return null;}
     }
 }

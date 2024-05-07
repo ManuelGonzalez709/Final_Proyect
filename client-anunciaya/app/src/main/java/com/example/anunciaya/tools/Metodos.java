@@ -89,7 +89,7 @@ public class Metodos {
      */
     public ArrayList<ListAnuncios> getAnunciosInicio(String[] args) {
         try {
-            if (comunication.LanzarPeticion("Anuncio", "getAnunciosExcepIdUsuario", args)) {
+            if (comunication.LanzarPeticion("Anuncio", "getAnunciosExcepIdUsuarioAndPedido", args)) {
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode jsonNode = objectMapper.readTree(getRespuestaServer());
 
@@ -188,8 +188,9 @@ public class Metodos {
             return null;
         }
     }
-
-
+    public String subirFotoServer(String url){
+        return comunication.subirFoto(url);
+    }
     private static String getRespuestaServer(){
         return comunication.getResultadoServer();
     }

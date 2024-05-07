@@ -6,4 +6,5 @@
     <color name="Rojo3">#690E29</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparente">#00B50C0C</color>
 </resources>

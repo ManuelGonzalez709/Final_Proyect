@@ -32,7 +32,11 @@ android {
 }
 
 dependencies {
+    implementation ("commons-net:commons-net:3.8.0")
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation("androidx.activity:activity:1.6.1")
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("com.github.denzcoskun:ImageSlideShow:0.1.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("androidx.navigation:navigation-fragment:2.7.7")
     implementation ("androidx.navigation:navigation-ui:2.7.7")
