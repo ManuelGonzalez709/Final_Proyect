@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AnunciaYa</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contentDescription">Foto anuncio</string>
+    <string name="titBuscar">Buscar productos…</string>
+    <string name="descripUbicacion">Filtrar por ubicación</string>
+    <string name="promptCategorias">Categorías</string>
+    <string name="datAnunciante">Datos del Anunciante</string>
+    <string name="comprar">Comprar</string>
+    <string name="noAnuncios">Actualmente no hay anuncios disponibles…</string>
+    <string name="euro">€</string>
+    <string name="resumCompra">Resumen de tu compra</string>
+    <string name="dirEnvio">Dirección Envio</string>
+    <string name="direccion">Dirección</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="cp">Código Postal</string>
+</resources>
