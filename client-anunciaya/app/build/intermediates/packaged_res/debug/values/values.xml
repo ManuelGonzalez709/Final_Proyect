@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Rojo1">#b3395a</color>
+    <color name="Rojo2">#a0153e</color>
+    <color name="Rojo3">#690E29</color>
+    <color name="black">#FF000000</color>
+    <color name="fondoApp">#ffc9c9</color>
+    <color name="transparente">#00B50C0C</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="Euro">€</string>
+    <string name="app_name">AnunciaYa</string>
+    <string name="contentDescription">Foto anuncio</string>
+    <string name="descripUbicacion">Selecciona una ubicación</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="promptCategorias">Categorías</string>
+    <string name="titBuscar">Buscar productos…</string>
+    <style name="Base.Theme.AnunciaYa" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.AnunciaYa" parent="Base.Theme.AnunciaYa"/>
+</resources>
