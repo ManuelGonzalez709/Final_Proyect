@@ -59,7 +59,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 intent.putExtra("a_titulo", a.getTitulo());
                 intent.putExtra("a_descripcion", a.getDescripcion());
                 intent.putExtra("a_precio", a.getPrecio());
-                intent.putExtra("a_divisa", a.getDivisa());
                 intent.putExtra("a_ubicacion", a.getUbicacion());
 
                 context.startActivity(intent); // inicia la actividad
@@ -89,7 +88,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         void bindData(final ListAnuncios item) {
             tvTitulo.setText(item.getTitulo());
             tvPrecio.setText(item.getPrecio());
-            tvDivisa.setText(String.valueOf(item.getDivisa()));
             tvUbicacion.setText(item.getUbicacion());
 
             String[]fotos = item.getFoto().split(";");

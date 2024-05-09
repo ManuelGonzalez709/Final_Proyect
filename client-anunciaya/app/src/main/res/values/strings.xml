@@ -5,4 +5,5 @@
     <string name="titBuscar">Buscar productos…</string>
     <string name="descripUbicacion">Selecciona una ubicación</string>
     <string name="promptCategorias">Categorías</string>
+    <string name="Euro">€</string>
 </resources>

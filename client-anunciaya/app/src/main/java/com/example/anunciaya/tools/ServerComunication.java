@@ -36,7 +36,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 
 public class ServerComunication {
-    private String urlServer = "https://sv-anunciaya.000webhostapp.com/sv-php/";
+    private String urlServer = "http://192.168.18.149/sv-php";
     private String resultadoServer = "";
 
     public String getUrlServer() {
@@ -52,7 +52,7 @@ public class ServerComunication {
         try {
             String respuesta = "";
             // Crear una URL y establecer la conexión HTTP
-            URL url = new URL("https://analisi.transparenciacatalunya.cat/api/views/x5xm-w9x7/rows.xml?accessType=DOWNLOAD");
+            URL url = new URL(urlServer+"/util/municipios.xml");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
@@ -69,7 +69,7 @@ public class ServerComunication {
             XPath xpath = XPathFactory.newInstance().newXPath();
 
             // Compilar la expresión XPath
-            XPathExpression expr = xpath.compile("//nom");
+            XPathExpression expr = xpath.compile("//municipio");
 
             // Evaluar la expresión XPath para obtener el resultado
             NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
@@ -85,7 +85,7 @@ public class ServerComunication {
             e.printStackTrace(); return null;
         }
     }
-    public String subirFotoServer(String rutaFoto){
+    public String subirFotoServer(String rutaFoto,int idUsuario,int idAnuncio){
         String server = "files.000webhost.com";
         int port = 21;
         String user = "sv-anunciaya";
@@ -100,13 +100,13 @@ public class ServerComunication {
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
             File file = new File(rutaFoto);
-            String fileName = file.getName();
+            String fileName = idAnuncio+"_"+idUsuario+"_"+file.getName();
             FileInputStream inputStream = new FileInputStream(file);
 
             boolean uploaded = ftpClient.storeFile(remoteDirectory + "/" + fileName, inputStream);
             inputStream.close();
             if (uploaded) {
-                return urlServer+"img/"+fileName;
+                return urlServer+"/img/"+fileName;
             } else {
                 return null;
             }
@@ -169,10 +169,10 @@ public class ServerComunication {
         }
         return retornador;
     }
-    public String subirFoto(String url){
+    public String subirFoto(String url, int idUsuario,int idAnuncio){
         Thread thread = new Thread(new Runnable() {
             @Override
-            public void run() {resultadoServer = subirFotoServer(url);}
+            public void run() {resultadoServer = subirFotoServer(url,idUsuario,idAnuncio);}
         });
         // lanzamos el hilo y esperamos a que termine
         try{thread.start();thread.join(); return resultadoServer;}

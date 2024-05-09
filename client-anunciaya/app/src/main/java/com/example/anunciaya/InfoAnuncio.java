@@ -10,7 +10,6 @@ public class InfoAnuncio extends AppCompatActivity {
     private TextView tvTitulo;
     private TextView tvDescripcion;
     private TextView tvPrecio;
-    private TextView tvDivisa;
     private TextView tvUbicacion;
 
 
@@ -26,7 +25,6 @@ public class InfoAnuncio extends AppCompatActivity {
         tvTitulo = findViewById(R.id.tvTituloArt);
         tvDescripcion = findViewById(R.id.tvDescripcionArt);
         tvPrecio = findViewById(R.id.tvPrecioArt);
-        tvDivisa = findViewById(R.id.tvDivisaArt);
         tvUbicacion = findViewById(R.id.tvUbicacionArt);
     }
 
@@ -35,7 +33,6 @@ public class InfoAnuncio extends AppCompatActivity {
         tvTitulo.setText(intent.getStringExtra("a_titulo"));
         tvDescripcion.setText(intent.getStringExtra("a_descripcion"));
         tvPrecio.setText(intent.getStringExtra("a_precio"));
-        tvDivisa.setText(intent.getStringExtra("a_divisa"));
         tvUbicacion.setText(intent.getStringExtra("a_ubicacion"));
     }
 

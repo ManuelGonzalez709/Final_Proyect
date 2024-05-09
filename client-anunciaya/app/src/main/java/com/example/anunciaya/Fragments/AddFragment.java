@@ -25,6 +25,18 @@ public class AddFragment extends Fragment {
     public AddFragment() {
     }
 
+    /**
+     * Metodo que se encarga de lanzar la activity de register
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_add, container, false);
@@ -34,11 +46,17 @@ public class AddFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Metodo que se encarga de capturar cuando el fragment ha sido pausado
+     */
     @Override
     public void onPause() {
         super.onPause();
     }
-    /*Metodo que se encarga de cuando se cierre la activity de add vuelva al fragment del main*/
+
+    /**
+     * Metodo que captura cuando el fragment vuelve a ser reanudado
+     */
     @Override
     public void onResume() {
         super.onResume();

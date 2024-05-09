@@ -70,6 +70,7 @@ public class Register extends AppCompatActivity {
                                     int idUser = metodos.insertUsuario(p1);
                                     if(idUser!= -1){
                                         dataRecovery.guardarInt("logginId",idUser);
+                                        dataRecovery.guardarString("logginUserName",nomb_usu.getText().toString());
                                         LanzarMain();
                                     }else Toast.makeText(getApplicationContext(), "Usario Existente", Toast.LENGTH_SHORT).show();
                                 }else Toast.makeText(getApplicationContext(), "La fecha de nacimiento no puede estar vacia", Toast.LENGTH_SHORT).show();

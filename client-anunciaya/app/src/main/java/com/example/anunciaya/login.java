@@ -44,6 +44,7 @@ public class Login extends AppCompatActivity{
                        String[]p2 = {loginNombreUsuario.getText().toString()};
                           int idUser = metodos.getIdUser(p2);
                           dataRecovery.guardarInt("logginId",idUser);
+                          dataRecovery.guardarString("logginUserName",loginNombreUsuario.getText().toString());
                           LanzarMain();
                     }else Toast.makeText(getApplicationContext(), "Usuario o Contraseña Incorrectos", Toast.LENGTH_SHORT).show();
                 }else Toast.makeText(getApplicationContext(), "Los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show();

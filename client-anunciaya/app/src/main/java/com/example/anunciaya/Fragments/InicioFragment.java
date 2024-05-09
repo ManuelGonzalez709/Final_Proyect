@@ -24,6 +24,19 @@ public class InicioFragment extends Fragment {
 
     public InicioFragment() {}
 
+    /**
+     * Metodo que se encarga de devolver la vista del fragment y llama a initComponets()
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflar el layout del fragmento
@@ -32,6 +45,9 @@ public class InicioFragment extends Fragment {
         return view; // Devolver la vista inflada correctamente
     }
 
+    /**
+     * Metodo que se encarga de Iniciar los componentes principales(Anuncios, spinners....) de dicho fragments
+     */
     private void initComponents() {
         // Inflar y encontrar el Spinner
 

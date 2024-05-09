@@ -1,5 +1,10 @@
 package com.example.anunciaya.tools;
-
+/**
+ * Clase Metodos
+ * @Author Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @Version 2.1
+ * @Description Clase que contiene todas los metodos disponibles
+ */
 
 import com.example.anunciaya.adapter.ListAnuncios;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,9 +14,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class Metodos {
+    //Atributos de la Clase
     private static ServerComunication comunication;
+
+    /**
+     * Constructor Principal
+     */
     public Metodos() {comunication = new ServerComunication();}
 
+    /**
+     * Metodo que se encarga de Insertar Usuario y retorna el Id del Usuario
+     * @param args parametros que necesita el Metodo del Servidor para su Funcionamiento
+     * @return retorna el Id del Usuario
+     */
     public int insertUsuario(String[]args){
         try{
             if(comunication.LanzarPeticion("Usuario","insertUsuario",args)){
@@ -24,6 +39,11 @@ public class Metodos {
         }catch (Exception e){return -1;}
     }
 
+    /**
+     * Metodo que se encarga de Comprobar si la contraseña y el ususario son validos
+     * @param args parametros que necesita el Server
+     * @return retorna un boolean (True= Inicio de Sesion Correcto/False= Inicio de sesion Fallido)
+     */
     public Boolean verificarAuthCliente(String[]args){
         try{
             comunication.LanzarPeticion("Auth","verificarAuthClient",args);
@@ -32,6 +52,11 @@ public class Metodos {
         }catch (Exception e){return false;}
     }
 
+    /**
+     * Metodo que se encarga de retornar el Id del usuario
+     * @param args parametros del server necesarios
+     * @return retorna el Id del usuario
+     */
     public int getIdUser(String[]args){
         try{
             comunication.LanzarPeticion("Usuario","getIdUser",args);
@@ -109,11 +134,10 @@ public class Metodos {
                         int id = node.get("id").asInt();
                         String titulo = node.get("titulo").asText();
                         String precio = node.get("precio").asText();
-                        String divisa = node.get("divisa").asText();
                         String ubicacion = node.get("ubicacion").asText();
                         String fotos = node.get("fotos").asText();
 
-                        ListAnuncios anuncio = new ListAnuncios(id,titulo, precio, divisa, ubicacion, fotos);
+                        ListAnuncios anuncio = new ListAnuncios(id,titulo, precio, ubicacion, fotos);
                         detallesProductos.add(anuncio);
                     }
                 }
@@ -128,6 +152,11 @@ public class Metodos {
         }
     }
 
+    /**
+     * Metodo que retorna un anuncio por id
+     * @param args argumentos necesarios por el server
+     * @return retorna un objeto de tipo anuncio
+     */
     public Anuncio getAnuncioId(String[] args) {
         try {
             if (comunication.LanzarPeticion("Anuncio", "getAnuncioId", args)) {
@@ -168,9 +197,6 @@ public class Metodos {
                     if (dataNode.has("precio")) {
                         anuncio.setPrecio(dataNode.get("precio").asText());
                     }
-                    if (dataNode.has("divisa")) {
-                        anuncio.setDivisa(dataNode.get("divisa").asText());
-                    }
                     if (dataNode.has("fotos")) {
                         anuncio.setFotos(dataNode.get("fotos").asText());
                     }
@@ -188,9 +214,98 @@ public class Metodos {
             return null;
         }
     }
-    public String subirFotoServer(String url){
-        return comunication.subirFoto(url);
+
+    /**
+     * Metodo que retorna el Id del Ultimo anuncio creado por el usuario
+     * @param args parametros necesarios por el server
+     * @return retorna el Id del ultimo anuncio creado por el usuario x(id)
+     */
+    public int getIdNewAnuncioUsuario(String[]args){
+        try{
+            if(comunication.LanzarPeticion("Anuncio","getIdNewAnuncioUsuario",args)){
+                JSONObject response = new JSONObject(getRespuestaServer());
+                String dataString = response.getString("data");
+                JSONObject dataObject = new JSONObject(dataString);
+                return dataObject.getInt("ultimo_id");
+            }
+            return -1;
+        }catch (Exception e){return -1;}
     }
+
+    /**
+     * Metodo que se encarga de retornar el Id de la Categoria por Descripcion
+     * @param args parametros necesarios por el server
+     * @return retorna el Id de la Categoria
+     */
+    public int getCategoriaId(String[] args) {
+        try {// Lanzar la petición al servidor y obtener la respuesta
+            if (comunication.LanzarPeticion("Categoria", "getCategoriaId", args)) {// Leer la respuesta del servidor como un árbol JSON
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(getRespuestaServer());
+
+                // Verificar si la respuesta contiene datos
+                if (jsonNode.has("data")) {
+                    // Obtener la cadena JSON de "data"
+                    String dataString = jsonNode.get("data").asText();
+
+                    // Convertir la cadena JSON en un objeto JsonNode
+                    JsonNode dataNode = objectMapper.readTree(dataString);
+
+                    // Verificar si el nodo de datos no es nulo
+                    if (dataNode != null && dataNode.has("id")) {
+                        // Obtener el ID de la categoría
+                        return dataNode.get("id").asInt();
+                    }
+                }
+            }
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        // Si ocurre alguna excepción o no se encuentran datos válidos, devolver 0
+        return -1;
+    }
+
+    /**
+     * Metodo que se encarga de Insertar un Anuncio
+     * @param args parametros necesarios por el server
+     * @return retorna si la inserccion del Anuncio ha sido exitosa o no
+     */
+    public Boolean insertarAnuncio(String [] args){
+        try{
+            return comunication.LanzarPeticion("Anuncio","insertAnuncio",args);
+        }catch (Exception e){return false;}
+    }
+
+    /**
+     * Metodo que se encarga de actualizar subir las fotos al server con id_usuario y id_anuncio
+     * @param url url de la foto a subir
+     * @param idUsuario id del usuario creador del anuncio
+     * @param idAnuncio id del anuncio creado por el usuario
+     * @return retorna la url del anuncio en el server ya subida
+     */
+    public String subirFotoServer(String url,int idUsuario,int idAnuncio){
+        return comunication.subirFoto(url,idUsuario,idAnuncio);
+    }
+
+    /**
+     * Metodo que se encarga de actualizar en la base de datos la url de las fotos
+     * @param args argumentos necesarios por el server
+     * @return retorna si la actualizacion ha sido exitosa o no
+     */
+    public Boolean updateAnuncioUploadImagen(String[]args){
+        try{
+            if(comunication.LanzarPeticion("Anuncio","subirFotoBaseDatos",args)){
+                JSONObject jsonObject = new JSONObject(getRespuestaServer());
+                return jsonObject.getBoolean("data");
+            }
+            return false;
+        }catch (Exception e){return false;}
+    }
+
+    /**
+     * Metodo que se encarga de obtener la respuesta del server tras ejecutar LanzarPeticion
+     * @return retorna la respuesta del Server
+     */
     private static String getRespuestaServer(){
         return comunication.getResultadoServer();
     }
