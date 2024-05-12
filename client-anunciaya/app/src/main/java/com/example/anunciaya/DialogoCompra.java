@@ -74,7 +74,6 @@ public class DialogoCompra extends DialogFragment {
 
     return view;
     }
-
     private void initComponents(View view){
         etDireccionCompra = view.findViewById(R.id.etDireccionCompra);
         actvCiudadCompra = view.findViewById(R.id.actvCiudadCompra);

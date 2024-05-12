@@ -43,7 +43,6 @@ public class InicioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflar el layout del fragmento
         view = inflater.inflate(R.layout.fragment_inicio, container, false);
-        m = new Metodos(); // Inicializar clase Metodos
         initComponents();
         searchView.clearFocus();
         autocompletarUbicacion();
@@ -62,7 +61,8 @@ public class InicioFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                listAdapter.filter(newText);
+                String txtMinuscula = newText.toLowerCase(); // Convertir texto a minúsculas
+                listAdapter.filter(txtMinuscula); // Aplicar el filtro con el texto en minúsculas
                 return false;
             }
         });
@@ -200,6 +200,7 @@ public class InicioFragment extends Fragment {
      * Método que inicializa los componentes del fragment
      */
     private void initComponents() {
+        m = new Metodos(); // Inicializar clase Metodos
         actvUbicacion = view.findViewById(R.id.actvUbicacion);
         tvNoAnuncios = view.findViewById(R.id.tvNoAnunciosCategoria);
         searchView = view.findViewById(R.id.searchView);
@@ -212,7 +213,7 @@ public class InicioFragment extends Fragment {
         BundleRecoverry almacen = new BundleRecoverry(sharedPreferences);
         idUsuario = almacen.recuperarInt("logginId"); // idUsuario logeado
 
-        listAdapter = new ListAdapter(m.getAnunciosInicio(new String[]{Integer.toString(idUsuario)}), requireContext());
+        listAdapter = new ListAdapter(m.getAnunciosInicio(new String[]{Integer.toString(idUsuario)}), requireContext(), this);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(listAdapter);

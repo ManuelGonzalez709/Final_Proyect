@@ -23,7 +23,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 public class ServerComunication {
-    private String urlServer = "https://sv-anunciaya.000webhostapp.com/sv-php";
+    private String urlServer = "http://192.168.0.102/sv-php";
     private String resultadoServer = "";
 
 

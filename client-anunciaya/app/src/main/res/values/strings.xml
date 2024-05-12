@@ -14,4 +14,19 @@
     <string name="direccion">Dirección</string>
     <string name="ciudad">Ciudad</string>
     <string name="cp">Código Postal</string>
+    <string name="cambContras">Cambiar Contraseña</string>
+    <string name="nuevaConstras">Nueva Contraseña</string>
+    <string name="confirmConstras">Confirmar Contraseña</string>
+    <string name="editar">Editar</string>
+    <string name="borrar">Borrar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="dialogElimAnuncio">¿Estás seguro de que deseas eliminar este anuncio?</string>
+    <string name="editAnuncio">Editar Anuncio</string>
+    <string name="modificar">Modificar</string>
+    <string name="titulo">Título*</string>
+    <string name="descripcion">Descripción*</string>
+    <string name="precio">Precio*</string>
+    <string name="estado">Estado*</string>
+    <string name="categoria">Categoría*</string>
 </resources>

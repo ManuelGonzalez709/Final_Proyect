@@ -1,6 +1,7 @@
 package com.example.anunciaya;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.anunciaya.fragments.InicioFragment;
 import com.example.anunciaya.tools.BundleRecoverry;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setupNavegacion();
 
     }
+
     private void setupNavegacion() {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_hostfragment);

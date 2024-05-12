@@ -3,16 +3,24 @@ package com.example.anunciaya.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.anunciaya.AnunciosUsuario;
 import com.example.anunciaya.InfoAnuncio;
 import com.example.anunciaya.R;
+import com.example.anunciaya.fragments.InicioFragment;
+import com.example.anunciaya.fragments.UserFragment;
 import com.example.anunciaya.tools.Anuncio;
 import com.example.anunciaya.tools.Metodos;
 import com.example.anunciaya.tools.Usuario;
@@ -28,10 +36,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private final List<ListAnuncios> mDatosOriginal;
     private final LayoutInflater mInflater; // Describe de donde viene el layout
     private final Context context; // De que clase llamamos el adaptador
+    private Fragment fragment; // Fragment donde se ejecuta el recyclerview
 
-    public ListAdapter(List<ListAnuncios> listAnuncios, Context context) {
+    public ListAdapter(List<ListAnuncios> listAnuncios, Context context, Fragment fragment) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
+        this.fragment = fragment;
         this.mDatos = listAnuncios;
         this.mDatosOriginal = new ArrayList<>();
         mDatosOriginal.addAll(listAnuncios);
@@ -107,32 +117,52 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Metodos m = new Metodos();
-                int idAnuncio = anuncio.getIdAnuncio(); // obtiene el id anuncio seleccionado
+                int idAnuncio = anuncio.getIdAnuncio(); // Obtiene el id anuncio seleccionado
+                // Fragmento actual ejecutado
+                Fragment currentFragment = fragment;
 
-                // Abrir la actividad 'Anuncio' pasando el ID del anuncio
-                Intent intent = new Intent(context, InfoAnuncio.class);
-                intent.putExtra("idAnuncio", String.valueOf(idAnuncio));
-                Anuncio a = m.getAnuncioId(new String[]{String.valueOf(idAnuncio)});
-                intent.putExtra("a_fotos", a.getFotos());
-                intent.putExtra("a_titulo", a.getTitulo());
-                intent.putExtra("a_descripcion", a.getDescripcion());
-                intent.putExtra("a_precio", a.getPrecio());
-                intent.putExtra("a_ubicacion", a.getUbicacion());
-                intent.putExtra("a_descripCategoria",
-                        m.getCategoriaDescripcion(new String[]{String.valueOf(a.getidCategoria())}));
-                intent.putExtra("a_estado", a.getEstado());
+                // Si se ejecuta el recycler view desde InicioFragment
+                if (currentFragment instanceof InicioFragment) {
+                    Intent intent = new Intent(context, InfoAnuncio.class);
 
-                Usuario u = m.getUsuarioDataId(new String[]{String.valueOf(a.getIdUsuario())});
-                intent.putExtra("a_nombCompUsu", u.getNombre() + " " + u.getApellidos());
+                    intent.putExtra("idAnuncio", String.valueOf(idAnuncio));
+                    Anuncio a = m.getAnuncioId(new String[]{String.valueOf(idAnuncio)});
+                    intent.putExtra("a_fotos", a.getFotos());
+                    intent.putExtra("a_titulo", a.getTitulo());
+                    intent.putExtra("a_descripcion", a.getDescripcion());
+                    intent.putExtra("a_precio", a.getPrecio());
+                    intent.putExtra("a_ubicacion", a.getUbicacion());
+                    intent.putExtra("a_descripCategoria",
+                            m.getCategoriaDescripcion(new String[]{String.valueOf(a.getidCategoria())}));
+                    intent.putExtra("a_estado", a.getEstado());
 
-                context.startActivity(intent); // Inicia la actividad
+                    Usuario u = m.getUsuarioDataId(new String[]{String.valueOf(a.getIdUsuario())});
+                    intent.putExtra("a_nombCompUsu", u.getNombre() + " " + u.getApellidos());
+
+                    context.startActivity(intent);
+
+                    // Si se ejecuta el recycler view desde UserFragment
+                } else if (currentFragment instanceof UserFragment) {
+                    Intent intent = new Intent(context, AnunciosUsuario.class);
+
+                    intent.putExtra("idAnuncio", String.valueOf(idAnuncio));
+                    Anuncio a = m.getAnuncioId(new String[]{String.valueOf(idAnuncio)});
+                    intent.putExtra("a_fotos", a.getFotos());
+                    intent.putExtra("a_titulo", a.getTitulo());
+                    intent.putExtra("a_descripcion", a.getDescripcion());
+                    intent.putExtra("a_precio", a.getPrecio());
+                    intent.putExtra("a_ubicacion", a.getUbicacion());
+                    intent.putExtra("a_descripCategoria",
+                            m.getCategoriaDescripcion(new String[]{String.valueOf(a.getidCategoria())}));
+                    intent.putExtra("a_estado", a.getEstado());
+
+                    Usuario u = m.getUsuarioDataId(new String[]{String.valueOf(a.getIdUsuario())});
+                    intent.putExtra("a_nombCompUsu", u.getNombre() + " " + u.getApellidos());
+
+                    context.startActivity(intent);
+                }
             }
         });
-    }
-
-    // Nuevo Listado
-    public void setItems(List<ListAnuncios> items) {
-        mDatos = items;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -149,6 +179,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             iconImagen = itemView.findViewById(R.id.isFotosAnuncioPrev);
         }
 
+        /**
+         * Método que componen los elementos del Recycler View
+         * @param item Objeto ListAnuncios
+         */
         void bindData(final ListAnuncios item) {
             ArrayList<SlideModel> imageList = new ArrayList<>();
             // Obtiene todas las fotos y con el separados ; usa la primera

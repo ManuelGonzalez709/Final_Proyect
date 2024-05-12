@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ public class Login extends AppCompatActivity{
         dataRecovery = new BundleRecoverry(sharedPreferences);
         // comprueba si has iniciado sesion
         // si logginId != -1 ha iniciado sesion
-        //dataRecovery.guardarInt("logginId", -1); // cerrar sesion
+        //dataRecovery.guardarInt("logginId", -1);
         if(dataRecovery.recuperarInt("logginId")!= -1)LanzarMain();
 
         registerButton = findViewById(R.id.btLoginRegistrate);
