@@ -30,7 +30,7 @@
             android:name=".InfoAnuncio"
             android:exported="false" />
         <activity
-            android:name=".AnunciosUsuario"
+            android:name=".AnuncioUsuario"
             android:exported="false" />
         <activity
             android:name=".EditarAnuncio"

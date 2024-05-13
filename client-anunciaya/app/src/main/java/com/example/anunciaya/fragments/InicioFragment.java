@@ -17,7 +17,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.example.anunciaya.R;
 import com.example.anunciaya.adapter.ListAdapter;
 import com.example.anunciaya.adapter.ListAnuncios;
@@ -164,7 +164,7 @@ public class InicioFragment extends Fragment {
     }
 
     /**
-     * Método que se ejecuta cuando se vuelve al Fragment Inicio
+     * Método que se ejecuta cuando se vuelve al Fragment
      * para actualizar la lista de anuncios
      */
     @Override
@@ -219,8 +219,8 @@ public class InicioFragment extends Fragment {
         recyclerView.setAdapter(listAdapter);
 
         // Crear y configurar el adaptador
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.spinner_categorias, m.getCategorias());
-        adapter.setDropDownViewResource(R.layout.spinner_categorias);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.spinner_rojo3, m.getCategorias());
+        adapter.setDropDownViewResource(R.layout.spinner_rojo3);
 
         // Asignar el adaptador al Spinner
         spinner.setAdapter(adapter);
@@ -232,8 +232,8 @@ public class InicioFragment extends Fragment {
         ServerComunication comunication = new ServerComunication();
         try{
             String[]Municipios = comunication.getMunicipios().split(";");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity().getApplicationContext(), R.layout.auto_municipios, Municipios);
-            adapter.setDropDownViewResource(R.layout.auto_municipios);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity().getApplicationContext(), R.layout.auto_municipios_rojo3, Municipios);
+            adapter.setDropDownViewResource(R.layout.auto_municipios_rojo3);
             // android.R.layout.simple_spinner_dropdown_item
             actvUbicacion.setAdapter(adapter);
         }catch (Exception e){

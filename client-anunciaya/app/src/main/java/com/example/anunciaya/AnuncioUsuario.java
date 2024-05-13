@@ -18,7 +18,7 @@ import com.example.anunciaya.tools.Metodos;
 
 import java.util.ArrayList;
 
-public class AnunciosUsuario extends AppCompatActivity {
+public class AnuncioUsuario extends AppCompatActivity {
     private TextView tvTitulo;
     private TextView tvDescripcion;
     private TextView tvPrecio;
@@ -38,20 +38,26 @@ public class AnunciosUsuario extends AppCompatActivity {
         initComponents();
         addDatosAnuncio();
 
+        /*
+         * Evento que se ejecuta cuando pulsamos en el botón de eliminar anuncio.
+         * Si el anuncio se ha comprado no se puede borrar, si no se elimina correctamente.
+         */
         btBorrarAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Metodos m = new Metodos();
-                AlertDialog.Builder builder = new AlertDialog.Builder(AnunciosUsuario.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AnuncioUsuario.this);
 
                 builder.setMessage(R.string.dialogElimAnuncio)
                         .setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                if(m.deleteAnuncio(new String[]{idAnuncio})){
-                                    Toast.makeText(AnunciosUsuario.this, "¡El anuncio ha sido eliminado correctamente!", Toast.LENGTH_SHORT).show();
+                                if(m.deleteAnuncio(new String[]{idAnuncio}).equals("true")){
+                                    Toast.makeText(AnuncioUsuario.this, "¡El anuncio ha sido eliminado correctamente!", Toast.LENGTH_SHORT).show();
                                     finish();
+                                } else if (m.deleteAnuncio(new String[]{idAnuncio}).equals("\"err_const\"")) {
+                                    Toast.makeText(AnuncioUsuario.this, "No se puede eliminar un anuncio que ha sido comprado", Toast.LENGTH_SHORT).show();
                                 } else{
-                                    Toast.makeText(AnunciosUsuario.this, "El anuncio no se puede eliminar, ya que ha sido adquirido", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AnuncioUsuario.this, "Ha ocurrido un error al intentar eliminar el anuncio", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })
@@ -69,13 +75,18 @@ public class AnunciosUsuario extends AppCompatActivity {
         btEditarAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AnunciosUsuario.this, EditarAnuncio.class);
+                Intent intent = new Intent(AnuncioUsuario.this, EditarAnuncio.class);
+                intent.putExtra("au_idAnuncio", idAnuncio);
+                intent.putExtra("au_titulo", tvTitulo.getText());
+                intent.putExtra("au_descripcion", tvDescripcion.getText());
+                intent.putExtra("au_precio", tvPrecio.getText());
+                intent.putExtra("au_estado",tvEstado.getText());
+                intent.putExtra("au_categoria", tvCategoria.getText());
+                intent.putExtra("au_ubicacion", tvUbicacion.getText());
                 startActivity(intent);
-
+                finish();
             }
         });
-
-
     }
 
     /**

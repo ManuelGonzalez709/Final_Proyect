@@ -66,7 +66,7 @@
                                 android:layout_height="match_parent">
 
                                 <EditText
-                                    android:id="@+id/newTitulo"
+                                    android:id="@+id/etTitutloMod"
                                     android:layout_width="280dp"
                                     android:layout_height="40dp"
                                     android:layout_alignParentStart="true"
@@ -83,8 +83,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
-                                    android:layout_toEndOf="@id/newTitulo"
-                                    android:layout_toRightOf="@id/newTitulo"
+                                    android:layout_toEndOf="@id/etTitutloMod"
+                                    android:layout_toRightOf="@id/etTitutloMod"
                                     app:cardCornerRadius="10dp"
                                     app:cardElevation="6dp"
                                     app:cardBackgroundColor="@color/Rojo3">
@@ -118,7 +118,7 @@
                                 android:layout_height="wrap_content">
 
                                 <EditText
-                                    android:id="@+id/newDescripcion"
+                                    android:id="@+id/etDescripMod"
                                     android:layout_width="match_parent"
                                     android:layout_height="120dp"
                                     android:maxLines="5"
@@ -150,7 +150,7 @@
                                 android:layout_height="match_parent">
 
                                 <EditText
-                                    android:id="@+id/newPrecio"
+                                    android:id="@+id/etPrecioMod"
                                     android:layout_width="280dp"
                                     android:inputType="numberDecimal"
                                     android:layout_height="40dp"
@@ -168,8 +168,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
-                                    android:layout_toEndOf="@id/newPrecio"
-                                    android:layout_toRightOf="@id/newPrecio"
+                                    android:layout_toEndOf="@id/etPrecioMod"
+                                    android:layout_toRightOf="@id/etPrecioMod"
                                     app:cardCornerRadius="10dp"
                                     app:cardElevation="6dp"
                                     app:cardBackgroundColor="@color/Rojo3">
@@ -242,7 +242,7 @@
                                     android:layout_height="wrap_content">
 
                                     <Spinner
-                                        android:id="@+id/newEstado"
+                                        android:id="@+id/spEstadoMod"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
 
@@ -267,7 +267,7 @@
                                     android:layout_height="wrap_content">
 
                                     <Spinner
-                                        android:id="@+id/newCategoria"
+                                        android:id="@+id/spCategoriaMod"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         >
@@ -305,7 +305,7 @@
                             android:layout_height="wrap_content">
                             <AutoCompleteTextView
                                 android:textColor="@color/white"
-                                android:id="@+id/newUbicacion"
+                                android:id="@+id/actvUbiMod"
                                 android:layout_width="325dp"
                                 android:layout_height="wrap_content">
                             </AutoCompleteTextView>
@@ -368,10 +368,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="center">
                     <Button
-                        android:id="@+id/btnewCrearAnuncio"
+                        android:id="@+id/btModAnuncio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Crear Anuncio"
+                        android:text="@string/modAnuncio"
+                        android:textStyle="bold"
                         android:backgroundTint="@color/Rojo2"/>
 
                 </LinearLayout>

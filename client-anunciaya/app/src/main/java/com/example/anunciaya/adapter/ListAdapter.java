@@ -3,20 +3,17 @@ package com.example.anunciaya.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.example.anunciaya.AnunciosUsuario;
+import com.example.anunciaya.AnuncioUsuario;
 import com.example.anunciaya.InfoAnuncio;
 import com.example.anunciaya.R;
 import com.example.anunciaya.fragments.InicioFragment;
@@ -143,7 +140,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
                     // Si se ejecuta el recycler view desde UserFragment
                 } else if (currentFragment instanceof UserFragment) {
-                    Intent intent = new Intent(context, AnunciosUsuario.class);
+                    Intent intent = new Intent(context, AnuncioUsuario.class);
 
                     intent.putExtra("idAnuncio", String.valueOf(idAnuncio));
                     Anuncio a = m.getAnuncioId(new String[]{String.valueOf(idAnuncio)});

@@ -67,8 +67,19 @@ public class UserFragment extends Fragment {
         setAnunciosUser();
         CargarDatosUsuario();
         return view;
+    }
+
+    /**
+     * Método que se ejecuta cuando se vuelve al Fragment
+     * para actualizar la lista de anuncios
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        setAnunciosUser();
 
     }
+
     private void LanzarAjustesUsuario(){
         Intent intent = new Intent(getActivity(), Register.class);
         intent.putExtra("fromMainActivity", true);

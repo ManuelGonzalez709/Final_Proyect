@@ -564,20 +564,42 @@ public class Metodos {
         }catch (Exception e){return false;}
     }
 
+    /**
+     * Método que actualiza un anuncio existente
+     * @param args idAnuncio, titulo, descripcion, estado, precio, divisa, fotos, idCategoria
+     * @return true / false
+     */
+    public boolean updateAnuncio(String[] args){
+        try{
+            if(comunication.LanzarPeticion("Anuncio", "updateAnuncio", args)){
+                JSONObject jsonObject = new JSONObject(getRespuestaServer());
+                return jsonObject.getBoolean("data");
+            } else return false;
+        } catch (Exception e){return false;}
+    }
 
     /**
      * Método que elimina un aunucio a partir del idAnuncio
      * @param args idAnuncio
-     * @return true / false -> El anuncio está en un pedido y no se puede eliminar
+     * @return true / false / err_const -> El anuncio está en un pedido y no se puede eliminar
      */
-    public boolean deleteAnuncio(String[] args) {
-        try{
-            if(comunication.LanzarPeticion("Usuario","deleteAnuncio", args)){
+    public String deleteAnuncio(String[] args) {
+        try {
+            // Lanza la petición a tu servicio web
+            if (comunication.LanzarPeticion("Anuncio", "deleteAnuncio", args)) {
+                // Obtén la respuesta del servidor
                 JSONObject jsonObject = new JSONObject(getRespuestaServer());
-                return jsonObject.getBoolean("data");
-            }else return false;
-        }catch (Exception e){return false;}
+                // Devuelve la respuesta de data
+                return jsonObject.getString("data");
+            } else {
+                return "false";
+            }
+        } catch (Exception e) {
+            // Si hay alguna excepción, devuelve "false" como String
+            return "false";
+        }
     }
+
 
     private String getRespuestaServer(){
         return comunication.getResultadoServer();
