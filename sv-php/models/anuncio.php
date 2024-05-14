@@ -8,6 +8,57 @@ class Anuncio {
      * 
      * return anuncio
      */
+
+    public function subirFotoBaseDatos($Fotos,$idAnuncio){
+        $sql = "UPDATE anuncio SET fotos = ? WHERE id = ?";
+        
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        $stmt->bind_param("si",$Fotos,$idAnuncio);
+        
+        $stmt->execute();
+        
+        $filas_afectadas = $stmt->affected_rows;
+        
+        $stmt->close();
+        $conexion->cerrarConexion();
+        
+        // Retorna true si se actualizó al menos una fila, de lo contrario, retorna false
+        return json_encode($filas_afectadas > 0);
+    }
+
+    public function getIdNewAnuncioUsuario($id_usuario) {
+        $sql = "SELECT MAX(id) AS ultimo_id FROM anuncio WHERE id_usuario = ?";
+        
+        // Obtener la conexión a la base de datos
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        // Preparar la sentencia
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bind_param("i", $id_usuario);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
+        
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        
+        // Obtener el primer resultado como un array asociativo
+        $anuncio = $result->fetch_assoc();
+        
+        // Cerrar la conexión y devuelve el resultado
+        $stmt->close();
+        $conexion->cerrarConexion();
+        
+        // Retornar el resultado como JSON
+        return json_encode($anuncio);
+    }
     public function getAnuncioId($id_anuncio){
         $sql = "SELECT * FROM anuncio WHERE id = ?";
         
@@ -44,8 +95,84 @@ class Anuncio {
      * 
      * return anuncio
      */
-    public function getAnunciosExcepIdUsuario($id_usuario) {
+    public function getAnunciosExcepIdUsuarioAndPedido($id_usuario) {
         $sql = "SELECT * FROM anuncio WHERE id_usuario != ?";
+        
+        // Obtener la conexión a la base de datos
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        // Preparar la sentencia
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bind_param("i", $id_usuario);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
+        
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        
+        // Crear un array para almacenar los anuncios
+        $anuncios = array();
+        
+        // Verificar si se encontraron anuncios
+        if ($result->num_rows > 0) {
+            // Obtener todos los anuncios encontrados
+            while ($row = $result->fetch_assoc()) {
+                $anuncios[] = $row;
+            }
+        } else {
+            // No se encontraron anuncios, devolver null
+            $anuncios = null;
+        }
+        
+        // Cerrar la conexión y devolver los anuncios como JSON
+        $stmt->close();
+        $conexion->cerrarConexion();
+        return json_encode($anuncios);
+    }
+    public function getEnvios($id_usuario) {
+        $sql = "SELECT anuncio.* FROM usuario JOIN anuncio ON anuncio.id_usuario = usuario.id JOIN pedido ON pedido.id = anuncio.id WHERE usuario.id = ?";
+        
+        // Obtener la conexión a la base de datos
+        $conexion = new Conexion();
+        $conexion->conectar();
+        
+        // Preparar la sentencia
+        $stmt = $conexion->obtenerConexion()->prepare($sql);
+        
+        // Vincular los parámetros
+        $stmt->bind_param("i", $id_usuario);
+        
+        // Ejecutar la consulta
+        $stmt->execute();
+        
+        // Obtener el resultado de la consulta
+        $result = $stmt->get_result();
+        
+        // Crear un array para almacenar los anuncios
+        $anuncios = array();
+        
+        // Verificar si se encontraron anuncios
+        if ($result->num_rows > 0) {
+            // Obtener todos los anuncios encontrados
+            while ($row = $result->fetch_assoc()) {
+                $anuncios[] = $row;
+            }
+        } else {
+            // No se encontraron anuncios, devolver null
+            $anuncios = null;
+        }
+        
+        // Cerrar la conexión y devolver los anuncios como JSON
+        $stmt->close();
+        $conexion->cerrarConexion();
+        return json_encode($anuncios);
+    }
+    public function getPedidos($id_usuario) {
+        $sql = "SELECT anuncio.* FROM anuncio JOIN pedido ON pedido.id_anuncio = anuncio.id WHERE pedido.id_comprador = ?";
         
         // Obtener la conexión a la base de datos
         $conexion = new Conexion();
@@ -90,7 +217,7 @@ class Anuncio {
      * return anuncios
      */
     public function getAnunciosIdUsuario($id_usuario) {
-        $sql = "SELECT * FROM anuncio WHERE id_usuario = ?";
+        $sql = "SELECT * FROM anuncio WHERE id_usuario = ? AND id NOT IN (SELECT id_anuncio FROM pedido)";
         
         // Obtener la conexión a la base de datos
         $conexion = new Conexion();
@@ -129,9 +256,9 @@ class Anuncio {
      * 
      * return -> true / false
      */
-    public function insertAnuncio($id_usuario, $id_categoria, $titulo, $descripcion, $estado, $ubicacion, $precio, $divisa, $fotos) {
-        // Query SQL para insertar una nuevo anuncio en la base de datos
-        $sql = "INSERT INTO anuncio (id_usuario, id_categoria, titulo, descripcion, estado, ubicacion, precio, divisa, fotos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public function insertAnuncio($id_usuario, $id_categoria, $titulo, $descripcion, $estado, $ubicacion, $precio, $fotos) {
+        // Query SQL para insertar un nuevo anuncio en la base de datos
+        $sql = "INSERT INTO anuncio (id_usuario, id_categoria, titulo, descripcion, estado, ubicacion, precio, fotos) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         // Obtiene la conexión a la base de datos
         $conexion = new Conexion();
@@ -139,19 +266,20 @@ class Anuncio {
         
         // Prepara la sentencia SQL
         $stmt = $conexion->obtenerConexion()->prepare($sql);
-        
+    
         // Enlaza los parámetros con los valores proporcionados
-        $stmt->bind_param("iissssdss", $id_usuario, $id_categoria, $titulo, $descripcion, $estado, $ubicacion, $precio, $divisa, $fotos);
+        $stmt->bind_param("iissssds", $id_usuario, $id_categoria, $titulo, $descripcion, $estado, $ubicacion, $precio, $fotos);
         
         // Ejecuta la consulta
         $stmt->execute();
-        
+    
         // Verifica si la inserción fue exitosa
         $insercion_exitosa = $stmt->affected_rows > 0;
-        
+    
+        // Cierra la sentencia y la conexión
         $stmt->close();
         $conexion->cerrarConexion();
-
+    
         // Retorna true si se insertó correctamente, de lo contrario, retorna false
         return json_encode($insercion_exitosa);
     }
@@ -163,15 +291,15 @@ class Anuncio {
      * 
      * return true / false
      */
-    public function updateAnuncio($id_anuncio, $titulo, $descripcion, $estado, $precio, $divisa, $fotos, $id_categoria){
-        $sql = "UPDATE anuncio SET titulo = ?, descripcion = ?, estado = ?, precio = ?, divisa = ?, fotos = ?, id_categoria = ? WHERE id = ?";
+    public function updateAnuncio($id_anuncio, $titulo, $descripcion, $estado, $ubicacion,$precio, $fotos, $id_categoria){
+        $sql = "UPDATE anuncio SET titulo = ?, descripcion = ?, estado = ?,ubicacion = ?, precio = ?, fotos = ?, id_categoria = ? WHERE id = ?";
         
         $conexion = new Conexion();
         $conexion->conectar();
         
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
-        $stmt->bind_param("sssdssii", $titulo, $descripcion, $estado, $precio, $divisa, $fotos, $id_categoria, $id_anuncio);
+        $stmt->bind_param("ssssdsii", $titulo, $descripcion, $estado,$ubicacion, $precio, $fotos, $id_categoria, $id_anuncio);
         
         $stmt->execute();
         

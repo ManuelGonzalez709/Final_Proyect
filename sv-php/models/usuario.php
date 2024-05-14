@@ -1,12 +1,7 @@
 <?php
 require_once 'conexion.php';
 require_once 'util/auth.php';
-
 class Usuario {
-<<<<<<< HEAD
-=======
-    
->>>>>>> 4da6a5a8611f7ae8fcb35f6896c420c5b5ca3fa3
     /**
      * Función que obtiene todos los datos de un usuario insertado
      * en una base de datos a partir del $id_usuario
@@ -78,6 +73,9 @@ class Usuario {
      * 
      * return true / false
      */
+    
+
+
     public function updateUsuario($id_usuario, $nombre, $apellidos, $telefono, $email, $fecha_nac, $nomb_usu){
         try{
             $sql = "UPDATE usuario SET nombre = ?, apellidos = ?, telefono = ?, email = ?, fecha_nacimiento = ?, nomb_usu = ? WHERE id = ?";
@@ -88,7 +86,7 @@ class Usuario {
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
         $stmt->bind_param("ssssssi", $nombre, $apellidos, $telefono, $email, $fecha_nac, $nomb_usu, $id_usuario);
-        
+
         $stmt->execute();
         
         // Verifica si la actualización fue exitosa
