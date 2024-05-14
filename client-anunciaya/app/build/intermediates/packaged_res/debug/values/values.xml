@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="Rojo1">#b3395a</color>
+    <color name="Rojo2">#a0153e</color>
+    <color name="Rojo3">#690E29</color>
+    <color name="black">#FF000000</color>
+    <color name="fondoApp">#ffc9c9</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">AnunciaYa</string>
+    <string name="borrar">Borrar</string>
+    <string name="cambContras">Cambiar Contraseña</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="categoria">Categoría*</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="comprar">Comprar</string>
+    <string name="confirmConstras">Confirmar Contraseña</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="contentDescription">Foto anuncio</string>
+    <string name="cp">Código Postal</string>
+    <string name="datAnunciante">Datos del Anunciante</string>
+    <string name="descripUbicacion">Filtrar por ubicación</string>
+    <string name="descripcion">Descripción*</string>
+    <string name="dialogElimAnuncio">¿Estás seguro de que deseas eliminar este anuncio?</string>
+    <string name="dirEnvio">Dirección Envio</string>
+    <string name="direccion">Dirección</string>
+    <string name="editAnuncio">Editar Anuncio</string>
+    <string name="editar">Editar</string>
+    <string name="estado">Estado*</string>
+    <string name="euro">€</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="modAnuncio">Modificar Anuncio</string>
+    <string name="modificar">Modificar</string>
+    <string name="noAnuncios">Actualmente no hay anuncios disponibles…</string>
+    <string name="noAnunciosAjustes">Actualmente no tienes anuncios subidos.</string>
+    <string name="nuevaConstras">Nueva Contraseña</string>
+    <string name="precio">Precio*</string>
+    <string name="promptCategorias">Categorías</string>
+    <string name="resumCompra">Resumen de tu compra</string>
+    <string name="titBuscar">Buscar productos…</string>
+    <string name="titulo">Título*</string>
+    <style name="Base.Theme.AnunciaYa" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/fondoApp</item>
+        <item name="android:navigationBarColor">@color/fondoApp</item>
+        
+        
+    </style>
+    <style name="Theme.AnunciaYa" parent="Base.Theme.AnunciaYa"/>
+</resources>
