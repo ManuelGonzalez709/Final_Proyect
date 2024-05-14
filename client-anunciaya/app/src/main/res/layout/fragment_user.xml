@@ -31,14 +31,14 @@
                         android:backgroundTint="@color/Rojo3"
                         >
                         <ImageView
+                            android:layout_gravity="center"
                             android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:src="@drawable/user"
-                            android:id="@+id/FotoPerfil"
-                            />
+                            android:layout_height="80dp"
+                            android:src="@drawable/user_logo"
+                            android:id="@+id/FotoPerfil"/>
                     </androidx.cardview.widget.CardView>
                     <LinearLayout
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -46,22 +46,22 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nombre_Usuario"
-                            android:textSize="23dp"
+                            tools:text="Nombre_Usuario"
+                            android:textSize="23sp"
                             android:textColor="@color/white"
                             android:id="@+id/userNombreUsuario"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Correo_Usuario"
-                            android:textSize="15dp"
+                            tools:text="Correo_Usuario"
+                            android:textSize="15sp"
                             android:textColor="@color/white"
                             android:id="@+id/userCorreoUsuario"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Telefono_Usuario"
-                            android:textSize="15dp"
+                            tools:text="Telefono_Usuario"
+                            android:textSize="15sp"
                             android:textColor="@color/white"
                             android:id="@+id/userTelefonoUsuario"/>
                         <ImageView
@@ -212,22 +212,22 @@
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@color/black"/>
-
 
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/Rojo3"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/Rojo2"
+            android:layout_marginTop="15dp"
             android:layout_marginHorizontal="100dp"
             app:cardCornerRadius="20dp"
             >
@@ -240,6 +240,7 @@
                 android:textSize="20dp"
                 android:textColor="@color/white"/>
         </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAnunciosUsuario"
             android:layout_width="match_parent"

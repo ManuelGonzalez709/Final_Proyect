@@ -7,23 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.anunciaya.AnuncioUsuario;
-import com.example.anunciaya.InfoAnuncio;
 import com.example.anunciaya.R;
 import com.example.anunciaya.fragments.InicioFragment;
 import com.example.anunciaya.fragments.UserFragment;
 import com.example.anunciaya.tools.Anuncio;
+import com.example.anunciaya.tools.InfoAnuncio;
 import com.example.anunciaya.tools.Metodos;
 import com.example.anunciaya.tools.Usuario;
-
 import androidx.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,11 +31,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private final LayoutInflater mInflater; // Describe de donde viene el layout
     private final Context context; // De que clase llamamos el adaptador
     private Fragment fragment; // Fragment donde se ejecuta el recyclerview
+    private int layoutResourceId; // Id del layout a usar en el recycler view
 
-    public ListAdapter(List<ListAnuncios> listAnuncios, Context context, Fragment fragment) {
+    public ListAdapter(List<ListAnuncios> listAnuncios, Context context, Fragment fragment, int layoutResourceId) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.fragment = fragment;
+        this.layoutResourceId = layoutResourceId;
         this.mDatos = listAnuncios;
         this.mDatosOriginal = new ArrayList<>();
         mDatosOriginal.addAll(listAnuncios);
@@ -101,7 +100,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @NonNull
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.list_anuncios, null); // Asignamos el layout del RecyclerView
+        View view = mInflater.inflate(layoutResourceId, parent, false); // Usar el nuevo layout
         return new ListAdapter.ViewHolder(view);
     }
 
@@ -167,6 +166,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         TextView tvTitulo;
         TextView tvPrecio;
         TextView tvUbicacion;
+        TextView tvDireccion;
+        TextView tvCiudad;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -174,11 +175,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
             tvUbicacion = itemView.findViewById(R.id.tvUbicacion);
             iconImagen = itemView.findViewById(R.id.isFotosAnuncioPrev);
+            tvDireccion = itemView.findViewById(R.id.tvDireccion);
+            tvCiudad = itemView.findViewById(R.id.tvCiudad);
         }
 
         /**
-         * Método que componen los elementos del Recycler View
-         * @param item Objeto ListAnuncios
+         * Método que vincula los datos de un elemento de la lista con las vistas
+         * correspondientes en el ViewHolder. Se encarga de configurar las vistas
+         * según los datos del elemento y el layout utilizado en el RecyclerView.
+         * @param item Objeto ListAnuncios que contiene los datos del elemento.
          */
         void bindData(final ListAnuncios item) {
             ArrayList<SlideModel> imageList = new ArrayList<>();
@@ -187,7 +192,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
             tvTitulo.setText(item.getTitulo());
             tvPrecio.setText(item.getPrecio());
-            tvUbicacion.setText(item.getUbicacion());
+
+            if(layoutResourceId == R.layout.list_anuncios){tvUbicacion.setText(item.getUbicacion());}
+            if(layoutResourceId == R.layout.list_pedidos){
+                tvDireccion.setText(item.getDireccion());
+                tvCiudad.setText(item.getCiudad());
+            }
 
             if (fotos != null && fotos.length > 0) {
                 // Añadir solo la primera foto anuncio

@@ -1,5 +1,7 @@
 package com.example.anunciaya;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,8 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -19,6 +19,7 @@ import com.example.anunciaya.tools.Metodos;
 import java.util.ArrayList;
 
 public class AnuncioUsuario extends AppCompatActivity {
+
     private TextView tvTitulo;
     private TextView tvDescripcion;
     private TextView tvPrecio;
@@ -29,12 +30,13 @@ public class AnuncioUsuario extends AppCompatActivity {
     private Button btEditarAnuncio;
     private Button btBorrarAnuncio;
     private String idAnuncio;
+    private String fotos;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anuncios_usuario);
+        setContentView(R.layout.activity_anuncio_usuario);
         initComponents();
         addDatosAnuncio();
 
@@ -83,6 +85,7 @@ public class AnuncioUsuario extends AppCompatActivity {
                 intent.putExtra("au_estado",tvEstado.getText());
                 intent.putExtra("au_categoria", tvCategoria.getText());
                 intent.putExtra("au_ubicacion", tvUbicacion.getText());
+                intent.putExtra("au_fotos", fotos);
                 startActivity(intent);
                 finish();
             }
@@ -119,7 +122,7 @@ public class AnuncioUsuario extends AppCompatActivity {
         tvEstado.setText(intent.getStringExtra("a_estado"));
         tvCategoria.setText(intent.getStringExtra("a_descripCategoria"));
         tvUbicacion.setText(intent.getStringExtra("a_ubicacion"));
-        String fotos = intent.getStringExtra("a_fotos");
+        fotos = intent.getStringExtra("a_fotos");
 
         // Separar la ruta de la foto usando ";" como separador
         String[] fotoSplit = fotos.split(";");

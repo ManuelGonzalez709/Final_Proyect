@@ -1,7 +1,9 @@
 package com.example.anunciaya;
 
 import static android.content.Context.MODE_PRIVATE;
+import static android.content.Intent.getIntent;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -100,8 +102,8 @@ public class DialogoCompra extends DialogFragment {
         ServerComunication comunication = new ServerComunication();
         try{
             String[]Municipios = comunication.getMunicipios().split(";");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity().getApplicationContext(), R.layout.auto_municipios_rojo3, Municipios);
-            adapter.setDropDownViewResource(R.layout.auto_municipios_rojo3);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity().getApplicationContext(), R.layout.auto_municipios, Municipios);
+            adapter.setDropDownViewResource(R.layout.auto_municipios);
             // android.R.layout.simple_spinner_dropdown_item
             actvCiudadCompra.setAdapter(adapter);
         }catch (Exception e){

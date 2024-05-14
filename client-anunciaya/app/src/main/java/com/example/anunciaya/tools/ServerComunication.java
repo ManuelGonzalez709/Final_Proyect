@@ -15,6 +15,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
@@ -23,9 +25,13 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 public class ServerComunication {
-    private String urlServer = "http://192.168.200.176/sv-php";
+    private String urlServer = "http://192.168.0.100/sv-php";
     private String resultadoServer = "";
-
+    private String urlServerFtp = "files.000webhost.com";
+    private int PuertoFTP = 21;
+    private String userFtp = "sv-anunciaya";
+    private String passFtp = "0O&67mG{oE";
+    private String rutaFtp = "/public_html/sv-php/img";
 
     public ServerComunication(String server){urlServer = server;}
 
@@ -88,18 +94,48 @@ public class ServerComunication {
         try{thread.start();thread.join();return true;}
         catch (Exception e){return false;}
     }
-
-    public String subirFotoServer(String rutaFoto,int idUsuario,int idAnuncio){
-        String server = "files.000webhost.com";
-        int port = 21;
-        String user = "sv-anunciaya";
-        String password = "0O&67mG{oE";
-        String remoteDirectory = "/public_html/sv-php/img";
-
-        FTPClient ftpClient = new FTPClient();
+    public Boolean borrarFotoServer(String idAnuncio,ArrayList<String>Salvadas){
+        FTPClient ftpClient2 = new FTPClient();
         try {
-            ftpClient.connect(server, port);
-            ftpClient.login(user, password);
+            ftpClient2.connect(urlServerFtp, PuertoFTP);
+            ftpClient2.login(userFtp, passFtp);
+            ftpClient2.enterLocalPassiveMode();
+            ftpClient2.setFileType(FTP.BINARY_FILE_TYPE);
+
+            // Cambiamos al directorio donde están los archivos
+            ftpClient2.changeWorkingDirectory(rutaFtp);
+
+            // Obtenemos la lista de nombres de archivos
+            String[] archivos = ftpClient2.listNames();
+
+            // Iteramos sobre los archivos y eliminamos aquellos que comiencen con "15_"
+            if (archivos != null) {
+                for (String archivo : archivos) {
+                    if (archivo.startsWith(idAnuncio+"_") && !Salvadas.contains(archivo)) {
+                        ftpClient2.deleteFile(archivo);
+                    }
+                }
+            }
+            return true;
+        } catch (IOException ex) {
+            ex.printStackTrace();return false;
+        } finally {
+            try {
+                if (ftpClient2.isConnected()) {
+                    ftpClient2.logout();
+                    ftpClient2.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    public String subirFotoServer(String rutaFoto,int idUsuario,int idAnuncio){
+        FTPClient ftpClient = new FTPClient();
+        String serverFTPSubida = "https://sv-anunciaya.000webhostapp.com/sv-php";
+        try {
+            ftpClient.connect(urlServerFtp, PuertoFTP);
+            ftpClient.login(userFtp, passFtp);
             ftpClient.enterLocalPassiveMode();
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
@@ -107,10 +143,10 @@ public class ServerComunication {
             String fileName = idAnuncio+"_"+idUsuario+"_"+file.getName();
             FileInputStream inputStream = new FileInputStream(file);
 
-            boolean uploaded = ftpClient.storeFile(remoteDirectory + "/" + fileName, inputStream);
+            boolean uploaded = ftpClient.storeFile(rutaFtp + "/" + fileName, inputStream);
             inputStream.close();
             if (uploaded) {
-                return urlServer+"/img/"+fileName;
+                return serverFTPSubida+"/img/"+fileName;
             } else {
                 return null;
             }
@@ -128,6 +164,15 @@ public class ServerComunication {
                 ex.printStackTrace();
             }
         }
+    }
+    public Boolean borrarFotos(String id, ArrayList<String>Salvadas){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {borrarFotoServer(id,Salvadas);}
+        });
+        // lanzamos el hilo y esperamos a que termine
+        try{thread.start();thread.join(); return true;}
+        catch (Exception e){return false;}
     }
     public String subirFoto(String url, int idUsuario,int idAnuncio){
         Thread thread = new Thread(new Runnable() {

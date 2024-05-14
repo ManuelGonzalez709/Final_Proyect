@@ -127,7 +127,7 @@ public class addAnuncio extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }else Toast.makeText(getApplicationContext(), "No hay fotos disponibles para borrar", Toast.LENGTH_SHORT).show();
     }
-    /*Metodo que se encarga de cargar el buscador de municipios */
+    /*Metodo que se encarga de cargar el buscador de */
     private void autocompleterUbicacion(){
         try{
             String[]Municipios = comunication.getMunicipios().split(";");
@@ -139,13 +139,13 @@ public class addAnuncio extends AppCompatActivity {
         }
     }
     public static void setSpinner(Spinner spinner,String[]estados){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), R.layout.spinner_rojo2, estados);
-        adapter.setDropDownViewResource(R.layout.spinner_rojo2);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, estados);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
-    public static void setSpinner(Spinner spinner,ArrayList<String>categorias){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), R.layout.spinner_rojo2, categorias);
-        adapter.setDropDownViewResource(R.layout.spinner_rojo2);
+    public static  void setSpinner(Spinner spinner,ArrayList<String>estados){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, estados);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Asignar el adaptador al Spinner
         spinner.setAdapter(adapter);
     }

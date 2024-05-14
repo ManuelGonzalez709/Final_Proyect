@@ -1,7 +1,14 @@
 package com.example.anunciaya;
 
 import static com.example.anunciaya.addAnuncio.setSpinner;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,12 +16,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.anunciaya.adapter.ImageAdapter;
+import com.example.anunciaya.tools.BundleRecoverry;
 import com.example.anunciaya.tools.Metodos;
 import com.example.anunciaya.tools.ServerComunication;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EditarAnuncio extends AppCompatActivity {
     private EditText etTitutloMod;
@@ -26,38 +40,76 @@ public class EditarAnuncio extends AppCompatActivity {
     private AutoCompleteTextView actvUbiMod;
     private String idAnuncio;
     ArrayList<String> estados;
+    private ImageAdapter adapter;
+    private RecyclerView recyclerView;
+    private ArrayList<String>fotos = new ArrayList<>();
+    private BundleRecoverry almacenDatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modificar_anuncio);
+        setContentView(R.layout.activity_editar_anuncio);
         initComponents();
         addDatosFormularioAnuncio();
         autocompletarUbicacion();
+
+        findViewById(R.id.btremoveFoto).setOnClickListener(view->borrarUltFoto());
+        findViewById(R.id.btaddFoto)
+                .setOnClickListener(view -> ImagePicker.with(this).crop().maxResultSize(480,320).start());
+        adapter.setOnItemClickListener(new ImageAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(ImageView imageView, String path) {
+                startActivity(new Intent(EditarAnuncio.this, ImageView.class).putExtra("image", path),
+                        ActivityOptions.makeSceneTransitionAnimation(EditarAnuncio.this, imageView, "image")
+                                .toBundle());
+            }
+        });
 
         btModAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Metodos m = new Metodos();
-                // ***********************************************
-                // QUEDA POR ACTUALIZAR LAS FOTOS
-                if(!etTitutloMod.getText().toString().isEmpty() && !etDescripMod.getText().toString().isEmpty()
-                && !etPrecioMod.getText().toString().isEmpty() && !actvUbiMod.getText().toString().isEmpty()
-                && !spEstadoMod.getSelectedItem().toString().isEmpty() && !spCategoriaMod.getSelectedItem().toString().isEmpty()){
-                    if( m.updateAnuncio(new String[]{idAnuncio, etTitutloMod.getText().toString(),
-                            etDescripMod.getText().toString(), spEstadoMod.getSelectedItem().toString(),
-                            etPrecioMod.getText().toString(), "", String.valueOf(m.getCategoriaId(new String[]{spCategoriaMod.getSelectedItem().toString()}))})){
-                        Toast.makeText(EditarAnuncio.this, "¡Anuncio actualizado con éxito!", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else{
-                        Toast.makeText(EditarAnuncio.this, "Ha ocurido un error al actualizar el anuncio", Toast.LENGTH_SHORT).show();
+                ArrayList<String>Salvadas = new ArrayList<String>();
+                String fotosSubidas = "";
+                for(int i = 0; i< fotos.size();i++){
+                    if(fotos.get(i).toString().contains("http://") || fotos.get(i).toString().contains("https://")){
+                        String[]fotoSplitted = fotos.get(i).split("/");
+                        Salvadas.add(fotoSplitted[fotoSplitted.length-1].toString());
                     }
-                } else{
-                    Toast.makeText(EditarAnuncio.this, "Hay campos del formulario de actualización vacíos", Toast.LENGTH_SHORT).show();
                 }
+                if(m.borrarFotosIdAnuncio(idAnuncio,Salvadas)){//Si Fotos Anuncio Borradas
+                    for(int i = 0;i<fotos.size();i++){
+                        if(!fotos.get(i).contains("http://") && !fotos.get(i).contains("https://")){
+                            fotosSubidas+=m.subirFotoServer(fotos.get(i),almacenDatos.recuperarInt("logginId"),Integer.parseInt(idAnuncio));
+                        }else fotosSubidas+=fotos.get(i);
+                        if(i-1<fotos.size())fotosSubidas+=";";
+                    }
+                }
+                String [] params2 = {spCategoriaMod.getSelectedItem().toString()};
+                int idcategoria = m.getCategoriaId(params2);
+                String []params = {idAnuncio,
+                        etTitutloMod.getText().toString(),
+                        etDescripMod.getText().toString(),
+                        spEstadoMod.getSelectedItem().toString(),
+                        actvUbiMod.getText().toString(),
+                        etPrecioMod.getText().toString(),
+                        fotosSubidas,Integer.toString(idcategoria)};
+                if(m.updateAnuncio(params)){
+                    Toast.makeText(EditarAnuncio.this, "¡Anuncio actualizado con éxito!", Toast.LENGTH_SHORT).show();
+                }else Toast.makeText(EditarAnuncio.this, "No se modifico ningun campo", Toast.LENGTH_SHORT).show();
+                finish();
             }
+
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        String urlFoto = data.getData().getPath();
+        fotos.add(urlFoto);
+        recyclerView.setAdapter(adapter);
     }
 
     /**
@@ -82,8 +134,10 @@ public class EditarAnuncio extends AppCompatActivity {
         setSpinner(spEstadoMod, estados);
         spEstadoMod.setSelection(estados.indexOf(intent.getStringExtra("au_estado")));
         actvUbiMod.setText(intent.getStringExtra("au_ubicacion"));
+        String []fotosArray = intent.getStringExtra("au_fotos").split(";");
+        for(int i = 0; i<fotosArray.length;i++)fotos.add(fotosArray[i]);
+        recyclerView.setAdapter(adapter);
     }
-
     /**
      * Método que inicializa los componentes de la activity
      */
@@ -95,8 +149,14 @@ public class EditarAnuncio extends AppCompatActivity {
         spCategoriaMod = findViewById(R.id.spCategoriaMod);
         actvUbiMod = findViewById(R.id.actvUbiMod);
         btModAnuncio = findViewById(R.id.btModAnuncio);
-    }
 
+        recyclerView = findViewById(R.id.recyclerEditar);
+        adapter = new ImageAdapter(this, fotos);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MisDatos", MODE_PRIVATE);
+        almacenDatos = new BundleRecoverry(sharedPreferences);
+
+    }
     private void autocompletarUbicacion(){
         ServerComunication comunication = new ServerComunication();
         try{
@@ -104,6 +164,13 @@ public class EditarAnuncio extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditarAnuncio.this, android.R.layout.simple_dropdown_item_1line, Municipios);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             actvUbiMod.setAdapter(adapter);
-        }catch (Exception e){Log.i("Error",e.toString());}
+        }catch (Exception e){
+            Log.i("Error",e.toString());}
+    }
+    private void borrarUltFoto(){
+        if(fotos.size()>0){
+            fotos.remove(fotos.size()-1);
+            recyclerView.setAdapter(adapter);
+        }else Toast.makeText(getApplicationContext(), "No hay fotos disponibles para borrar", Toast.LENGTH_SHORT).show();
     }
 }

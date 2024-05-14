@@ -1,4 +1,4 @@
-package com.example.anunciaya;
+package com.example.anunciaya.tools;
 
 
 import android.content.Intent;
@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.anunciaya.DialogoCompra;
+import com.example.anunciaya.R;
+
 import java.util.ArrayList;
 
 public class InfoAnuncio extends AppCompatActivity {

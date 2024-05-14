@@ -30,4 +30,5 @@
     <string name="estado">Estado*</string>
     <string name="categoria">Categoría*</string>
     <string name="modAnuncio">Modificar Anuncio</string>
+    <string name="noAnunciosAjustes">Actualmente no tienes anuncios subidos.</string>
 </resources>

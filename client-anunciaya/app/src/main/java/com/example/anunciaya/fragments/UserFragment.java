@@ -18,9 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.anunciaya.Login;
+import com.example.anunciaya.Pedidos;
 import com.example.anunciaya.R;
 import com.example.anunciaya.Register;
 import com.example.anunciaya.adapter.ListAdapter;
+import com.example.anunciaya.Envios;
 import com.example.anunciaya.tools.BundleRecoverry;
 import com.example.anunciaya.tools.Metodos;
 import com.example.anunciaya.tools.Usuario;
@@ -50,7 +52,6 @@ public class UserFragment extends Fragment {
         almacen = new BundleRecoverry(sharedPreferences);
         m = new Metodos();
 
-
         btAjustesUsuario = view.findViewById(R.id.btUserAjustes);
         btEnviosUsuario = view.findViewById(R.id.btUserEnvios);
         btPedidosUsuario = view.findViewById(R.id.btUserPedidos);
@@ -58,6 +59,8 @@ public class UserFragment extends Fragment {
 
         loggout.setOnClickListener(view -> Loggout());
         btAjustesUsuario.setOnClickListener(view -> LanzarAjustesUsuario());
+        btPedidosUsuario.setOnClickListener(view -> LanzarMisPedidos());
+        btEnviosUsuario.setOnClickListener(view -> LanzarMisEnvios());
 
         recyclerView = view.findViewById(R.id.rvAnunciosUsuario); // declaramos cual es el recyclerView
         nombreUsu = view.findViewById(R.id.userNombreUsuario);
@@ -67,19 +70,16 @@ public class UserFragment extends Fragment {
         setAnunciosUser();
         CargarDatosUsuario();
         return view;
-    }
-
-    /**
-     * Método que se ejecuta cuando se vuelve al Fragment
-     * para actualizar la lista de anuncios
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-        setAnunciosUser();
 
     }
-
+    private void LanzarMisEnvios(){
+        Intent intent = new Intent(getActivity(), Envios.class);
+        startActivity(intent);
+    }
+    private void LanzarMisPedidos(){
+        Intent intent = new Intent(getActivity(), Pedidos.class);
+        startActivity(intent);
+    }
     private void LanzarAjustesUsuario(){
         Intent intent = new Intent(getActivity(), Register.class);
         intent.putExtra("fromMainActivity", true);
@@ -102,11 +102,16 @@ public class UserFragment extends Fragment {
     }
     private void setAnunciosUser(){
         idUsuario = almacen.recuperarInt("logginId");
-        listAdapter = new ListAdapter(m.getAnunciosIdUsuario(new String[]{Integer.toString(idUsuario)}), requireContext(), this);
-
+        listAdapter = new ListAdapter(m.getAnunciosIdUsuario(new String[]{Integer.toString(idUsuario)}), requireContext(),this, R.layout.list_anuncios);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(listAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setAnunciosUser();
+        CargarDatosUsuario();
+    }
 }

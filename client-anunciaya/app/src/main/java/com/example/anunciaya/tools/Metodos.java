@@ -4,8 +4,6 @@ import com.example.anunciaya.adapter.ListAnuncios;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Node;
 
@@ -515,7 +513,10 @@ public class Metodos {
             return false;
         }catch (Exception e){return false;}
     }
-
+    public Boolean borrarFotosIdAnuncio(String id,ArrayList<String>Salvadas){
+        if(comunication.borrarFotos(id,Salvadas))return true;
+        else return false;
+    }
     public ArrayList<ListAnuncios> getAnunciosIdUsuario(String[] args) {
         try {
             if (comunication.LanzarPeticion("Anuncio", "getAnunciosIdUsuario", args)) {
@@ -555,6 +556,93 @@ public class Metodos {
             return null;
         }
     }
+    /**
+     * Método que obtiene los anuncios que ha comprado el usuario.
+     * Unicamente se muestran los datos: titulo, precio, direccion, ciudad y fotos.
+     *
+     * @param args Id del usuario comprador
+     * @return ArrayList<ListAnuncios> con todos los anuncios
+     */
+    public ArrayList<ListAnuncios> getPedidos(String[] args) {
+        try {
+            if (comunication.LanzarPeticion("Pedido", "getPedidos", args)) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(getRespuestaServer());
+
+                ArrayList<ListAnuncios> detallesProductos = new ArrayList<>();
+
+                if (jsonNode.has("data")) {
+                    String dataString = jsonNode.get("data").asText();
+                    if (dataString.equals("null")) {
+                        return null;
+                    }
+
+                    JsonNode dataNode = objectMapper.readTree(dataString);
+                    for (JsonNode node : dataNode) {
+                        String titulo = node.get("titulo").asText();
+                        String precio = node.get("precio").asText();
+                        String direccion = node.get("direccion").asText();
+                        String ciudad = node.get("ciudad").asText();
+                        String fotos = node.get("fotos").asText();
+
+                        ListAnuncios anuncio = new ListAnuncios(titulo, precio, direccion, ciudad, fotos);
+                        detallesProductos.add(anuncio);
+                    }
+                }
+
+                return detallesProductos;
+            } else {
+                return null;
+            }
+        } catch (JsonProcessingException e) {return null;}
+    }
+    public ArrayList<ListAnuncios> getEnvios(String[] args) {
+        try {
+            if (comunication.LanzarPeticion("Anuncio", "getEnvios", args)) {
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode jsonNode = objectMapper.readTree(getRespuestaServer());
+
+                ArrayList<ListAnuncios> detallesProductos = new ArrayList<>();
+
+                if (jsonNode.has("data")) {
+                    String dataString = jsonNode.get("data").asText();
+                    if (dataString.equals("null")) {
+                        // Si data es null es porque no hay anuncios para mostrar al usuario
+                        // porque los anuncios que hay son todos suyos
+
+                        return new ArrayList<>();
+                    }
+
+                    JsonNode dataNode = objectMapper.readTree(dataString);
+                    for (JsonNode node : dataNode) {
+                        int id = node.get("id").asInt();
+                        String titulo = node.get("titulo").asText();
+                        String precio = node.get("precio").asText();
+                        String ubicacion = node.get("ubicacion").asText();
+                        String fotos = node.get("fotos").asText();
+
+                        ListAnuncios anuncio = new ListAnuncios(id,titulo, precio, ubicacion, fotos);
+                        detallesProductos.add(anuncio);
+                    }
+                }
+
+                return detallesProductos;
+            } else {
+                return new ArrayList<>();
+            }
+        } catch (JsonProcessingException e) {
+            // Manejar la excepción de procesamiento JSON
+            return null;
+        }
+    }
+    public Boolean ActualizarContasena(String[]params){
+        try{
+            if(comunication.LanzarPeticion("Usuario","updateContras",params)){
+                JSONObject jsonObject = new JSONObject(getRespuestaServer());
+                return jsonObject.getBoolean("data");
+            }else return false;
+        }catch (Exception e){return false;}
+    }
     public Boolean ActualizarUsuario(String[]params){
         try{
             if(comunication.LanzarPeticion("Usuario","updateUsuario",params)){
@@ -563,26 +651,6 @@ public class Metodos {
             }else return false;
         }catch (Exception e){return false;}
     }
-
-    /**
-     * Método que actualiza un anuncio existente
-     * @param args idAnuncio, titulo, descripcion, estado, precio, divisa, fotos, idCategoria
-     * @return true / false
-     */
-    public boolean updateAnuncio(String[] args){
-        try{
-            if(comunication.LanzarPeticion("Anuncio", "updateAnuncio", args)){
-                JSONObject jsonObject = new JSONObject(getRespuestaServer());
-                return jsonObject.getBoolean("data");
-            } else return false;
-        } catch (Exception e){return false;}
-    }
-
-    /**
-     * Método que elimina un aunucio a partir del idAnuncio
-     * @param args idAnuncio
-     * @return true / false / err_const -> El anuncio está en un pedido y no se puede eliminar
-     */
     public String deleteAnuncio(String[] args) {
         try {
             // Lanza la petición a tu servicio web
@@ -599,8 +667,14 @@ public class Metodos {
             return "false";
         }
     }
-
-
+    public boolean updateAnuncio(String[] args){
+        try{
+            if(comunication.LanzarPeticion("Anuncio", "updateAnuncio", args)){
+                JSONObject jsonObject = new JSONObject(getRespuestaServer());
+                return jsonObject.getBoolean("data");
+            } else return false;
+        } catch (Exception e){return false;}
+    }
     private String getRespuestaServer(){
         return comunication.getResultadoServer();
     }

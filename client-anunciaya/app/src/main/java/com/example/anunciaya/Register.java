@@ -32,6 +32,7 @@ public class Register extends AppCompatActivity {
     private TextView iniciaSesion ;
     private Metodos metodos;
     private Boolean lanzadaMain = false;
+    private Usuario user ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +70,7 @@ public class Register extends AppCompatActivity {
     private void PrepararDatos(){
         try{
             String[]params = {Integer.toString(dataRecovery.recuperarInt("logginId"))};
-            Usuario user = metodos.getUsuarioDataId(params);
+            user = metodos.getUsuarioDataId(params);
             if(user != null){
                 nombre.setText(user.getNombre());
                 apellidos.setText(user.getApellidos());
@@ -80,12 +81,8 @@ public class Register extends AppCompatActivity {
                 registerButton.setText("Guardar Cambios");
 
                 RelativeLayout preguntarCuenta = findViewById(R.id.tienesCuentaAsk);
-                CardView contraseñaCard = findViewById(R.id.contraseñaCard);
-                TextView textContraseña = findViewById(R.id.textoContraseña);
 
                 preguntarCuenta.setVisibility(View.GONE);
-                textContraseña.setVisibility(View.GONE);
-                contraseñaCard.setVisibility(View.GONE);
 
             }else{
                 Toast.makeText(getApplicationContext(), "Error al Cargar los datos del Usuario", Toast.LENGTH_SHORT).show();
@@ -113,8 +110,12 @@ public class Register extends AppCompatActivity {
                                                 dateButton.getText().toString(), // fecha_nac
                                                 nomb_usu.getText().toString(), // nomb_usu
                                         };
+                                        if(contras.getText().toString().compareTo("")!= 0){
+                                            String[]contra = { Integer.toString(dataRecovery.recuperarInt("logginId")),contras.getText().toString()};
+                                            if(!metodos.ActualizarContasena(contra))
+                                                Toast.makeText(getApplicationContext(), "Error al Actualizar la contraseña", Toast.LENGTH_SHORT).show();
+                                        }
                                         if(metodos.ActualizarUsuario(params))Toast.makeText(getApplicationContext(), "Usario Actualizado", Toast.LENGTH_SHORT).show();
-                                        else Toast.makeText(getApplicationContext(), "Error al Actualizar", Toast.LENGTH_SHORT).show();
                                         finish();
                                     }else{
                                         String [] p1 = {nombre.getText().toString(),apellidos.getText().toString(),nomb_usu.getText().toString(),contras.getText().toString(),dateButton.getText().toString(),email.getText().toString(),telf.getText().toString()};
@@ -170,7 +171,7 @@ public class Register extends AppCompatActivity {
         datePickerDialog = new DatePickerDialog(this,style,dateSetListener,año,mes,dia);
     }
     private String makeDateString(int dia, int mes, int año) {
-        return año+ "/"+mes+"/"+dia;
+        return año+"-"+mes+"-"+dia;
 
     }
     public void openDatePicker(View view){

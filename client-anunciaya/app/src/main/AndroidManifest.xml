@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
@@ -21,22 +21,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".EditarAnuncio"
+            android:exported="false" />
+        <activity
+            android:name=".AnuncioUsuario"
+            android:exported="false" />
+        <activity
+            android:name=".Envios"
+            android:exported="false" />
+        <activity
+            android:name=".Pedidos"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".InfoAnuncio"
+            android:name=".tools.InfoAnuncio"
             android:exported="false" />
         <activity
-            android:name=".AnuncioUsuario"
-            android:exported="false" />
-        <activity
-            android:name=".EditarAnuncio"
-            android:exported="false" />
-        <activity
-            android:name=".ImageView"
+            android:name=".adapter.ImageView"
             android:exported="false" />
         <activity
             android:name=".addAnuncio"
