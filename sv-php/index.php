@@ -4,7 +4,6 @@ include 'models/categoria.php';
 include 'models/pedido.php';
 include 'models/anuncio.php';
 include 'models/usuario.php';
-include 'models/direccion_envio.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 if (isset($data['class']) && isset($data['method']) && isset($data['params'])) { 
@@ -25,9 +24,6 @@ if (isset($data['class']) && isset($data['method']) && isset($data['params'])) {
             break;
         case 'Usuario':
             $obj = new Usuario();
-            break;
-        case 'DireccionEnvio':
-            $obj = new DireccionEnvio();
             break;
         case 'Auth':
             $obj = new Auth();
