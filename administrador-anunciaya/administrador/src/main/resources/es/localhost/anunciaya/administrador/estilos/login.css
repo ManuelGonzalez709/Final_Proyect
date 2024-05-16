@@ -1,0 +1,25 @@
+#pInfo{
+    -fx-background-color: #FFC9C9;
+}
+#pLogin{
+    -fx-background-color: #F4F4F4;
+}
+#tfEmail, #pfPasswd{
+    -fx-background-color: #A0153E;
+    -fx-text-fill: #FFFFFF;
+}
+-fx-prompt-text-fill{
+    -fx-text-fill: #FFFFFF;
+}
+#btLogin{
+    -fx-background-color: #A0153E;
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #000000;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+#btLogin:hover{
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #A0153E;
+}
