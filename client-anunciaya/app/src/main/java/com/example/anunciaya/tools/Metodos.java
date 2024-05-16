@@ -596,6 +596,7 @@ public class Metodos {
             }
         } catch (JsonProcessingException e) {return null;}
     }
+
     public ArrayList<ListAnuncios> getEnvios(String[] args) {
         try {
             if (comunication.LanzarPeticion("Anuncio", "getEnvios", args)) {

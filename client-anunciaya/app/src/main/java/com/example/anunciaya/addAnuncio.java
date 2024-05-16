@@ -23,7 +23,7 @@ import com.example.anunciaya.tools.Metodos;
 import com.example.anunciaya.tools.ServerComunication;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
-public class addAnuncio extends AppCompatActivity {
+public class AddAnuncio extends AppCompatActivity {
     private Spinner spinnerEstado,spinnerCategoria;
     private AutoCompleteTextView ubicacion;
     private ServerComunication comunication;
@@ -52,19 +52,14 @@ public class addAnuncio extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("MisDatos", MODE_PRIVATE);
         almacenDatos = new BundleRecoverry(sharedPreferences);
-        adapter = new ImageAdapter(addAnuncio.this, fotos);
+        adapter = new ImageAdapter(AddAnuncio.this, fotos);
 
         findViewById(R.id.btremoveFoto).setOnClickListener(view->borrarUltFoto());
         findViewById(R.id.btaddFoto)
-                .setOnClickListener(view ->ImagePicker.with(addAnuncio.this).crop().maxResultSize(480,320).start());
-        adapter.setOnItemClickListener(new ImageAdapter.OnItemClickListener() {
-            @Override
-            public void onClick(ImageView imageView, String path) {
-                startActivity(new Intent(addAnuncio.this, ImageView.class).putExtra("image", path),
-                        ActivityOptions.makeSceneTransitionAnimation(addAnuncio.this, imageView, "image")
-                                .toBundle());
-            }
-        });
+                .setOnClickListener(view ->ImagePicker.with(AddAnuncio.this).crop().maxResultSize(480,320).start());
+        adapter.setOnItemClickListener((imageView, path) -> startActivity(new Intent(AddAnuncio.this, ImageView.class).putExtra("image", path),
+                ActivityOptions.makeSceneTransitionAnimation(AddAnuncio.this, imageView, "image")
+                        .toBundle()));
         boton = findViewById(R.id.btnewCrearAnuncio);
         boton.setOnClickListener(view -> CrearAnuncio());
 
@@ -116,9 +111,11 @@ public class addAnuncio extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String urlFoto = data.getData().getPath();
-        fotos.add(urlFoto);
-        recyclerView.setAdapter(adapter);
+        if(data.getData()!= null){
+            String urlFoto = data.getData().getPath();
+            fotos.add(urlFoto);
+            recyclerView.setAdapter(adapter);
+        }
     }
     /*Metodo que borra la ultima foto*/
     private void borrarUltFoto(){
@@ -131,21 +128,21 @@ public class addAnuncio extends AppCompatActivity {
     private void autocompleterUbicacion(){
         try{
             String[]Municipios = comunication.getMunicipios().split(";");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(addAnuncio.this, android.R.layout.simple_dropdown_item_1line, Municipios);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(AddAnuncio.this, R.layout.auto_municipios_rojo2, Municipios);
+            adapter.setDropDownViewResource(R.layout.auto_municipios_rojo2);
             ubicacion.setAdapter(adapter);
         }catch (Exception e){
             Log.i("Error",e.toString());
         }
     }
     public static void setSpinner(Spinner spinner,String[]estados){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, estados);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), R.layout.spinner_categorias_rojo2, estados);
+        adapter.setDropDownViewResource(R.layout.spinner_categorias_rojo2);
         spinner.setAdapter(adapter);
     }
     public static  void setSpinner(Spinner spinner,ArrayList<String>estados){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, estados);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), R.layout.spinner_categorias_rojo2, estados);
+        adapter.setDropDownViewResource(R.layout.spinner_categorias_rojo2);
         // Asignar el adaptador al Spinner
         spinner.setAdapter(adapter);
     }

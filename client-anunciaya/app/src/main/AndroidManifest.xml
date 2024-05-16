@@ -45,7 +45,7 @@
             android:name=".adapter.ImageView"
             android:exported="false" />
         <activity
-            android:name=".addAnuncio"
+            android:name=".AddAnuncio"
             android:exported="false" />
         <activity
             android:name=".Login"

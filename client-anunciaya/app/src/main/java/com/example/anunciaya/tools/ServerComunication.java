@@ -25,7 +25,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 public class ServerComunication {
-    private String urlServer = "http://192.168.0.100/sv-php";
+    private String urlServer = "http://192.168.0.102/sv-php";
     private String resultadoServer = "";
     private String urlServerFtp = "files.000webhost.com";
     private int PuertoFTP = 21;

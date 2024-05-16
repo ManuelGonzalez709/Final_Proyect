@@ -1,9 +1,7 @@
 package com.example.anunciaya;
 
 import static android.content.Context.MODE_PRIVATE;
-import static android.content.Intent.getIntent;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,32 +41,29 @@ public class DialogoCompra extends DialogFragment {
         addDatosCompra();
         autocompletarUbicacion();
 
-        btComprarComp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!etDireccionCompra.getText().toString().isEmpty() && !actvCiudadCompra.getText().toString().isEmpty()
-                        && !etCPCompra.getText().toString().isEmpty()){
-                    // El cp no puede tener más de cinco nº
-                    if (etCPCompra.getText().length() > 5){
-                        Toast.makeText(getContext(), "El código postal no puede tener más de cinco números", Toast.LENGTH_SHORT).show();
-                    } else{
-                        Metodos m = new Metodos();
-                        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MisDatos", MODE_PRIVATE);
-                        BundleRecoverry dataRecovery = new BundleRecoverry(sharedPreferences);
-                        int idUsuario = dataRecovery.recuperarInt("logginId");
-
-                        if(m.insertPedido(new String[]{String.valueOf(idUsuario), idAnuncio, etDireccionCompra.getText().toString(),
-                                actvCiudadCompra.getText().toString(), etCPCompra.getText().toString() })){
-                            Toast.makeText(getContext(), "¡Artículo comprado exitosamente!", Toast.LENGTH_SHORT).show();
-                            dismiss(); // Cerrar ventana dialogo
-                            getActivity().finish(); // Cerrar activity y volver al fragment inicio
-                        } else{
-                            Toast.makeText(getContext(), "Ha ocurrido un error al realizar la compra", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+        btComprarComp.setOnClickListener(v -> {
+            if(!etDireccionCompra.getText().toString().isEmpty() && !actvCiudadCompra.getText().toString().isEmpty()
+                    && !etCPCompra.getText().toString().isEmpty()){
+                // El cp no puede tener más de cinco nº
+                if (etCPCompra.getText().length() > 5){
+                    Toast.makeText(getContext(), "El código postal no puede tener más de cinco números", Toast.LENGTH_SHORT).show();
                 } else{
-                    Toast.makeText(getContext(), "Por favor, completa todos los campos obligatorios", Toast.LENGTH_SHORT).show();
+                    Metodos m = new Metodos();
+                    SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MisDatos", MODE_PRIVATE);
+                    BundleRecoverry dataRecovery = new BundleRecoverry(sharedPreferences);
+                    int idUsuario = dataRecovery.recuperarInt("logginId");
+
+                    if(m.insertPedido(new String[]{String.valueOf(idUsuario), idAnuncio, etDireccionCompra.getText().toString(),
+                            actvCiudadCompra.getText().toString(), etCPCompra.getText().toString() })){
+                        Toast.makeText(getContext(), "¡Artículo comprado exitosamente!", Toast.LENGTH_SHORT).show();
+                        dismiss(); // Cerrar ventana dialogo
+                        getActivity().finish(); // Cerrar activity y volver al fragment inicio
+                    } else{
+                        Toast.makeText(getContext(), "Ha ocurrido un error al realizar la compra", Toast.LENGTH_SHORT).show();
+                    }
                 }
+            } else{
+                Toast.makeText(getContext(), "Por favor, completa todos los campos obligatorios", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,8 +97,8 @@ public class DialogoCompra extends DialogFragment {
         ServerComunication comunication = new ServerComunication();
         try{
             String[]Municipios = comunication.getMunicipios().split(";");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity().getApplicationContext(), R.layout.auto_municipios, Municipios);
-            adapter.setDropDownViewResource(R.layout.auto_municipios);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(requireActivity().getApplicationContext(), R.layout.auto_municipios_rojo3, Municipios);
+            adapter.setDropDownViewResource(R.layout.auto_municipios_rojo3);
             // android.R.layout.simple_spinner_dropdown_item
             actvCiudadCompra.setAdapter(adapter);
         }catch (Exception e){

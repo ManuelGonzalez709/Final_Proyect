@@ -41,10 +41,10 @@ com.example.anunciaya.app-emoji2-1.2.0-39 C:\Users\Carlos\.gradle\caches\transfo
 com.example.anunciaya.app-drawerlayout-1.1.1-40 C:\Users\Carlos\.gradle\caches\transforms-3\f334f190f31d9ed5ccf4dcace1573dc2\transformed\drawerlayout-1.1.1\res
 com.example.anunciaya.app-annotation-experimental-1.4.0-41 C:\Users\Carlos\.gradle\caches\transforms-3\fc4914657f3f7aaa79f7c013269829da\transformed\annotation-experimental-1.4.0\res
 com.example.anunciaya.app-navigation-fragment-2.7.7-42 C:\Users\Carlos\.gradle\caches\transforms-3\fdfab6c3aeaa678e975b130e18c504b6\transformed\navigation-fragment-2.7.7\res
-com.example.anunciaya.app-pngs-43 C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\build\generated\res\pngs\debug
-com.example.anunciaya.app-resValues-44 C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\build\generated\res\resValues\debug
-com.example.anunciaya.app-packageDebugResources-45 C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.example.anunciaya.app-packageDebugResources-46 C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.example.anunciaya.app-merged_res-47 C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\build\intermediates\merged_res\debug
-com.example.anunciaya.app-debug-48 C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\debug\res
-com.example.anunciaya.app-main-49 C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\res
+com.example.anunciaya.app-pngs-43 C:\Users\Carlos\Desktop\client-anunciaya\app\build\generated\res\pngs\debug
+com.example.anunciaya.app-resValues-44 C:\Users\Carlos\Desktop\client-anunciaya\app\build\generated\res\resValues\debug
+com.example.anunciaya.app-packageDebugResources-45 C:\Users\Carlos\Desktop\client-anunciaya\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.example.anunciaya.app-packageDebugResources-46 C:\Users\Carlos\Desktop\client-anunciaya\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.example.anunciaya.app-merged_res-47 C:\Users\Carlos\Desktop\client-anunciaya\app\build\intermediates\merged_res\debug
+com.example.anunciaya.app-debug-48 C:\Users\Carlos\Desktop\client-anunciaya\app\src\debug\res
+com.example.anunciaya.app-main-49 C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\res

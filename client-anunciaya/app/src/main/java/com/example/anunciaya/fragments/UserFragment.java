@@ -62,7 +62,7 @@ public class UserFragment extends Fragment {
         btPedidosUsuario.setOnClickListener(view -> LanzarMisPedidos());
         btEnviosUsuario.setOnClickListener(view -> LanzarMisEnvios());
 
-        recyclerView = view.findViewById(R.id.rvAnunciosUsuario); // declaramos cual es el recyclerView
+        recyclerView = view.findViewById(R.id.rvAnunciosUsuario); // Declaramos cual es el recyclerView
         nombreUsu = view.findViewById(R.id.userNombreUsuario);
         telefonoUsu = view.findViewById(R.id.userTelefonoUsuario);
         correoUsu = view.findViewById(R.id.userCorreoUsuario);

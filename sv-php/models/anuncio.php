@@ -96,7 +96,7 @@ class Anuncio {
      * return anuncio
      */
     public function getAnunciosExcepIdUsuarioAndPedido($id_usuario) {
-        $sql = "SELECT * FROM anuncio WHERE id_usuario != ?";
+        $sql = "SELECT * FROM anuncio WHERE id_usuario != ? AND id NOT IN (SELECT id_anuncio FROM pedido)";
         
         // Obtener la conexión a la base de datos
         $conexion = new Conexion();
@@ -133,46 +133,14 @@ class Anuncio {
         $conexion->cerrarConexion();
         return json_encode($anuncios);
     }
+
+    /**
+     * Método que obtiene todos los productos vendidos
+     * 
+     * return anuncios
+     */
     public function getEnvios($id_usuario) {
-        $sql = "SELECT anuncio.* FROM usuario JOIN anuncio ON anuncio.id_usuario = usuario.id JOIN pedido ON pedido.id = anuncio.id WHERE usuario.id = ?";
-        
-        // Obtener la conexión a la base de datos
-        $conexion = new Conexion();
-        $conexion->conectar();
-        
-        // Preparar la sentencia
-        $stmt = $conexion->obtenerConexion()->prepare($sql);
-        
-        // Vincular los parámetros
-        $stmt->bind_param("i", $id_usuario);
-        
-        // Ejecutar la consulta
-        $stmt->execute();
-        
-        // Obtener el resultado de la consulta
-        $result = $stmt->get_result();
-        
-        // Crear un array para almacenar los anuncios
-        $anuncios = array();
-        
-        // Verificar si se encontraron anuncios
-        if ($result->num_rows > 0) {
-            // Obtener todos los anuncios encontrados
-            while ($row = $result->fetch_assoc()) {
-                $anuncios[] = $row;
-            }
-        } else {
-            // No se encontraron anuncios, devolver null
-            $anuncios = null;
-        }
-        
-        // Cerrar la conexión y devolver los anuncios como JSON
-        $stmt->close();
-        $conexion->cerrarConexion();
-        return json_encode($anuncios);
-    }
-    public function getPedidos($id_usuario) {
-        $sql = "SELECT anuncio.* FROM anuncio JOIN pedido ON pedido.id_anuncio = anuncio.id WHERE pedido.id_comprador = ?";
+        $sql = "SELECT anuncio.* FROM usuario JOIN anuncio ON anuncio.id_usuario = usuario.id JOIN pedido ON pedido.id_anuncio = anuncio.id WHERE usuario.id = ?;";
         
         // Obtener la conexión a la base de datos
         $conexion = new Conexion();

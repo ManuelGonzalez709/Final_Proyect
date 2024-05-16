@@ -9,17 +9,17 @@
 9        android:targetSdkVersion="33" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:5:5-67
-11-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:5:22-64
+11-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:5:22-64
 12    <uses-permission
-12-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:6:5-8:38
+12-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:6:5-8:38
 13        android:name="android.permission.READ_EXTERNAL_STORAGE"
-13-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:7:9-64
+13-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:7:9-64
 14        android:maxSdkVersion="32" />
-14-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:8:9-35
+14-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:8:9-35
 15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-15-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:9:5-79
-15-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:9:22-76
+15-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:9:5-79
+15-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:9:22-76
 16
 17    <queries>
 17-->[com.github.dhaval2404:imagepicker:2.1] C:\Users\Carlos\.gradle\caches\transforms-3\13a15df32fc6b053c37fe37b45d7cfae\transformed\imagepicker-2.1\AndroidManifest.xml:9:5-19:15
@@ -52,101 +52,101 @@
 33-->[androidx.core:core:1.13.0] C:\Users\Carlos\.gradle\caches\transforms-3\19e7c0b98f8b685f3cf799bdf4313285\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
 34
 35    <application
-35-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:11:5-59:19
+35-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:11:5-59:19
 36        android:allowBackup="true"
-36-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:12:9-35
+36-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:12:9-35
 37        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 37-->[androidx.core:core:1.13.0] C:\Users\Carlos\.gradle\caches\transforms-3\19e7c0b98f8b685f3cf799bdf4313285\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
 38        android:dataExtractionRules="@xml/data_extraction_rules"
-38-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:13:9-65
+38-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:13:9-65
 39        android:debuggable="true"
 40        android:extractNativeLibs="false"
 41        android:fullBackupContent="@xml/backup_rules"
-41-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:14:9-54
+41-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:14:9-54
 42        android:icon="@drawable/logo"
-42-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:15:9-38
+42-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:15:9-38
 43        android:label="@string/app_name"
-43-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:16:9-41
+43-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:16:9-41
 44        android:roundIcon="@mipmap/ic_launcher_round"
-44-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:17:9-54
+44-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:17:9-54
 45        android:screenOrientation="portrait"
-45-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:18:9-45
+45-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:18:9-45
 46        android:supportsRtl="true"
-46-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:19:9-35
+46-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:19:9-35
 47        android:testOnly="true"
 48        android:theme="@style/Theme.AnunciaYa"
-48-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:20:9-47
+48-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:20:9-47
 49        android:usesCleartextTraffic="true" >
-49-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:21:9-44
+49-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:21:9-44
 50        <activity
-50-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:23:9-25:40
+50-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:23:9-25:40
 51            android:name="com.example.anunciaya.EditarAnuncio"
-51-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:24:13-42
+51-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:24:13-42
 52            android:exported="false" />
-52-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:25:13-37
+52-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:25:13-37
 53        <activity
-53-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:26:9-28:40
+53-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:26:9-28:40
 54            android:name="com.example.anunciaya.AnuncioUsuario"
-54-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:27:13-43
+54-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:27:13-43
 55            android:exported="false" />
-55-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:28:13-37
+55-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:28:13-37
 56        <activity
-56-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:29:9-31:40
+56-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:29:9-31:40
 57            android:name="com.example.anunciaya.Envios"
-57-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:30:13-35
+57-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:30:13-35
 58            android:exported="false" />
-58-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:31:13-37
+58-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:31:13-37
 59        <activity
-59-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:32:9-34:40
+59-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:32:9-34:40
 60            android:name="com.example.anunciaya.Pedidos"
-60-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:33:13-36
+60-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:33:13-36
 61            android:exported="false" />
-61-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:34:13-37
+61-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:34:13-37
 62        <activity
-62-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:35:9-37:40
+62-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:35:9-37:40
 63            android:name="com.example.anunciaya.Register"
-63-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:36:13-37
+63-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:36:13-37
 64            android:exported="false" />
-64-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:37:13-37
+64-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:37:13-37
 65        <activity
-65-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:38:9-40:40
+65-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:38:9-40:40
 66            android:name="com.example.anunciaya.MainActivity"
-66-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:39:13-41
+66-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:39:13-41
 67            android:exported="false" />
-67-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:40:13-37
+67-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:40:13-37
 68        <activity
-68-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:41:9-43:40
+68-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:41:9-43:40
 69            android:name="com.example.anunciaya.tools.InfoAnuncio"
-69-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:42:13-46
+69-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:42:13-46
 70            android:exported="false" />
-70-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:43:13-37
+70-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:43:13-37
 71        <activity
-71-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:44:9-46:40
+71-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:44:9-46:40
 72            android:name="com.example.anunciaya.adapter.ImageView"
-72-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:45:13-46
+72-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:45:13-46
 73            android:exported="false" />
-73-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:46:13-37
+73-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:46:13-37
 74        <activity
-74-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:47:9-49:40
-75            android:name="com.example.anunciaya.addAnuncio"
-75-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:48:13-39
+74-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:47:9-49:40
+75            android:name="com.example.anunciaya.AddAnuncio"
+75-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:48:13-39
 76            android:exported="false" />
-76-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:49:13-37
+76-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:49:13-37
 77        <activity
-77-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:50:9-58:20
+77-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:50:9-58:20
 78            android:name="com.example.anunciaya.Login"
-78-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:51:13-34
+78-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:51:13-34
 79            android:exported="true" >
-79-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:52:13-36
+79-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:52:13-36
 80            <intent-filter>
-80-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:53:13-57:29
+80-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:53:13-57:29
 81                <action android:name="android.intent.action.MAIN" />
-81-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:54:17-69
-81-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:54:25-66
+81-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:54:17-69
+81-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:54:25-66
 82
 83                <category android:name="android.intent.category.LAUNCHER" />
-83-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:56:17-77
-83-->C:\Users\Carlos\Desktop\Final_Proyect\client-anunciaya\app\src\main\AndroidManifest.xml:56:27-74
+83-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:56:17-77
+83-->C:\Users\Carlos\Desktop\client-anunciaya\app\src\main\AndroidManifest.xml:56:27-74
 84            </intent-filter>
 85        </activity>
 86        <activity

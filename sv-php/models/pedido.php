@@ -2,13 +2,14 @@
 require_once 'conexion.php';
 
 class Pedido {
+
     /**
-     * Función que obtiene el pedido completo a partir del $id_pedido
+     * Método que obtiene todos los anuncios comprados
      * 
-     * return -> pedido
+     * return anuncios
      */
-    public function getPedidoId($id_pedido){
-        $sql = "SELECT * FROM pedido WHERE id = ?";
+    public function getPedidos($id_usuario) {
+        $sql = "SELECT titulo, precio, direccion, ciudad, fotos FROM anuncio JOIN pedido ON pedido.id_anuncio = anuncio.id WHERE pedido.id_comprador = ?";
         
         // Obtener la conexión a la base de datos
         $conexion = new Conexion();
@@ -18,7 +19,7 @@ class Pedido {
         $stmt = $conexion->obtenerConexion()->prepare($sql);
         
         // Vincular los parámetros
-        $stmt->bind_param("i", $id_pedido);
+        $stmt->bind_param("i", $id_usuario);
         
         // Ejecutar la consulta
         $stmt->execute();
@@ -26,13 +27,24 @@ class Pedido {
         // Obtener el resultado de la consulta
         $result = $stmt->get_result();
         
-        // Obtiene el primer pedido encontrada (debería ser único)
-        $pedido = $result->fetch_assoc();
+        // Crear un array para almacenar los anuncios
+        $anuncios = array();
         
-        // Cerrar la conexión y devuelve el pedido
+        // Verificar si se encontraron anuncios
+        if ($result->num_rows > 0) {
+            // Obtener todos los anuncios encontrados
+            while ($row = $result->fetch_assoc()) {
+                $anuncios[] = $row;
+            }
+        } else {
+            // No se encontraron anuncios, devolver null
+            $anuncios = null;
+        }
+        
+        // Cerrar la conexión y devolver los anuncios como JSON
         $stmt->close();
         $conexion->cerrarConexion();
-        return json_encode($pedido);
+        return json_encode($anuncios);
     }
 
     /**
@@ -83,7 +95,7 @@ class Pedido {
      * 
      * return -> true / false
      */
-    public function insertPedido($id_comprador, $id_anuncio){
+    public function insertPedido($id_comprador, $id_anuncio, $direccion, $ciudad, $cp){
         // Comprobar si ya existe el pedido en la bd
         $sql_check = "SELECT COUNT(*) AS total FROM pedido WHERE id_anuncio = ?";
         
@@ -112,11 +124,11 @@ class Pedido {
         }
         
         // Si no existe, proceder con la inserción del nuevo pedido
-        $sql_insert = "INSERT INTO pedido (id_comprador, id_anuncio) VALUES (?, ?)";
+        $sql_insert = "INSERT INTO pedido (id_comprador, id_anuncio, direccion, ciudad, cp) VALUES (?, ?, ?, ?, ?)";
         
         $stmt_insert = $conexion->obtenerConexion()->prepare($sql_insert);
         
-        $stmt_insert->bind_param("ii", $id_comprador, $id_anuncio);
+        $stmt_insert->bind_param("iisss", $id_comprador, $id_anuncio, $direccion, $ciudad, $cp);
         
         $stmt_insert->execute();
         

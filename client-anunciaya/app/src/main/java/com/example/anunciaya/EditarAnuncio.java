@@ -1,6 +1,5 @@
 package com.example.anunciaya;
 
-import static com.example.anunciaya.addAnuncio.setSpinner;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -107,9 +106,11 @@ public class EditarAnuncio extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String urlFoto = data.getData().getPath();
-        fotos.add(urlFoto);
-        recyclerView.setAdapter(adapter);
+        if(data.getData()!= null){
+            String urlFoto = data.getData().getPath();
+            fotos.add(urlFoto);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     /**
@@ -138,6 +139,14 @@ public class EditarAnuncio extends AppCompatActivity {
         for(int i = 0; i<fotosArray.length;i++)fotos.add(fotosArray[i]);
         recyclerView.setAdapter(adapter);
     }
+
+    public static  void setSpinner(Spinner spinner,ArrayList<String>estados){
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, estados);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Asignar el adaptador al Spinner
+        spinner.setAdapter(adapter);
+    }
+
     /**
      * Método que inicializa los componentes de la activity
      */

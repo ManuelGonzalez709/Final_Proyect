@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,24 +25,39 @@ import com.example.anunciaya.tools.Usuario;
 import java.util.Calendar;
 
 public class Register extends AppCompatActivity {
+    private TextView tvTitReg;
+    private TextView tvTitActDat;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     private Button registerButton;
     private EditText nombre, apellidos,nomb_usu,email,telf,contras;
     private BundleRecoverry dataRecovery;
-    private TextView iniciaSesion ;
-    private Metodos metodos;
+    private TextView iniciaSesion;
     private Boolean lanzadaMain = false;
     private Usuario user ;
+    private ImageView imagen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        initComponents();
         initDatePicker();
-        metodos = new Metodos();
+
+        lanzadaMain = getIntent().getBooleanExtra("fromMainActivity", false);
+        if (lanzadaMain) PrepararDatos();
+
+        iniciaSesion.setOnClickListener(v -> LanzarLoggin());
+        registerButton.setOnClickListener(v -> onclickInsertarUsuario());
+    }
+
+    private void initComponents(){
         SharedPreferences sharedPreferences = getSharedPreferences("MisDatos", MODE_PRIVATE);
         dataRecovery = new BundleRecoverry(sharedPreferences);
 
+        tvTitReg = findViewById(R.id.tvTitReg);
+        tvTitReg.setVisibility(View.VISIBLE);
+        tvTitActDat = findViewById(R.id.tvTitActDat);
+        tvTitActDat.setVisibility(View.GONE);
         nombre = findViewById(R.id.registerNombre);
         apellidos = findViewById(R.id.registerApellidos);
         nomb_usu = findViewById(R.id.registerNombreUsuario);
@@ -49,25 +65,16 @@ public class Register extends AppCompatActivity {
         telf = findViewById(R.id.registerTelefono);
         contras = findViewById(R.id.registerContraseña);
         iniciaSesion = findViewById(R.id.btRegistrateIniciaSesion);
-
+        imagen = findViewById(R.id.imageView);
 
         dateButton = findViewById(R.id.registerEdad);
         dateButton.setText(getFecha());
         registerButton = findViewById(R.id.Registrar);
 
-        lanzadaMain = getIntent().getBooleanExtra("fromMainActivity", false);
-        if (lanzadaMain) PrepararDatos();
-
-        iniciaSesion.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-                LanzarLoggin();
-            }
-        });
-        registerButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {onclickInsertarUsuario();}
-        });
     }
+
     private void PrepararDatos(){
+        Metodos metodos = new Metodos();
         try{
             String[]params = {Integer.toString(dataRecovery.recuperarInt("logginId"))};
             user = metodos.getUsuarioDataId(params);
@@ -78,7 +85,10 @@ public class Register extends AppCompatActivity {
                 dateButton.setText(user.getFechaNacimiento());
                 email.setText(user.getEmail());
                 telf.setText(user.getTelefono());
-                registerButton.setText("Guardar Cambios");
+                registerButton.setText(R.string.guardCambios);
+                imagen.setImageResource(R.drawable.user_logo_black);
+                tvTitReg.setVisibility(View.GONE);
+                tvTitActDat.setVisibility(View.VISIBLE);
 
                 RelativeLayout preguntarCuenta = findViewById(R.id.tienesCuentaAsk);
 
@@ -93,6 +103,7 @@ public class Register extends AppCompatActivity {
     }
 
     private void onclickInsertarUsuario(){
+        Metodos metodos = new Metodos();
         if(nombre.getText().toString().compareTo("") != 0){
             if(apellidos.getText().toString().compareTo("")!= 0){
                 if(nomb_usu.getText().toString().compareTo("")!= 0){
@@ -152,14 +163,10 @@ public class Register extends AppCompatActivity {
     }
 
     private void initDatePicker() {
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int año, int mes, int dia) {
-                mes = mes+1;
-                String date = makeDateString(dia,mes,año);
-                dateButton.setText(date);
-            }
-
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, año, mes, dia) -> {
+            mes = mes+1;
+            String date = makeDateString(dia,mes,año);
+            dateButton.setText(date);
         };
         Calendar cal = Calendar.getInstance();
         int año = cal.get(Calendar.YEAR);

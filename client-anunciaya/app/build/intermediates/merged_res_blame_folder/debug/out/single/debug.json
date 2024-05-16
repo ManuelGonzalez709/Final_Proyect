@@ -20,6 +20,10 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\candado.xml"
     },
     {
+        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_spinner_categorias_rojo2.xml.flat",
+        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\spinner_categorias_rojo2.xml"
+    },
+    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
@@ -36,12 +40,12 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\navigation\\nav.xml"
     },
     {
-        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_caja.xml.flat",
-        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\caja.xml"
-    },
-    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_caja.xml.flat",
+        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\caja.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_activity_image_view.xml.flat",
@@ -64,20 +68,12 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\user_logo.xml"
     },
     {
-        "merged": "com.example.anunciaya.app-merged_res-47:/drawable_loggout.xml.flat",
-        "source": "com.example.anunciaya.app-main-49:/drawable/loggout.xml"
-    },
-    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_activity_login.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\activity_login.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\activity_main.xml"
-    },
-    {
-        "merged": "com.example.anunciaya.app-merged_res-47:/layout_fragment_user.xml.flat",
-        "source": "com.example.anunciaya.app-main-49:/layout/fragment_user.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_buscar.xml.flat",
@@ -92,6 +88,10 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\mipmap-xhdpi\\ic_launcher_round.webp"
     },
     {
+        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_spinner_categorias_rojo3.xml.flat",
+        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\spinner_categorias_rojo3.xml"
+    },
+    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     },
@@ -104,10 +104,6 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\ajustes.xml"
     },
     {
-        "merged": "com.example.anunciaya.app-merged_res-47:/drawable_caja.xml.flat",
-        "source": "com.example.anunciaya.app-main-49:/drawable/caja.xml"
-    },
-    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
@@ -116,12 +112,12 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\mipmap-hdpi\\ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.anunciaya.app-merged_res-47:/drawable_ajustes.xml.flat",
-        "source": "com.example.anunciaya.app-main-49:/drawable/ajustes.xml"
-    },
-    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_euro.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\euro.xml"
+    },
+    {
+        "merged": "com.example.anunciaya.app-merged_res-47:/drawable_calendario.xml.flat",
+        "source": "com.example.anunciaya.app-main-49:/drawable/calendario.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_carrousel_img.xml.flat",
@@ -132,12 +128,16 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\dialog_comprar.xml"
     },
     {
-        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\xml\\data_extraction_rules.xml"
+        "merged": "com.example.anunciaya.app-merged_res-47:/layout_activity_register.xml.flat",
+        "source": "com.example.anunciaya.app-main-49:/layout/activity_register.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_activity_register.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\xml\\data_extraction_rules.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
@@ -148,12 +148,20 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\fragment_add.xml"
     },
     {
+        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_auto_municipios_rojo3.xml.flat",
+        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\auto_municipios_rojo3.xml"
+    },
+    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_spinner_categorias.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\spinner_categorias.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_camera.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\camera.xml"
+    },
+    {
+        "merged": "com.example.anunciaya.app-merged_res-47:/drawable_candado.xml.flat",
+        "source": "com.example.anunciaya.app-main-49:/drawable/candado.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_logo.xml.flat",
@@ -176,12 +184,28 @@
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\auto_municipios.xml"
     },
     {
+        "merged": "com.example.anunciaya.app-merged_res-47:/drawable_email.xml.flat",
+        "source": "com.example.anunciaya.app-main-49:/drawable/email.xml"
+    },
+    {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_activity_pedidos.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\activity_pedidos.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\drawable_user_logo_black.xml.flat",
+        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\drawable\\user_logo_black.xml"
+    },
+    {
+        "merged": "com.example.anunciaya.app-merged_res-47:/drawable_telefono.xml.flat",
+        "source": "com.example.anunciaya.app-main-49:/drawable/telefono.xml"
+    },
+    {
+        "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_auto_municipios_rojo2.xml.flat",
+        "source": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-main-49:\\layout\\auto_municipios_rojo2.xml"
     },
     {
         "merged": "C:\\Users\\Carlos\\.gradle\\daemon\\8.2\\com.example.anunciaya.app-merged_res-47:\\layout_activity_envios.xml.flat",

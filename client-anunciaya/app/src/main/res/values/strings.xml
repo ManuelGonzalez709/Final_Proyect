@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">AnunciaYa</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="contentDescription">Foto anuncio</string>
@@ -14,9 +14,6 @@
     <string name="direccion">Dirección</string>
     <string name="ciudad">Ciudad</string>
     <string name="cp">Código Postal</string>
-    <string name="cambContras">Cambiar Contraseña</string>
-    <string name="nuevaConstras">Nueva Contraseña</string>
-    <string name="confirmConstras">Confirmar Contraseña</string>
     <string name="editar">Editar</string>
     <string name="borrar">Borrar</string>
     <string name="cancelar">Cancelar</string>
@@ -30,5 +27,33 @@
     <string name="estado">Estado*</string>
     <string name="categoria">Categoría*</string>
     <string name="modAnuncio">Modificar Anuncio</string>
-    <string name="noAnunciosAjustes">Actualmente no tienes anuncios subidos.</string>
+    <string name="misPedidos">Mis Pedidos</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="anunPublicados">Anuncios Publicados</string>
+    <string name="noAnunComprados">No has realizado la compra de ningún producto…</string>
+    <string name="noAnunVendidos">No has realizado la venta de ningún producto…</string>
+    <string name="misEnvios">Mis Envios</string>
+    <string name="formReg">Formulario Registro"</string>
+    <string name="nombre">Nombre</string>
+    <string name="nombre_">Nombre*</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="apellidos_">Apellidos*</string>
+    <string name="nombUsu">Nombre Usuario</string>
+    <string name="nombUsu_">Nombre Usuario*</string>
+    <string name="fechNac">16/01/2004</string>
+    <string name="fechNac_">Fecha Nacimiento*</string>
+    <string name="email">Email</string>
+    <string name="email_">Email*</string>
+    <string name="tlf">Teléfono</string>
+    <string name="tlf_">Telefono*</string>
+    <string name="contraseña">Contaseña</string>
+    <string name="contraseña_">Constraseña*</string>
+    <string name="registrar">Registrar</string>
+    <string name="iniciarSesion">Iniciar Sesion</string>
+    <string name="registrate">Registrate</string>
+    <string name="noCuenta">¿No tienes una cuenta?</string>
+    <string name="bienvAnuncYa">Bienvenido a AnunciaYa</string>
+    <string name="guardCambios">Guardar Cambios</string>
+    <string name="modDatosUsuario">Modificar Datos Usuario</string>
+
 </resources>

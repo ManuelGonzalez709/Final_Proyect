@@ -63,14 +63,14 @@ class Auth {
      * 
      * return true / false
      */
-    public function verificarAuthAdmin($nomb_usuario, $contrasena) {
-        $sql = "SELECT contras FROM usuario WHERE nomb_usu = ? AND tipo = 'ADM' ";
+    public function verificarAuthAdmin($email, $contrasena) {
+        $sql = "SELECT contras FROM usuario WHERE email = ? AND tipo = 'ADM' ";
 
         // Prepara la consulta
         $stmt = $this->conexion->obtenerConexion()->prepare($sql);
 
         // Vincula el parámetro
-        $stmt->bind_param("s", $nomb_usuario);
+        $stmt->bind_param("s", $email);
 
         $stmt->execute();
 

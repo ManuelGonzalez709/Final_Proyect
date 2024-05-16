@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_inicio"
+        android:icon="@drawable/home"
+        android:title="Inicio" />
+    <item
+        android:id="@+id/page_Add"
+        android:icon="@drawable/add"
+        android:title="Añadir Anuncio" />
+    <item
+        android:id="@+id/page_perfil"
+        android:icon="@drawable/user"
+        android:title="Perfil" />
+</menu>
