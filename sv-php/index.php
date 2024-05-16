@@ -4,8 +4,11 @@ include 'models/categoria.php';
 include 'models/pedido.php';
 include 'models/anuncio.php';
 include 'models/usuario.php';
+include 'models/direccion_envio.php';
+include 'util/ConfigServer.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
+
 if (isset($data['class']) && isset($data['method']) && isset($data['params'])) { 
     // Obtiene la clase y el método solicitado
     $class = $data['class'];
@@ -25,6 +28,9 @@ if (isset($data['class']) && isset($data['method']) && isset($data['params'])) {
         case 'Usuario':
             $obj = new Usuario();
             break;
+        case 'DireccionEnvio':
+            $obj = new DireccionEnvio();
+            break;
         case 'Auth':
             $obj = new Auth();
             break;
@@ -38,12 +44,13 @@ if (isset($data['class']) && isset($data['method']) && isset($data['params'])) {
         // Llamar al metodo correspondiente de la clase
         $result = call_user_func_array([$obj, $method], $data['params']);
         echo json_encode(['success' => true, 'data' => $result]);
+        $logWritter = new ConfigServer();
+        $logWritter->escribirLog($method, $result);
     } else {
         echo json_encode(['success' => false, 'error' => 'Metodo no encontrado']);
     }
 } else {
     echo json_encode(['success' => false, 'error' => 'No se especifico ningun metodo']);
 }
-
 
 ?>
