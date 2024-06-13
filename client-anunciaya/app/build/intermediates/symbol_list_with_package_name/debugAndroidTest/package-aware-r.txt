@@ -1,3 +1,0 @@
-com.example.anunciaya.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

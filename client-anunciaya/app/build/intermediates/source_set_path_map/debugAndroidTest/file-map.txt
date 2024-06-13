@@ -1,6 +1,0 @@
-com.example.anunciaya.test.app-core-1.5.0-0 C:\Users\Manuel\.gradle\caches\transforms-3\30568b380fcbd6c472dec8793871322c\transformed\core-1.5.0\res
-com.example.anunciaya.test.app-annotation-experimental-1.4.0-1 C:\Users\Manuel\.gradle\caches\transforms-3\fc4914657f3f7aaa79f7c013269829da\transformed\annotation-experimental-1.4.0\res
-com.example.anunciaya.test.app-androidTest-2 C:\Users\Manuel\Documents\client-anunciaya\app\build\generated\res\resValues\androidTest\debug
-com.example.anunciaya.test.app-mergeDebugAndroidTestResources-3 C:\Users\Manuel\Documents\client-anunciaya\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.anunciaya.test.app-mergeDebugAndroidTestResources-4 C:\Users\Manuel\Documents\client-anunciaya\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.anunciaya.test.app-merged_res-5 C:\Users\Manuel\Documents\client-anunciaya\app\build\intermediates\merged_res\debugAndroidTest
