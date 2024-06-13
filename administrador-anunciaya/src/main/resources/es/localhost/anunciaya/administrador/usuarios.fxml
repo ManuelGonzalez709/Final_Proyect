@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="604.0" prefWidth="1156.0" style="-fx-background-color: #ffc9c9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.localhost.anunciaya.administrador.ViewsControllers.UserController">
+   <children>
+      <TableView fx:id="tbUsuarios" layoutX="116.0" layoutY="112.0" prefHeight="334.0" prefWidth="971.0" stylesheets="@estilos/tabla.css">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="51.0" text="ID" />
+            <TableColumn fx:id="nombreColumn" prefWidth="102.40003967285156" text="Nombre" />
+            <TableColumn fx:id="apellidosColumn" prefWidth="122.39996337890625" text="Apellidos" />
+            <TableColumn fx:id="nombUsuColumn" minWidth="0.0" prefWidth="134.39996337890625" text="Nombre Usuario" />
+            <TableColumn fx:id="fechaNacimientoColumn" prefWidth="134.4000244140625" text="Fecha Nacimiento" />
+            <TableColumn fx:id="emailColumn" prefWidth="209.60003662109375" text="Email" />
+            <TableColumn fx:id="telefonoColumn" prefWidth="135.99993896484375" text="Teléfono" />
+            <TableColumn fx:id="tipoColumn" prefWidth="77.5999755859375" text="Tipo" />
+         </columns>
+      </TableView>
+      <HBox layoutX="116.0" layoutY="28.0" prefHeight="47.0" prefWidth="331.0" style="-fx-background-color: rgba(160,21,62, 0.7); -fx-background-radius: 12;">
+         <children>
+            <Pane prefHeight="47.0" prefWidth="428.0">
+               <children>
+                  <Label layoutX="30.0" layoutY="8.0" text="USUARIOS REGISTRADOS" textFill="WHITE">
+                     <font>
+                        <Font name="Leelawadee UI Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <Line endX="342.0" layoutX="814.0" layoutY="51.0" startX="-351.0" stroke="#a0153e" />
+      <HBox layoutX="1100.0" layoutY="148.0" prefHeight="31.0" prefWidth="36.0" style="-fx-background-color: rgba(119,163,69, 1.0); -fx-background-radius: 10;">
+         <children>
+            <Pane prefHeight="47.0" prefWidth="428.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="8.0" layoutY="6.0" onMouseClicked="#btInsertar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/añadir.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <HBox layoutX="1103.0" layoutY="220.0" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: rgba(156,0,0, 0.9); -fx-background-radius: 10;">
+         <children>
+            <Pane prefHeight="31.0" prefWidth="49.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="16.0" layoutX="9.0" layoutY="3.0" onMouseClicked="#btBorrar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/borrar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <HBox layoutX="1103.0" layoutY="184.0" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: rgba(83,83,236, 0.7); -fx-background-radius: 10;">
+         <children>
+            <Pane prefHeight="31.0" prefWidth="49.0">
+               <children>
+                  <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="6.0" layoutY="4.0" onMouseClicked="#btCambiarPass" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/candado.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

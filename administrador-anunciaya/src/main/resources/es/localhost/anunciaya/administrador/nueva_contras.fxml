@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="199.0" prefWidth="524.0" style="-fx-background-color: #ffc9c9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.localhost.anunciaya.administrador.ViewsControllers.NuevaPassController">
+   <children>
+      <HBox layoutX="138.0" layoutY="26.0" prefHeight="27.0" prefWidth="209.0" style="-fx-background-color: #a0153e; -fx-background-radius: 10;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Insertar Nueva Contraseña" textAlignment="CENTER" wrappingWidth="247.5367431640625">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <Line endX="-274.0" layoutX="785.0" layoutY="37.0" startX="-394.20001220703125" startY="-1.1444091796875E-5" stroke="#b3395a" strokeWidth="2.0" style="-fx-fill: #b3395a;" />
+      <Line endX="-254.0" layoutX="381.0" layoutY="37.0" startX="-370.0141906738281" startY="-1.1444091796875E-5" stroke="#b3395a" strokeWidth="2.0" style="-fx-fill: #b3395a;" />
+      <Label layoutX="134.0" layoutY="72.0" text="Contraseña*">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfContraseña" layoutX="130.0" layoutY="90.0" prefHeight="27.0" prefWidth="250.0" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font></TextField>
+      <Button fx:id="btCancelar" layoutX="265.0" layoutY="136.0" mnemonicParsing="false" onAction="#btCancelar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #b3395a; -fx-background-radius: 10;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btAceptar" layoutX="164.0" layoutY="136.0" mnemonicParsing="false" onAction="#onAceptarClick" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #b3395a; -fx-background-radius: 10;" text="Aceptar" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

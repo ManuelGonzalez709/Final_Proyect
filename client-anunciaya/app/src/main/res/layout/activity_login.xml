@@ -1,0 +1,184 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fondoApp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="167dp"
+            android:layout_height="163dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/white"
+            app:cardCornerRadius="120dp"
+            app:cardElevation="12dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="167dp"
+                android:layout_height="163dp"
+                app:srcCompat="@drawable/logo" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/bienvAnuncYa"
+            android:textSize="21sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/nombUsu_"
+            android:textSize="16sp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/containerEmailPadre"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/Rojo1"
+            android:elevation="30dp"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/loginNoUsu"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:hint="@string/nombUsu"
+                    android:singleLine="true" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/loginNoUsu"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@color/Rojo2">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/user"
+                        />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/contraseña_"
+            android:textSize="16sp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/containerPassPadre"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/Rojo1"
+            android:elevation="30dp"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:password="true"
+                    android:id="@+id/loginContraseña"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@null"
+                    android:textColor="@color/white"
+                    android:hint="@string/contraseña"
+                    android:gravity="end|center"
+                    android:singleLine="true"
+                    android:layout_marginRight="10dp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="@color/Rojo2">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/candado" />
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:id="@+id/IniciarSesion"
+            android:textStyle="bold"
+            android:text="@string/iniciarSesion"
+            android:backgroundTint="@color/Rojo2"
+            android:elevation="20dp"
+            />
+
+        <RelativeLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+            <TextView
+                android:layout_alignParentTop="true"
+                android:id="@+id/textoEj1"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/noCuenta"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/btLoginRegistrate"
+                android:layout_marginStart="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_toEndOf="@id/textoEj1"
+                android:gravity="center"
+                android:text="@string/registrate"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

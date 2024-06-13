@@ -1,0 +1,27 @@
+.custom-alert {
+    -fx-background-color: #282828;
+}
+
+.custom-alert .label{
+    -fx-font-size: 13px;
+    -fx-text-fill: white;
+}
+
+.custom-alert .header-panel .label {
+    -fx-font-size: 16px;
+}
+
+.custom-alert .button-bar .button {
+    -fx-background-color: rgba(160, 21, 62, 1);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.custom-alert .button-bar .button:hover {
+    -fx-background-color: rgba(160, 21, 62, 0.7);
+    -fx-text-fill: white;
+}
+
+.custom-alert .header-panel {
+    -fx-background-color: #282828;
+}
