@@ -23,35 +23,74 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para gestionar las operaciones relacionadas con la vista de categorías.
+ * Implementa {@link Initializable} para manejar la inicialización de componentes FXML.
+ *
+ * @author AnunciaYa
+ */
 public class CategoriaController implements Initializable {
-    private ObservableList<Categoria> categoriasList;
-    @FXML private TableView<Categoria> tbCategorias;
-    @FXML private TableColumn<Categoria, Integer> tcIdCategoria;
-    @FXML private TableColumn<Categoria, String> tcDescrip;
 
+    /**
+     * Lista observable que almacena las categorías.
+     */
+    private ObservableList<Categoria> categoriasList;
+
+    /**
+     * Tabla que muestra las categorías.
+     */
+    @FXML
+    private TableView<Categoria> tbCategorias;
+
+    /**
+     * Columna de la tabla para mostrar el ID de la categoría.
+     */
+    @FXML
+    private TableColumn<Categoria, Integer> tcIdCategoria;
+
+    /**
+     * Columna de la tabla para mostrar la descripción de la categoría.
+     */
+    @FXML
+    private TableColumn<Categoria, String> tcDescrip;
+
+    /**
+     * Método de inicialización para configurar la tabla y cargar los datos al abrir la vista.
+     *
+     * @param url no se utiliza en este contexto.
+     * @param resourceBundle no se utiliza en este contexto.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         PrepararTabla();
         CargarDatosTabla();
     }
 
-    public void CargarDatosTabla(){
+    /**
+     * Carga los datos de las categorías en la tabla desde la base de datos.
+     */
+    public void CargarDatosTabla() {
         Metodos me = new Metodos();
-
         categoriasList = me.getAllCategorias(new String[]{""});
         tbCategorias.setItems(categoriasList);
     }
 
-    private void PrepararTabla(){
+    /**
+     * Prepara la configuración de la tabla, estableciendo las propiedades de las columnas
+     * y haciendo la columna de descripción editable.
+     */
+    private void PrepararTabla() {
         Metodos me = new Metodos();
-        tcIdCategoria.setCellValueFactory(new PropertyValueFactory<>("id")); tcIdCategoria.setResizable(false);
-        tcDescrip.setCellValueFactory(new PropertyValueFactory<>("descripcion")); tcDescrip.setResizable(false);
 
-        // Hacer la tabla y la columna de descripción editables
+        tcIdCategoria.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcIdCategoria.setResizable(false);
+
+        tcDescrip.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        tcDescrip.setResizable(false);
+
         tbCategorias.setEditable(true);
         tcDescrip.setCellFactory(TextFieldTableCell.forTableColumn(new DefaultStringConverter()));
 
-        // Manejar el evento de edición de la celda
         tcDescrip.setOnEditCommit(event -> {
             Categoria categoria = event.getRowValue();
             String nuevaDescripcion = event.getNewValue();
@@ -59,93 +98,89 @@ public class CategoriaController implements Initializable {
             if (categoria != null) {
                 categoria.setDescripcion(nuevaDescripcion);
 
-                // Actualizar la base de datos
                 if (me.updateCategoria(new String[]{String.valueOf(categoria.getId()), nuevaDescripcion})) {
-                    // Actualizar la tabla si la actualización en la base de datos fue exitosa
                     tbCategorias.refresh();
-                    Util.mostrarDialogo("MENSAJE_INFO", "Categoría actualizada", "Se ha actualizado la descripción de la categoría correctamente.", Alert.AlertType.INFORMATION);
-
+                    Util.mostrarDialogo("MENSAJE_INFO", "Categoría actualizada",
+                            "Se ha actualizado la descripción de la categoría correctamente.", Alert.AlertType.INFORMATION);
                 } else {
-                    // Manejar el error (puedes mostrar un diálogo de error aquí)
-                    Util.mostrarDialogo("MENSAJE_ERROR", "No se pudo actualizar la categoría", "La descripción de la categoría no se pudo actualizar.", Alert.AlertType.ERROR);
+                    Util.mostrarDialogo("MENSAJE_ERROR", "No se pudo actualizar la categoría",
+                            "La descripción de la categoría no se pudo actualizar.", Alert.AlertType.ERROR);
                 }
             }
         });
     }
 
-    @FXML private void onAddCatClick(){
+    /**
+     * Maneja el evento de clic en el botón para agregar una nueva categoría.
+     * Abre un diálogo modal para insertar una nueva categoría.
+     */
+    @FXML
+    private void onAddCatClick() {
         try {
-            // Cargar el archivo FXML desde los recursos
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/es/localhost/anunciaya/administrador/insert_categoria.fxml"));
             Parent root = loader.load();
 
-            // Obtener el controlador del FXML y configurar las imágenes
             InsertCategoController controller = loader.getController();
             controller.setCategoController(this);
 
-            // Crear y configurar el Stage para el diálogo modal
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Insertar Categoría");
             stage.setScene(new Scene(root));
             stage.setResizable(false);
 
-            // Establecer la ventana principal como propietario de la ventana emergente
-            Stage primaryStage = (Stage) tbCategorias.getScene().getWindow(); // Reemplaza 'tbAnuncios' con cualquier nodo de tu ventana principal
+            Stage primaryStage = (Stage) tbCategorias.getScene().getWindow();
             stage.initOwner(primaryStage);
 
-            // Mostrar la ventana emergente y esperar hasta que se cierre
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @FXML private void onBorrarCatClick() {
+    /**
+     * Maneja el evento de clic en el botón para borrar la categoría seleccionada.
+     * Muestra un diálogo de confirmación y elimina la categoría si se confirma.
+     */
+    @FXML
+    private void onBorrarCatClick() {
         Metodos m = new Metodos();
         Categoria selectedCategoria = tbCategorias.getSelectionModel().getSelectedItem();
 
         if (selectedCategoria != null) {
-            // Alert de confirmación
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmar eliminación");
             alert.setHeaderText("¿Estás seguro de que deseas eliminar la categoría?");
             alert.setContentText("Esta acción no se puede deshacer.");
 
-            // Cargar la hoja de estilo
             String css = Util.class.getResource("/es/localhost/anunciaya/administrador/estilos/alert.css").toExternalForm();
             alert.getDialogPane().getStylesheets().add(css);
-
-            // Aplicar una clase CSS personalizada al DialogPane
             alert.getDialogPane().getStyleClass().add("custom-alert");
 
             Optional<ButtonType> result = alert.showAndWait();
 
-            // Si se pulso en OK
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                if(!m.tieneAnunciosCategoria(new String[]{String.valueOf(selectedCategoria.getId())})){
+                if (!m.tieneAnunciosCategoria(new String[]{String.valueOf(selectedCategoria.getId())})) {
                     if (m.deleteCategoria(new String[]{String.valueOf(selectedCategoria.getId())})) {
-                        // Eliminar la categoria de la lista observable
                         tbCategorias.getItems().remove(selectedCategoria);
-                        // Refrescar el TableView para reflejar los cambios
                         tbCategorias.refresh();
-                        Util.mostrarDialogo("MENSAJE_INFO", "Categoría eliminada", "La categoría ha sido eliminado correctamente.", Alert.AlertType.INFORMATION);
+                        Util.mostrarDialogo("MENSAJE_INFO", "Categoría eliminada",
+                                "La categoría ha sido eliminada correctamente.", Alert.AlertType.INFORMATION);
                     } else {
-                        // Manejar el caso en que la categoria no pudo ser eliminado
-                        Util.mostrarDialogo("MENSAJE_WARNING", "No se pudo eliminar la categoría", "La categoría no pudo ser eliminado del servidor.", Alert.AlertType.WARNING);
+                        Util.mostrarDialogo("MENSAJE_WARNING", "No se pudo eliminar la categoría",
+                                "La categoría no pudo ser eliminada del servidor.", Alert.AlertType.WARNING);
                     }
-                } else{
-                    Util.mostrarDialogo("Operación no permitida", "Eliminación de categoría no permitida", "La categoría seleccionada no puede ser eliminada ya que está asociada a múltiples anuncios.", Alert.AlertType.ERROR);
+                } else {
+                    Util.mostrarDialogo("Operación no permitida", "Eliminación de categoría no permitida",
+                            "La categoría seleccionada no puede ser eliminada ya que está asociada a múltiples anuncios.", Alert.AlertType.ERROR);
                 }
             } else {
-                // Se hizo click en Cancel o cerró el diálogo
-                Util.mostrarDialogo("MENSAJE_INFO", "Eliminación cancelada", "La eliminación de la categoría ha sido cancelada.", Alert.AlertType.INFORMATION);
+                Util.mostrarDialogo("MENSAJE_INFO", "Eliminación cancelada",
+                        "La eliminación de la categoría ha sido cancelada.", Alert.AlertType.INFORMATION);
             }
         } else {
-            Util.mostrarDialogo("MENSAJE_WARNING", "No se seleccionó ninguna categoría", "Por favor, selecciona una categoría para eliminar.", Alert.AlertType.WARNING);
+            Util.mostrarDialogo("MENSAJE_WARNING", "No se seleccionó ninguna categoría",
+                    "Por favor, selecciona una categoría para eliminar.", Alert.AlertType.WARNING);
         }
     }
-
-
 }
-

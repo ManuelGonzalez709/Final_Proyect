@@ -21,6 +21,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para la vista de gestión de anuncios.
+ *
+ * @author AnunciaYa
+ */
 public class AnuncioController implements Initializable {
     private ObservableList<Anuncio> anunciosList;
     private List<Image> images = new ArrayList<>();
@@ -37,18 +42,29 @@ public class AnuncioController implements Initializable {
     @FXML private TableColumn<Anuncio, String> tcFotos;
     @FXML private TableColumn<Anuncio, String> tcFechPubl;
 
+    /**
+     * Inicializa el controlador después de que su contenido haya sido cargado.
+     * @param url La ubicación relativa del archivo FXML.
+     * @param resourceBundle Recursos específicos del local.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         PrepararTabla();
         CargarDatosTabla();
     }
 
+    /**
+     * Carga los datos de los anuncios en la tabla.
+     */
     private void CargarDatosTabla() {
         Metodos me = new Metodos();
         anunciosList = me.getAllAnuncios(new String[]{""});
         tbAnuncios.setItems(anunciosList);
     }
 
+    /**
+     * Prepara las columnas de la tabla, asociando cada columna con el atributo correspondiente de la clase Anuncio.
+     */
     private void PrepararTabla() {
         tcIdAnuncio.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcNombUsu.setCellValueFactory(new PropertyValueFactory<>("nombUsu"));
@@ -62,6 +78,10 @@ public class AnuncioController implements Initializable {
         tcFechPubl.setCellValueFactory(new PropertyValueFactory<>("fechPubl"));
     }
 
+    /**
+     * Maneja el evento de clic en el icono "Ver fotos".
+     * Obtiene las URLs de las imágenes del anuncio seleccionado y muestra un diálogo con un carrusel de imágenes.
+     */
     @FXML
     private void onVerRegClick() {
         Anuncio selectedAnuncio = tbAnuncios.getSelectionModel().getSelectedItem();
@@ -79,6 +99,10 @@ public class AnuncioController implements Initializable {
         }
     }
 
+    /**
+     * Maneja el evento de clic en el icono "Borrar".
+     * Elimina el anuncio seleccionado después de confirmar la acción con el usuario.
+     */
     @FXML
     private void onBorrarRegClick() {
         Metodos m = new Metodos();
@@ -90,7 +114,7 @@ public class AnuncioController implements Initializable {
             alert.setHeaderText("¿Estás seguro de que deseas eliminar el anuncio?");
             alert.setContentText("Esta acción no se puede deshacer.");
 
-            // Cargar la hoja de estilo
+            // Cargar la hoja de estilo CSS personalizada para el diálogo de confirmación
             String css = Util.class.getResource("/es/localhost/anunciaya/administrador/estilos/alert.css").toExternalForm();
             alert.getDialogPane().getStylesheets().add(css);
 
@@ -114,6 +138,11 @@ public class AnuncioController implements Initializable {
         }
     }
 
+    /**
+     * Obtiene una lista de URLs de las imágenes separadas por ";" de la bd.
+     * @param cadenaUrls Cadena de URLs separadas por ";".
+     * @return Lista de URLs de imágenes.
+     */
     private List<String> obtenerUrlsImagenes(String cadenaUrls) {
         List<String> urls = new ArrayList<>();
         if (cadenaUrls != null && !cadenaUrls.isEmpty()) {
@@ -125,6 +154,9 @@ public class AnuncioController implements Initializable {
         return urls;
     }
 
+    /**
+     * Muestra un diálogo modal con un carrusel de imágenes del anuncio seleccionado.
+     */
     private void showImageCarouselDialog() {
         try {
             Anuncio selectedAnuncio = tbAnuncios.getSelectionModel().getSelectedItem();
@@ -140,7 +172,7 @@ public class AnuncioController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Imágenes Anuncio " + selectedAnuncio.getId());
-            
+
             DialogPane dialogPane = new DialogPane();
             dialogPane.setContent(root);
             stage.setHeight(430);
@@ -148,7 +180,7 @@ public class AnuncioController implements Initializable {
             stage.setResizable(false);
 
             // Establecer la ventana principal como propietario de la ventana emergente
-            Stage primaryStage = (Stage) tbAnuncios.getScene().getWindow(); // Reemplaza 'tbAnuncios' con cualquier nodo de tu ventana principal
+            Stage primaryStage = (Stage) tbAnuncios.getScene().getWindow();
             stage.initOwner(primaryStage);
 
             // Mostrar la ventana emergente y esperar hasta que se cierre
@@ -157,6 +189,4 @@ public class AnuncioController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 }
