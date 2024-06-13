@@ -1,0 +1,17 @@
+Cuenta Hostalia
+--------------------
+anunciaya
+6BGUz5m2x2k5
+
+BD MySQL
+-----------
+host: PMYSQL175.dns-servicio.com:3306
+nombrebd: 10454915_anunciaya
+usuario: sv-anunciaya
+contraseña: S7^4xb9i3
+
+FTP
+--------
+host: 82.194.68.93
+usuario: user-10454915
+contraseña: 0O&67mG{oE
