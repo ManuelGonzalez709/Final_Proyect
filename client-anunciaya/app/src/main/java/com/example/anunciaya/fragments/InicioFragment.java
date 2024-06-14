@@ -1,6 +1,9 @@
 package com.example.anunciaya.fragments;
-
-
+/**
+ * @Description Esto es el Fragmento principal encargado de mostrar los Anuncios en la primera pagina
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 1.0
+ */
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,8 +30,10 @@ import com.example.anunciaya.tools.ServerComunication;
 
 import java.util.ArrayList;
 import java.util.List;
+/*Clase principal InicioFragment*/
 
 public class InicioFragment extends Fragment {
+    /*Atributos de la Clase*/
     private AutoCompleteTextView actvUbicacion;
     private TextView tvNoAnuncios;
     private SearchView searchView;
@@ -39,8 +44,23 @@ public class InicioFragment extends Fragment {
     private String categoSelect;
     private Metodos m;
 
-
+    /**
+     * Constructor Principal
+     */
     public InicioFragment() {}
+
+    /**
+     * Metodo que se lanza al abrir el fragment del Home es como un (Init)
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -232,6 +252,9 @@ public class InicioFragment extends Fragment {
         spinner.setSelection(m.getCategorias().indexOf("None")); // Selecciona por defecto la categoria ninguna
     }
 
+    /**
+     * Metodo que se encarga de Autocompletar la Ubicacion del Spinner
+     */
     private void autocompletarUbicacion(){
         ServerComunication comunication = new ServerComunication();
         try{

@@ -1,5 +1,9 @@
 package com.example.anunciaya.tools;
-
+/**
+ * @Description Esto es una clase que contiene todos los metodos necesarios por la app
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.0
+ */
 import com.example.anunciaya.adapter.ListAnuncios;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -9,10 +13,21 @@ import org.w3c.dom.Node;
 
 import java.util.ArrayList;
 
-
+/*Esta es la clase principal*/
 public class Metodos {
+    /*Estos son los atributos de la clase*/
     private static ServerComunication comunication;
+
+    /**
+     * Esto es el Constructor de la clase Principal
+     */
     public Metodos() {comunication = new ServerComunication();}
+
+    /**
+     * Esto es un metodo que se encarga de Insertar un Usuario
+     * @param args contiene los datos de la Inserccion
+     * @return retorna un entero
+     */
     public int insertUsuario(String[]args){
         try{
             if(comunication.LanzarPeticion("Usuario","insertUsuario",args)){
@@ -24,7 +39,11 @@ public class Metodos {
             }else return -1;
         }catch (Exception e){return -1;}
     }
-
+    /**
+     * Esto es un metodo que se encarga de verificar un Usuario
+     * @param args contiene los datos de la verificacion
+     * @return retorna un Booleano con el valor de la Inserccion
+     */
     public Boolean verificarAuthCliente(String[]args){
         try{
             comunication.LanzarPeticion("Auth","verificarAuthClient",args);
@@ -32,7 +51,11 @@ public class Metodos {
             return jsonObject.getBoolean("data");
         }catch (Exception e){return false;}
     }
-
+    /**
+     * Esto es un metodo que se encarga de retornar un Id de Usuario pasado un nombre de Usuario
+     * @param args contiene el Nombre de Usuario
+     * @return retorna un Id de Usuario
+     */
     public int getIdUser(String[]args){
         try{
             comunication.LanzarPeticion("Usuario","getIdUser",args);
@@ -516,6 +539,13 @@ public class Metodos {
             return false;
         }catch (Exception e){return false;}
     }
+
+    /**
+     * Metodo que se encarga de borrar las Fotos por Id de Anncio
+     * @param id contiene el Id del Anuncio de las Fotos que quieres borrar
+     * @param Salvadas contiene una lista de las Imagenes que no hay que borrar
+     * @return retorna si el Borrado ha sido true o false
+     */
     public Boolean borrarFotosIdAnuncio(String id,ArrayList<String>Salvadas){
         if(comunication.borrarFotos(id,Salvadas))return true;
         else return false;
@@ -600,6 +630,11 @@ public class Metodos {
         } catch (JsonProcessingException e) {return null;}
     }
 
+    /**
+     * Metodo que se encarga de retornar los Envios por usuario
+     * @param args contiene el Id del Usuario
+     * @return retorna una lista de Anuncios
+     */
     public ArrayList<ListAnuncios> getEnvios(String[] args) {
         try {
             if (comunication.LanzarPeticion("Anuncio", "getEnvios", args)) {
@@ -639,6 +674,12 @@ public class Metodos {
             return null;
         }
     }
+
+    /**
+     * Metodo que se encarga de Actualizar la contraseña del Usuario
+     * @param params contiene el Id del Usuario y la contraseña
+     * @return retorna si la actualizacion ha sido exitosa o no
+     */
     public Boolean ActualizarContasena(String[]params){
         try{
             if(comunication.LanzarPeticion("Usuario","updateContras",params)){
@@ -647,6 +688,12 @@ public class Metodos {
             }else return false;
         }catch (Exception e){return false;}
     }
+
+    /**
+     * Esto es un metodo que se encarga de Actualizar el Usuario
+     * @param params contiene los parametros de los nuevos datos del Usuario
+     * @return retorna si la actualizacion ha sido exitosa o no
+     */
     public Boolean ActualizarUsuario(String[]params){
         try{
             if(comunication.LanzarPeticion("Usuario","updateUsuario",params)){
@@ -655,6 +702,12 @@ public class Metodos {
             }else return false;
         }catch (Exception e){return false;}
     }
+
+    /**
+     * Estro es un kmetodo que se encarga de borrar el Anuncio
+     * @param args contiene el Id del Usuario que queremos borrar
+     * @return contiene los datos del Anuncio que queremos borrar
+     */
     public String deleteAnuncio(String[] args) {
         try {
             // Lanza la petición a tu servicio web
@@ -671,6 +724,12 @@ public class Metodos {
             return "false";
         }
     }
+
+    /**
+     * Metodo que se encarga de Actualizar el Anuncio
+     * @param args contiene los datos de Actualizacion del Anuncio
+     * @return retorna si la Actualizacion ha sido exitosa o no
+     */
     public boolean updateAnuncio(String[] args){
         try{
             if(comunication.LanzarPeticion("Anuncio", "updateAnuncio", args)){
@@ -679,6 +738,11 @@ public class Metodos {
             } else return false;
         } catch (Exception e){return false;}
     }
+
+    /**
+     * Retorna la respuesta dada por el servidor (Hilo)
+     * @return retorna la respuesta del Server
+     */
     private String getRespuestaServer(){
         return comunication.getResultadoServer();
     }

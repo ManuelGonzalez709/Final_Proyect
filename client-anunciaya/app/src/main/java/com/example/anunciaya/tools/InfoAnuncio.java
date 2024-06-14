@@ -1,5 +1,9 @@
 package com.example.anunciaya.tools;
-
+/**
+ * @Description Esto es una clase que se encarga de mostrar la informacion del Anuncio
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.0
+ */
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import com.example.anunciaya.R;
 import java.util.ArrayList;
 
 public class InfoAnuncio extends AppCompatActivity {
+    /*Contiene los Atributos de la clase*/
     private TextView tvTitulo;
     private TextView tvDescripcion;
     private TextView tvPrecio;
@@ -27,7 +32,13 @@ public class InfoAnuncio extends AppCompatActivity {
     private Button btComprar;
     private String idAnuncio;
 
-
+    /**
+     * Esto es el primer metdoo que se ejecuta al abrir esta vista
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

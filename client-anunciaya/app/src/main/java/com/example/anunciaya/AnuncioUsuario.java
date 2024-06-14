@@ -1,5 +1,9 @@
 package com.example.anunciaya;
-
+/**
+ * @Description Esto es una clase usada para Mostrar los Anuncios del Ususario
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.3
+ */
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,9 +21,9 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.anunciaya.tools.Metodos;
 
 import java.util.ArrayList;
-
+/*Esta es la clase Principal*/
 public class AnuncioUsuario extends AppCompatActivity {
-
+    /*Estos son los atributos de la clase*/
     private TextView tvTitulo;
     private TextView tvDescripcion;
     private TextView tvPrecio;
@@ -32,6 +36,13 @@ public class AnuncioUsuario extends AppCompatActivity {
     private String idAnuncio;
     private String fotos;
 
+    /**
+     * Esto es el metodo que se ejecuta al abrir dicha activity
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +84,7 @@ public class AnuncioUsuario extends AppCompatActivity {
                 dialog.show();
             }
         });
-
+        /*Esto lo que hace es capturar cuando hemos hecho click en editar Anuncio*/
         btEditarAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

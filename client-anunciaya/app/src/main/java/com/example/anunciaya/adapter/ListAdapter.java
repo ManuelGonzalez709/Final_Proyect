@@ -1,5 +1,9 @@
 package com.example.anunciaya.adapter;
-
+/**
+ * @Description Esto es una clase que contiene el Adapter para el Recycler View
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.0
+ */
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+    /*Atributos de la clase*/
     private List<ListAnuncios> mDatos;
     private final List<ListAnuncios> mDatosOriginal;
     private final LayoutInflater mInflater; // Describe de donde viene el layout
@@ -33,6 +38,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private Fragment fragment; // Fragment donde se ejecuta el recyclerview
     private int layoutResourceId; // Id del layout a usar en el recycler view
 
+    /**
+     * Esto es el Contructor principal de la clase
+     * @param listAnuncios contiene una lista de tipo ListAnuncios
+     * @param context esto contiene el Context
+     * @param fragment esto contiene un Fragment
+     * @param layoutResourceId esto contiene un Int
+     */
     public ListAdapter(List<ListAnuncios> listAnuncios, Context context, Fragment fragment, int layoutResourceId) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
@@ -92,11 +104,23 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    /**
+     * Metodo que retorna el total del Elementos de la Lista
+     * @return retorna un Int
+     */
     @Override
     public int getItemCount() {
         return mDatos.size();
     } // Tamaño de elementos de la lista
 
+    /**
+     * Esto es un metodo que se encarga de cargar el Adapter por primera vez
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return retorna un ListAdapter
+     */
     @NonNull
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -104,6 +128,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return new ListAdapter.ViewHolder(view);
     }
 
+    /**
+     * Esto es un metodo que se encarga de capturar cuando hemos hecho click en un anuncio
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ListAdapter.ViewHolder holder, int position) {
         ListAnuncios anuncio = mDatos.get(position);
@@ -161,7 +191,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         });
     }
 
+    /**
+     * Esto es una clase ViewHolder que se ayuda del ListAdapter
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
+        /*Esto son los atributos principales de la clase*/
         ImageSlider iconImagen;
         TextView tvTitulo;
         TextView tvPrecio;
@@ -169,6 +203,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         TextView tvDireccion;
         TextView tvCiudad;
 
+        /**
+         * Esto es el constructor principal de la clase
+         * @param itemView contiene una Vista
+         */
         ViewHolder(View itemView) {
             super(itemView);
             tvTitulo = itemView.findViewById(R.id.tvTitulo);

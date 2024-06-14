@@ -1,5 +1,9 @@
 package com.example.anunciaya;
-
+/**
+ * @Description Esto es una clase usada para Mostrar los Anuncios del Ususario
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.3
+ */
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.SharedPreferences;
@@ -22,8 +26,9 @@ import androidx.fragment.app.DialogFragment;
 import com.example.anunciaya.tools.BundleRecoverry;
 import com.example.anunciaya.tools.Metodos;
 import com.example.anunciaya.tools.ServerComunication;
-
+/*Clase principal*/
 public class DialogoCompra extends DialogFragment {
+    /*Atributos de la clase*/
     private EditText etDireccionCompra;
     private AutoCompleteTextView actvCiudadCompra;
     private EditText etCPCompra;
@@ -33,13 +38,26 @@ public class DialogoCompra extends DialogFragment {
     private Button btComprarComp;
     private String idAnuncio;
 
+    /**
+     * Esto es el primer metodo que se ejecuta al abrir la activity
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return retorna la vista
+     */
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_comprar, container, false);
-        initComponents(view);
-        addDatosCompra();
-        autocompletarUbicacion();
+        initComponents(view); // es un inicializador de variables
+        addDatosCompra(); // se encarga de añadir los datos de compra
+        autocompletarUbicacion(); // se encarga de cargar los datos de ubicacion
 
         btComprarComp.setOnClickListener(v -> {
             if(!etDireccionCompra.getText().toString().isEmpty() && !actvCiudadCompra.getText().toString().isEmpty()
@@ -69,6 +87,11 @@ public class DialogoCompra extends DialogFragment {
 
     return view;
     }
+
+    /**
+     * Esto es un metodo que se encarga de inicializar los atributos predefinidos en la clase
+     * @param view contiene la vista de la clase
+     */
     private void initComponents(View view){
         etDireccionCompra = view.findViewById(R.id.etDireccionCompra);
         actvCiudadCompra = view.findViewById(R.id.actvCiudadCompra);
@@ -79,6 +102,9 @@ public class DialogoCompra extends DialogFragment {
         btComprarComp = view.findViewById(R.id.btComprarComp);
     }
 
+    /**
+     * Esto es un metodo que se encarga de añadir los datos de compra
+     */
     public void addDatosCompra(){
         Bundle args = getArguments();
         if (args != null) {
@@ -93,6 +119,9 @@ public class DialogoCompra extends DialogFragment {
         }
     }
 
+    /**
+     * Esto es un metodo que se encarga de Autocompletar la Ubicacion
+     */
     private void autocompletarUbicacion(){
         ServerComunication comunication = new ServerComunication();
         try{

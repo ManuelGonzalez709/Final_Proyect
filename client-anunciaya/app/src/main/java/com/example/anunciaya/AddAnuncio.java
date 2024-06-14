@@ -24,6 +24,11 @@ import com.example.anunciaya.tools.Metodos;
 import com.example.anunciaya.tools.ServerComunication;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
+/**
+ * @Description Esto es una clase creada para añadir anuncios o crear anuncios
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.3
+ */
 public class AddAnuncio extends AppCompatActivity {
     private Spinner spinnerEstado,spinnerCategoria;
     private AutoCompleteTextView ubicacion;
@@ -35,6 +40,14 @@ public class AddAnuncio extends AppCompatActivity {
     private Button boton;
     private EditText titulo,Descripicion,Precio;
     private BundleRecoverry almacenDatos;
+
+    /**
+     * Metodo principal on Create
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +83,10 @@ public class AddAnuncio extends AppCompatActivity {
         boton.setOnClickListener(view -> CrearAnuncio());
 
     }
+
+    /**
+     * Metodo que se encarga de Crear el anuncio cogiendo todos los datos necesarios y llamando a la clase metodos
+     */
     private void CrearAnuncio(){
         try{
             String[]args = {spinnerCategoria.getSelectedItem().toString()};
@@ -118,7 +135,18 @@ public class AddAnuncio extends AppCompatActivity {
             }else Toast.makeText(getApplicationContext(), "Elija una Categoria valida", Toast.LENGTH_SHORT).show();
         }catch (Exception e){Toast.makeText(getApplicationContext(), "Error: "+e.toString(), Toast.LENGTH_SHORT).show();}
     }
-    /*Metodo que se encarga de controlar cuando se ha cerrado el ImagePicker*/
+
+    /**
+     * Metodo que se encarga de capturar cuando se cierra el cargador de fotos
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     *
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -128,14 +156,20 @@ public class AddAnuncio extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }
     }
-    /*Metodo que borra la ultima foto*/
+
+    /**
+     * Metodo que borra la ultima foto
+     */
     private void borrarUltFoto(){
         if(fotos.size()>0){
             fotos.remove(fotos.size()-1);
             recyclerView.setAdapter(adapter);
         }else Toast.makeText(getApplicationContext(), "No hay fotos disponibles para borrar", Toast.LENGTH_SHORT).show();
     }
-    /*Metodo que se encarga de cargar el buscador de */
+
+    /**
+     * Metodo que se encarga de Autocompletar la ubicacion
+     */
     private void autocompleterUbicacion(){
         try{
             String[]Municipios = comunication.getMunicipios().split(";");
@@ -146,11 +180,22 @@ public class AddAnuncio extends AppCompatActivity {
             Log.i("Error",e.toString());
         }
     }
+
+    /**
+     * Esto es un metodo que se encarga de establecer los datos de los spinner
+     * @param spinner se le pasa el spinner
+     * @param estados se le pasa los datos que queremos cargar en los datos
+     */
     public static void setSpinner(Spinner spinner,String[]estados){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), R.layout.spinner_categorias_rojo2, estados);
         adapter.setDropDownViewResource(R.layout.spinner_categorias_rojo2);
         spinner.setAdapter(adapter);
     }
+    /**
+     * Esto es un metodo que se encarga de establecer los datos de los spinner
+     * @param spinner se le pasa el spinner
+     * @param estados se le pasa los datos que queremos cargar en los datos
+     */
     public static  void setSpinner(Spinner spinner,ArrayList<String>estados){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), R.layout.spinner_categorias_rojo2, estados);
         adapter.setDropDownViewResource(R.layout.spinner_categorias_rojo2);

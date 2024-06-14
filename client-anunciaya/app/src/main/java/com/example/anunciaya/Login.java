@@ -1,5 +1,9 @@
 package com.example.anunciaya;
-
+/**
+ * @Description Esto es una clase que controla el Loggin de la aplicacion
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.3
+ */
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,14 +17,23 @@ import android.widget.Toast;
 
 import com.example.anunciaya.tools.BundleRecoverry;
 import com.example.anunciaya.tools.Metodos;
-
+/*Esto es la clase principal*/
 public class Login extends AppCompatActivity{
+    /*Estos son los atributos de la clase*/
     private TextView registerButton;
     private BundleRecoverry dataRecovery;
     private Metodos metodos;
     private Button IniciarSesion;
     private EditText loginNombreUsuario;
     private EditText loginContraseña;
+
+    /**
+     * Esto es el primer metodo que se ejecuta al iniciar la actividad
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,16 +63,22 @@ public class Login extends AppCompatActivity{
                           dataRecovery.guardarInt("logginId",idUser);
                           LanzarMain();
                     }else Toast.makeText(getApplicationContext(), "Usuario o Contraseña Incorrectos", Toast.LENGTH_SHORT).show();
-                }else Toast.makeText(getApplicationContext(), "Los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show();
+                }else Toast.makeText(getApplicationContext(), "Los campos no pueden estar vacios", Toast.LENGTH_SHORT).show();
         }});
     }
-    /*Metodo que lanza la actividad de Main y Finaliza la Actividad de Loggin*/
+
+    /**
+     * Metodo que se encarga de lanzar el main(porque el loggin ha sido exitoso)
+     */
     private void LanzarMain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
-    /*Metodo que se encarga de abrir la ventana de Registro*/
+
+    /**
+     * Metodo que se encarga de abrir la actividad de Register
+     */
     private void abrirRegister(){
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
