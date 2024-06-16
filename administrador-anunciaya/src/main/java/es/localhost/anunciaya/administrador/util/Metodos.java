@@ -90,8 +90,8 @@ public class Metodos {
             JSONObject jsonObject = new JSONObject(resultadoServer);
             return jsonObject.getBoolean("data");
         }catch (Exception e) {
-        Util.mostrarDialogo("Server_Error", "Autenticación Fallida.","Ocurrio un error en el servidor: "+e,Alert.AlertType.INFORMATION);
-        return false;}
+            Util.mostrarDialogo("Server_Error", "Autenticación Fallida.","Ocurrio un error en el servidor: "+e,Alert.AlertType.INFORMATION);
+            return false;}
     }
 
     /**
@@ -159,9 +159,9 @@ public class Metodos {
             return listaUsuarios;
 
         } catch (Exception e) {
-                // Manejar la excepción de procesamiento JSON
-                Util.mostrarDialogo("Server_Error", "Error con el servidor","Ocurrio un error en el servidor: "+e,Alert.AlertType.INFORMATION);
-                return null;
+            // Manejar la excepción de procesamiento JSON
+            Util.mostrarDialogo("Server_Error", "Error con el servidor","Ocurrio un error en el servidor: "+e,Alert.AlertType.INFORMATION);
+            return null;
         }
     }
 
@@ -250,8 +250,10 @@ public class Metodos {
                 double precio = node.get("precio").asDouble();
                 String fotos = node.get("fotos").asText();
                 String fechPublic = node.get("fech_public").asText();
+                int isComprado = node.get("comprado").asInt();
 
-                Anuncio a = new Anuncio(id, nombUsu, categoria, titulo, descripcion, estado, ubicacion, precio, fotos, fechPublic);
+                Anuncio a = new Anuncio(id, nombUsu, categoria, titulo, descripcion, estado, ubicacion,
+                        precio, fotos, fechPublic, isComprado == 1 ? "Sí" : "No");
                 listaAnuncios.add(a);
             }
 
