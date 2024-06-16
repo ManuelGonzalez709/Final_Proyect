@@ -1,5 +1,9 @@
 package com.example.anunciaya.fragments;
-
+/**
+ * @Description Esto es el Fragment de Añadir Anuncios
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 1.0
+ */
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +18,12 @@ import com.example.anunciaya.AddAnuncio;
 
 
 public class AddFragment extends Fragment {
+    /*Atributos de la clase*/
     private View view;
+
+    /**
+     * Metodo principal de la Clase
+     */
 
     public AddFragment() {
     }

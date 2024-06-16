@@ -1,6 +1,4 @@
 package com.example.anunciaya;
-
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,8 +26,13 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+/**
+ * @Description Esto es una clase que se encarga de Editar Anuncios ya creados
+ * @Auhtor Carlos Murillo Perez & Manuel Gonzalez Perez
+ * @version 2.0
+ */
 public class EditarAnuncio extends AppCompatActivity {
+    /*Estos son los Atributos de la clase*/
     private EditText etTitutloMod;
     private EditText etDescripMod;
     private EditText etPrecioMod;
@@ -44,6 +47,13 @@ public class EditarAnuncio extends AppCompatActivity {
     private ArrayList<String>fotos = new ArrayList<>();
     private BundleRecoverry almacenDatos;
 
+    /**
+     * Esto es el primer metodo que se ejecuta al abrirse la clase
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,6 +133,17 @@ public class EditarAnuncio extends AppCompatActivity {
 
     }
 
+    /**
+     * Este es el metodo que se encarga de capturar cuando se cierra el cargador de fotos
+     * @param requestCode The integer request code originally supplied to
+     *                    startActivityForResult(), allowing you to identify who this
+     *                    result came from.
+     * @param resultCode The integer result code returned by the child activity
+     *                   through its setResult().
+     * @param data An Intent, which can return result data to the caller
+     *               (various data can be attached to Intent "extras").
+     *
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -160,6 +181,11 @@ public class EditarAnuncio extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Metodo que se encarga de establecer los datos de un spinner pasado el espinner y los datos que queremos que almacene este
+     * @param spinner es el spinner que queremos que se autocomplete con los datos
+     * @param estados estos son los datos que pasamos para que se llene el spinner de estos datos
+     */
     public static  void setSpinner(Spinner spinner,ArrayList<String>estados){
         ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, estados);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -186,6 +212,10 @@ public class EditarAnuncio extends AppCompatActivity {
         almacenDatos = new BundleRecoverry(sharedPreferences);
 
     }
+
+    /**
+     * Metodo que se encarga de Autocompletar la Ubicacion
+     */
     private void autocompletarUbicacion(){
         ServerComunication comunication = new ServerComunication();
         try{
@@ -196,6 +226,10 @@ public class EditarAnuncio extends AppCompatActivity {
         }catch (Exception e){
             Log.i("Error",e.toString());}
     }
+
+    /**
+     * Metodo que se encarga de borrar la ultima foto
+     */
     private void borrarUltFoto(){
         if(fotos.size()>0){
             fotos.remove(fotos.size()-1);
