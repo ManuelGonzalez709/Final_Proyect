@@ -41,6 +41,7 @@ public class AnuncioController implements Initializable {
     @FXML private TableColumn<Anuncio, Double> tcPrecio;
     @FXML private TableColumn<Anuncio, String> tcFotos;
     @FXML private TableColumn<Anuncio, String> tcFechPubl;
+    @FXML private TableColumn<Anuncio, String> tcComprado;
 
     /**
      * Inicializa el controlador después de que su contenido haya sido cargado.
@@ -76,6 +77,7 @@ public class AnuncioController implements Initializable {
         tcPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
         tcFotos.setCellValueFactory(new PropertyValueFactory<>("fotos"));
         tcFechPubl.setCellValueFactory(new PropertyValueFactory<>("fechPubl"));
+        tcComprado.setCellValueFactory(new PropertyValueFactory<>("isComprado"));
     }
 
     /**

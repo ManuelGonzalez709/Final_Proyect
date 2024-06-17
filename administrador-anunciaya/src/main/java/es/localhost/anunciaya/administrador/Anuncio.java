@@ -38,6 +38,11 @@ public class Anuncio {
     private String fechPubl;
 
     /**
+     * El anuncio ha sido comprado o no.
+     */
+    private String isComprado;
+
+    /**
      * Constructor por defecto para crear un anuncio vacío.
      */
     public Anuncio() {}
@@ -55,9 +60,10 @@ public class Anuncio {
      * @param precio Precio del artículo o servicio anunciado.
      * @param fotos Ruta o URL de las fotos asociadas con el anuncio.
      * @param fechPubl Fecha de publicación del anuncio.
+     * @param isComprado El anuncio se ha comprado.
      */
     public Anuncio(int id, String nombUsu, String categoria, String titulo, String descripcion, String estado,
-                   String ubicacion, double precio, String fotos, String fechPubl) {
+                   String ubicacion, double precio, String fotos, String fechPubl, String isComprado) {
         this.id = id;
         this.nombUsu = nombUsu;
         this.categoria = categoria;
@@ -68,6 +74,7 @@ public class Anuncio {
         this.precio = precio;
         this.fotos = fotos;
         this.fechPubl = fechPubl;
+        this.isComprado = isComprado;
     }
 
     /**
@@ -140,6 +147,14 @@ public class Anuncio {
      */
     public String getFechPubl() {return fechPubl;}
 
+
+    /**
+     * Obtiene si el anuncio se ha comprado.
+     *
+     * @return se ha comprado el anuncio.
+     */
+    public String getIsComprado() {return isComprado;}
+
     /**
      * Establece el identificador del anuncio.
      *
@@ -209,4 +224,10 @@ public class Anuncio {
      * @param fechPubl La nueva fecha de publicación del anuncio.
      */
     public void setFechPubl(String fechPubl) {this.fechPubl = fechPubl;}
+
+    /**
+     * Establece si el anuncio se ha comprado o no.
+     * @param isComprado Se ha comprado el anuncio.
+     */
+    public void setIsComprado(String isComprado) {this.isComprado = isComprado;}
 }
