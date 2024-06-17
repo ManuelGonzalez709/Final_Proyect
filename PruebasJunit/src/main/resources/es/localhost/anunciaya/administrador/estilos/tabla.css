@@ -1,0 +1,60 @@
+.table-view{
+    -fx-background-color: rgba(160, 21, 62, 1);
+    -fx-background-radius: 7px;
+    -fx-border-color: #ffc9c9;
+    -fx-border-radius: 7px;
+    -fx-border-width: 1px;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: transparent;
+    -fx-border-width: 1px;
+    -fx-border-color: transparent transparent  #ffc9c9 transparent;
+}
+
+.table-view .column-header{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background .label{
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+}
+
+.table-row-cell{
+    -fx-background-color: transparent;
+}
+
+.table-row-cell{
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: darkred;
+}
+
+.scroll-bar:vertical {
+    -fx-background-color: rgba(160,21,62, 0.7);
+}
+
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(160,21,62, 0.7)  ;
+}
+
+
+
+
+
+
+
+
+
+
+
+

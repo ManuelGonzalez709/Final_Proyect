@@ -10,6 +10,8 @@ module es.localhost.anunciaya.administrador {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.databind;
     requires java.desktop;
+    requires org.junit.jupiter.api;
+    requires junit;
 
     opens es.localhost.anunciaya.administrador to javafx.fxml;
     exports es.localhost.anunciaya.administrador;

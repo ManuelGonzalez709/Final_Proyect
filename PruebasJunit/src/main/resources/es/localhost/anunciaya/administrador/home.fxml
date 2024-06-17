@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.localhost.anunciaya.administrador.Home">
+    <children>
+        <AnchorPane fx:id="panelFondo" layoutX="44.0" layoutY="46.0" prefHeight="454.0" prefWidth="756.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <Pane layoutY="21.0" prefHeight="454.0" prefWidth="756.0" style="-fx-background-color: #d9ecf2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="opacityPane" layoutX="44.0" layoutY="46.4" prefHeight="454.0" prefWidth="756.0" style="-fx-background-color: #ffc9c9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0" />
+        <AnchorPane fx:id="drawerPane" prefHeight="604.0" prefWidth="178.0" style="-fx-background-color: #b3395a;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="40.0">
+            <children>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <JFXButton fx:id="btHome" alignment="BASELINE_LEFT" buttonType="RAISED" onAction="#CargarGraphics" prefHeight="38.0" prefWidth="178.0" text="Home " textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btUsuarios" alignment="BASELINE_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#CargarUsuarios" prefHeight="38.0" prefWidth="179.0" text="Usuarios" textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btProductos" alignment="BASELINE_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="58.0" onAction="#CargarAnuncios" prefHeight="38.0" prefWidth="179.0" text="Anuncios" textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btCategorias" alignment="BASELINE_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="106.0" onAction="#CargarCategorias" prefHeight="38.0" prefWidth="179.0" text="Categorías" textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btPedidos" alignment="BASELINE_LEFT" buttonType="RAISED" layoutX="10.0" layoutY="154.0" onAction="#CargarPedidos" prefHeight="38.0" prefWidth="179.0" text="Pedidos" textFill="WHITE">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </JFXButton>
+                  <JFXButton fx:id="btSalir" alignment="BASELINE_LEFT" buttonType="RAISED" onAction="#CargarLogin" prefHeight="38.0" prefWidth="179.0" text="Salir" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXButton>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutY="46.0" prefHeight="604.0" prefWidth="44.0" style="-fx-background-color: #a0153e;">
+            <children>
+                <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="44.0" spacing="10.0" style="-fx-background-color: #a0153e;" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <ImageView fx:id="homeButton" fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/home.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="usuariosButton" fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/user.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="productosButton" fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/productos.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="categoriasButton" fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/categorias.png" />
+                            </image>
+                        </ImageView>
+                        <ImageView fx:id="pedidosButton" fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/pedidos.png" />
+                            </image>
+                        </ImageView>
+                  <ImageView fx:id="ajustesButton1" fitHeight="46.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/salir.png" />
+                     </image>
+                  </ImageView>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="46.0" prefWidth="1200.0" style="-fx-background-color: #690E29;">
+            <children>
+                <Label layoutX="65.0" prefHeight="46.0" prefWidth="138.0" text="AnunciaYa" textFill="WHITE">
+                    <font>
+                        <Font name="Arial Bold" size="16.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="drawerImage" fitHeight="32.0" fitWidth="67.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/logo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

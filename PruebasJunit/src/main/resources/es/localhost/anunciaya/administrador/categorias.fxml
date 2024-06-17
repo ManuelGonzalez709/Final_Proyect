@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="604.0" prefWidth="1156.0" style="-fx-background-color: #ffc9c9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.localhost.anunciaya.administrador.ViewsControllers.CategoriaController">
+   <children>
+      <TableView fx:id="tbCategorias" layoutX="116.0" layoutY="112.0" prefHeight="334.0" prefWidth="971.0" stylesheets="@estilos/tabla.css">
+         <columns>
+            <TableColumn fx:id="tcIdCategoria" editable="false" prefWidth="83.19998168945312" text="ID" />
+            <TableColumn fx:id="tcDescrip" prefWidth="886.4000091552734" text="Descripción Categoría" />
+         </columns>
+      </TableView>
+      <HBox layoutX="116.0" layoutY="28.0" prefHeight="47.0" prefWidth="331.0" style="-fx-background-color: rgba(160,21,62, 0.7); -fx-background-radius: 10;">
+         <children>
+            <Pane prefHeight="47.0" prefWidth="428.0">
+               <children>
+                  <Label layoutX="21.0" layoutY="8.0" text="CATEGORÍAS REGISTRADAS" textFill="WHITE">
+                     <font>
+                        <Font name="Leelawadee UI Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <Line endX="342.0" layoutX="814.0" layoutY="51.0" startX="-351.0" stroke="#a0153e" />
+      <HBox layoutX="1104.0" layoutY="181.0" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: rgba(156,0,0, 0.9); -fx-background-radius: 10;">
+         <children>
+            <Pane prefHeight="31.0" prefWidth="49.0">
+               <children>
+                  <ImageView fitHeight="24.0" fitWidth="16.0" layoutX="9.0" layoutY="3.0" onMousePressed="#onBorrarCatClick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/borrar.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <HBox layoutX="1103.0" layoutY="144.0" prefHeight="31.0" prefWidth="33.0" style="-fx-background-color: rgba(119,163,69, 1.0); -fx-background-radius: 10;">
+         <children>
+            <Pane prefHeight="31.0" prefWidth="49.0">
+               <children>
+                  <ImageView fitHeight="18.0" fitWidth="22.0" layoutX="8.0" layoutY="6.0" onMouseClicked="#onAddCatClick" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/añadir.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

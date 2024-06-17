@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="596.0" prefWidth="486.0" style="-fx-background-color: #ffc9c9;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.localhost.anunciaya.administrador.ViewsControllers.InsertUserController">
+   <children>
+      <VBox layoutX="99.0" layoutY="85.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="390.0" prefWidth="289.0" AnchorPane.bottomAnchor="120.60000000000002">
+         <children>
+            <Label alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="294.0" text="Nombre*" textAlignment="RIGHT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Nombre" alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="209.0" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></TextField>
+            <Label alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="295.0" text="Apellidos*" textAlignment="RIGHT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Apellidos" alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="209.0" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></TextField>
+            <Label alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="316.0" text="Nombre Usuario*" textAlignment="RIGHT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="NombreUsuario" alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="209.0" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></TextField>
+            <Label alignment="TOP_LEFT" prefHeight="22.0" prefWidth="314.0" text="Fecha Nacimiento*">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="dateFechaNacimiento" editable="false" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black;" />
+            <Label alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="294.0" text="Email*" textAlignment="RIGHT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Email" alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="209.0" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></TextField>
+            <Label alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="289.0" text="Telefono*" textAlignment="RIGHT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Telefono" alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="209.0" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></TextField>
+            <Label alignment="TOP_RIGHT" prefHeight="22.0" prefWidth="332.0" text="Contraseña*" textAlignment="RIGHT">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="tbContrasena" alignment="TOP_RIGHT" style="-fx-background-color: #b3395a; -fx-text-fill: white; -fx-border-color: black; -fx-border-radius: 10; -fx-background-radius: 10;">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font></PasswordField>
+            <Label alignment="TOP_LEFT" prefHeight="22.0" prefWidth="323.0" text="Tipo de Cuenta*">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <SplitMenuButton fx:id="slTipo" mnemonicParsing="false" style="-fx-background-color: #b3395a; -fx-border-color: black;" text="Tipo Cuenta">
+              <items>
+                 <MenuItem onAction="#EstablecerTextoSelector" text="STD" />
+                 <MenuItem onAction="#EstablecerTextoSelector" text="ADM" />
+              </items>
+            </SplitMenuButton>
+         </children>
+      </VBox>
+      <Button fx:id="btCancelar" layoutX="304.0" layoutY="496.0" mnemonicParsing="false" onAction="#btCancelar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #b3395a; -fx-background-radius: 10;" text="Cancelar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btAceptar" layoutX="199.0" layoutY="496.0" mnemonicParsing="false" onAction="#btAceptar" prefHeight="25.0" prefWidth="90.0" style="-fx-background-color: #b3395a; -fx-background-radius: 10;" text="Aceptar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
+      <Line endX="-266.1999816894531" endY="-7.62939453125E-6" layoutX="395.0" layoutY="49.0" startX="-379.79998779296875" startY="-7.62939453125E-6" stroke="#b3395a" strokeWidth="2.0" style="-fx-fill: #b3395a;" />
+      <VBox layoutX="139.0" layoutY="37.0" prefHeight="27.0" prefWidth="210.0" style="-fx-background-color: #a0153e; -fx-background-radius: 10;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Insertar Usuario" textAlignment="CENTER" wrappingWidth="208.93670654296875">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Line endX="-266.1999816894531" endY="-7.62939453125E-6" layoutX="737.0" layoutY="50.0" startX="-379.79998779296875" startY="-7.62939453125E-6" stroke="#b3395a" strokeWidth="2.0" style="-fx-fill: #b3395a;" />
+   </children>
+</AnchorPane>
