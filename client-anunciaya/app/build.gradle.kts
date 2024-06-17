@@ -35,7 +35,6 @@ android {
 dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation ("commons-net:commons-net:3.8.0")
-    implementation(files("C:\\Users\\Manuel\\AppData\\Local\\Android\\Sdk\\platforms\\android-34\\android.jar"))
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation ("com.github.denzcoskun:ImageSlideshow:0.1.2")
     implementation("com.github.dhaval2404:imagepicker:2.1")
